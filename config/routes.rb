@@ -1,4 +1,15 @@
+# @logged_user will forever mean the currently logged user
+
 Rails.application.routes.draw do
+
+  get "/users/:id",               to: "users#show",         as: :user
+  get "/users/:id/edit",          to: "users#edit",         as: :edit_user
+
+  get "/products/:id",            to: "products#show",      as: :product
+  get "products/:id/edit",        to: "products#edit",      as: :edit_product
+  delete "products/:id/delete",   to: "products#delete",    as: :delete_product
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

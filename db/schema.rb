@@ -11,27 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20141014182447) do
-=======
-ActiveRecord::Schema.define(version: 20141014182210) do
->>>>>>> 4f34acfdeea081cbbf1e1b1c29edaf82eff26b25
+ActiveRecord::Schema.define(version: 20141014182634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
   create_table "order_items", force: true do |t|
     t.integer  "quantity_of_product"
     t.integer  "subtotal"
     t.integer  "order_id"
     t.integer  "product_id"
-=======
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.text     "name"
+    t.text     "description"
+    t.text     "imageurl"
+    t.integer  "price"
+    t.integer  "quantity"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.integer  "rating"
+    t.text     "title"
+    t.text     "content"
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email"
     t.string   "password"
->>>>>>> 4f34acfdeea081cbbf1e1b1c29edaf82eff26b25
     t.datetime "created_at"
     t.datetime "updated_at"
   end

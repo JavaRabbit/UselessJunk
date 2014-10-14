@@ -1,3 +1,4 @@
+
 class UsersController < ActionController::Base
   def show
     @user = User.find_by id: params[:id]

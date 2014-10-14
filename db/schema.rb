@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20141014182634) do
     t.datetime "updated_at"
   end
 
+  create_table "orders", force: true do |t|
+    t.string   "state"
+    t.integer  "total_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", force: true do |t|
     t.text     "name"
     t.text     "description"

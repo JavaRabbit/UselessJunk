@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user
+  delete "users/:id/delete",      to: "users#delete",       as: :delete_user
+
 
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product

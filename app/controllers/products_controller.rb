@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
     if @product == nil
       redirect_to "/"
     end
+    @review = Review.new
   end
 
 end

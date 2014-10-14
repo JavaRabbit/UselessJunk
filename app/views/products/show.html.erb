@@ -1,16 +1,21 @@
 <h2><%= @product.name %></h2>
 
 <h3>Sold by:
-  <a href = "<%= user_path(@product.user) %>"><%= @product.user.username %></a>
+  <%= link_to @product.user.username, user_path(@product.user) %>
 </h3>
 
-<div class = "product-info">
+<div class = "basic_product">
   <img src = <%= @product.imageurl %> alt = "Image of product">
   <p>Description: <%= @product.description %></p>
   <p>Price: <%= @product.price %> cents</p>
 </div>
 
-<div class = "product-reviews">
+<div class = "add_to_cart_button">
+  <!-- Update this link eventually -->
+  <%= link_to "Add to Cart", "/"  %>
+</div>
+
+<div class = "product_reviews">
   <h4>Reviews for <%= @product.name %></h4>
   <div class = "product-rating">
     <% @product.reviews.each do |review| %>

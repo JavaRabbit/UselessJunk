@@ -1,0 +1,10 @@
+This is the products#index page ! :)
+
+<% @products.collect do |product| %>
+    <ul>
+      <li>
+         <%= product.name %><br>
+         <%= product.description %>
+      </li>
+    </ul>
+<% end %>

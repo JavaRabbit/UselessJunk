@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get "products/:id/edit",        to: "products#edit",      as: :edit_product
   delete "products/:id/delete",   to: "products#delete",    as: :delete_product
 
+  get "/order_items",             to: "order_items#index",  as: :order_items
+  #this page will show only the logged user's order_items
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

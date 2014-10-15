@@ -25,10 +25,10 @@ class UsersController < ApplicationController
   end
 
 def signin
-    if User.exists?(params.require(:user).permit(:username, :id))
+    if User.exists?(user_params)
       @user = User.find(params[:user][:id])
-      session[:id] = @user.id
-      redirect_to users_path
+      session[:user_id] = @user.id
+      redirect_to user_path(@user.id)
     else
       redirect_to users_login_path
     end
@@ -52,6 +52,6 @@ def signin
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :id)
   end
 end

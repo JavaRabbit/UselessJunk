@@ -1,8 +1,23 @@
 <h2> Edit Your Profile </h2>
 
-<%= form_for @user, url: {action: "update"}, html: {class: "nifty_form"} do |f| %>
-  <%= f.text_field :username %>
-  <%= f.text_field :email %>
+<ul class = "errors">
+  <% @user.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= form_for @user, url: {action: "update"} do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
   <%= f.submit "Submit" %>
 <% end %>
 

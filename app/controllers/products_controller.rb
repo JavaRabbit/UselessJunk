@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
 
-
   def index
     @products = Product.all
   end
@@ -12,3 +11,5 @@ class ProductsController < ApplicationController
     end
     @review = Review.new
   end
+  
+end

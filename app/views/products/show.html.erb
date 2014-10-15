@@ -25,3 +25,18 @@
     <% end %>
   </div>
 </div>
+
+<div class = "review_form">
+  <h4>Add a review: </h4>
+  <%= form_for @review do |f| %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <!-- This is what it will crete -->
+    <!-- <input type = "hidden" name = "review[product_id]" value = 1> -->
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+
+    <%= f.submit %>
+  <% end %>
+</div>

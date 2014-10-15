@@ -1,0 +1,25 @@
+<h2> Edit Your Profile </h2>
+
+<ul class = "errors">
+  <% @user.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= form_for @user, url: {action: "update"} do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end %>
+
+Also at some time this page will let you update your password with verification,
+and will check that your email is valid

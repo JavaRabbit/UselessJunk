@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  get "/products",            to: "products#index"
+  get "/products",              to: "products#index"
 
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user

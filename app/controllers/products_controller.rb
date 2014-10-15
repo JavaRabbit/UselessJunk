@@ -14,10 +14,4 @@ class ProductsController < ApplicationController
     @review = Review.new
   end
 
-  def index
-    @products = Product.all
-
-
-  end
-
 end

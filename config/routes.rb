@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "/users/new",               to: "users#new",          as: :new_users
   post "/users/new",              to: "users#create"
   get "/users/login",             to: "users#login",        as: :users_login
-  post "/users/login",            to: "users#signin"
+  post "/users/signin",           to: "users#signin",        as: :users
   get "/users/logout",            to: "users#logout",       as: :users_logout
   post "/users/logout",           to: "users#destroy"
 
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   delete "products/:id",          to: "products#destroy"
 
-  get "/products",            to: "products#index"
+  get "/products",                to: "products#index"
 
 
   get "/order_items",             to: "order_items#index",  as: :order_items
@@ -34,14 +34,6 @@ Rails.application.routes.draw do
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create"
 
-  # delete "products/:id/delete",   to: "products#delete",    as: :delete_product
-  delete "products/:id",          to: "products#destroy"
-  get "/products",                to: "products#index"
-
-  get "/order_items",             to: "order_items#index",  as: :order_items
-
-  get "/reviews",                  to: "reviews#index",      as: :reviews
-  post "/reviews/",                to: "reviews#create"
 
   #this page will show only the logged user's order_items
 

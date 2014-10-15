@@ -2,7 +2,14 @@
 
 <h2>Sign up</h2>
 
-<form action="<%= users_login_path %>" method="POST">
-
-    <input  type= "submit" value="submit" />
-</form>
+<%= form_for @user do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end %>

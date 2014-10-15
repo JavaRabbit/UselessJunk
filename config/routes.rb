@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   delete "users/:id/delete",      to: "users#delete",       as: :delete_user
   patch "users/:id/edit",         to: "users#update"
 
+  get "/users/new",               to: "users#new",          as: :new_users
+  post "/users/new",              to: "users#create"
+  get "/users/login",             to: "users#login",        as: :users_login
+  post "/users/login",            to: "users#signin"
+  get "/users/logout",            to: "users#logout",       as: :users_logout
+  post "/users/logout",           to: "users#destroy"
 
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product

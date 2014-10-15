@@ -4,8 +4,8 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
-      @review.product_id
-      redirect_to "/products/#{params[:id]}"
+      product_id = @review.product_id
+      redirect_to product_path(product_id)
     end
   end
 

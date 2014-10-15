@@ -3,7 +3,7 @@
 <% @products.collect do |product| %>
     <ul>
       <li>
-         <a href = "www.google.com"><%= product.name %></a><br>
+         <a href = "/products/<%= product.id %>"><%= product.name %></a><br>
          <%= product.description %>
       </li>
     </ul>

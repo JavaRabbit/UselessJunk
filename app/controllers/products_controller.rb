@@ -11,4 +11,12 @@ class ProductsController < ApplicationController
     end
     @review = Review.new
   end
+
+  def destroy
+    @product = Product.find(params[:id])
+    if @product.destroy
+      redirect_to root_path
+    end
+  end
+
 end

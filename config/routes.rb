@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product
-  delete "products/:id/delete",   to: "products#delete",    as: :delete_product
+  # delete "products/:id/delete",   to: "products#delete",    as: :delete_product
+  delete "products/:id",          to: "products#destroy"
 
   get "/order_items",             to: "order_items#index",  as: :order_items
 

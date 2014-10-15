@@ -4,4 +4,7 @@ class Product < ActiveRecord::Base
   has_many :categories
   has_many :reviews
   # relationships
+
+  validates :name, :description, :price, :quantity, :user_id, presence: true
+
 end

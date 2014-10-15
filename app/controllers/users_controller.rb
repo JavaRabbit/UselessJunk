@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
-def signin
+  def signin
     if User.exists?(params.require(:user).permit(:username, :id))
       @user = User.find(params[:user][:id])
       session[:id] = @user.id

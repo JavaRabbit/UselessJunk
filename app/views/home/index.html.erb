@@ -7,4 +7,14 @@
     <input  type= "submit" value="submit" />
 </form>
 
-<% form_for @user, :url => 
+<% form_for @user, :url =>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end %>

@@ -1,0 +1,10 @@
+<h2>Useless Junk Products!</h2>
+
+<% @products.collect do |product| %>
+    <ul>
+      <li>
+         <a href = "www.google.com"><%= product.name %></a><br>
+         <%= product.description %>
+      </li>
+    </ul>
+<% end %>

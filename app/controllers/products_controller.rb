@@ -1,5 +1,10 @@
 class ProductsController < ApplicationController
 
+
+  def index
+    @products = Product.all
+  end
+
   def show
     @product = Product.find_by(id: params[:id])
     if @product == nil
@@ -7,5 +12,3 @@ class ProductsController < ApplicationController
     end
     @review = Review.new
   end
-
-end

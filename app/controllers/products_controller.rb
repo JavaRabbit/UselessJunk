@@ -12,3 +12,4 @@ class ProductsController < ApplicationController
     end
     @review = Review.new
   end
+end

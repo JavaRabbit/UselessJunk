@@ -3,13 +3,19 @@
 Rails.application.routes.draw do
 
   root "home#index"
-  
+
   get "/products",            to: "products#index"
 
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user
   delete "users/:id/delete",      to: "users#delete",       as: :delete_user
 
+  get "/users/new",               to: "users#new",          as: :new_users
+  post "/users/new",              to: "users#create"
+  get "/users/login",             to: "users#login",        as: :users_login
+  post "/users/login",            to: "users#signin"
+  get "/users/logout",            to: "users#logout",       as: :users_logout
+  post "/users/logout",           to: "users#destroy"
 
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product

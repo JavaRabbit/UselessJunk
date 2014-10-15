@@ -22,13 +22,13 @@ Rails.application.routes.draw do
 
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product
-  # delete "products/:id/delete",   to: "products#delete",    as: :delete_product
+  delete "products/:id/delete",   to: "products#delete",    as: :delete_product
   delete "products/:id",          to: "products#destroy"
 
   get "/order_items",             to: "order_items#index",  as: :order_items
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
-  post "/reviews/",                to: "reviews#create"
+  post "/reviews/",               to: "reviews#create"
   #this page will show only the logged user's order_items
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,40 @@
+<% if @user == @logged_user %>
+  <h2> My Account </h2>
+    <ul class = "horizontal">
+      <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
+      <li> <%= link_to "Delete My Account", delete_user_path(@user.id), method: :delete %> </li>
+    </ul>
+
+  <h3> My Products </h3>
+
+    <% @products.each do |product| %>
+
+       <div class = "basic_product">
+         <img src = <%= product.imageurl %> >
+         <%= link_to  product.name, product_path(product.id) %>
+            <ul class = "horizontal">
+              <li><%= link_to "Edit", edit_product_path(product.id) %></li>
+              <li><%= link_to "Delete", delete_product_path(product.id), method: :delete %></li>
+            </ul>
+      </div>
+
+  <h3> <%= link_to "View My Orders", order_items_path %> </h3>
+
+    <% end %>
+
+<% else %>
+
+  <h2><%= @user.username %></h2>
+
+  <h3><%= @user.username %>'s  Products </h3>
+
+<% @products.each do |product| %>
+
+   <div class = "basic_product">
+     <img src = <%= product.imageurl %> >
+     <%= link_to  product.name, product_path(product.id) %>
+  </div>
+
+<% end %>
+
+<% end %>

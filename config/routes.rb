@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   delete "products/:id/delete",   to: "products#delete",    as: :delete_product
 
   get "/order_items",             to: "order_items#index",  as: :order_items
+
+  get "/reviews",                 to: "reviews#index",      as: :reviews
+  post "/reviews/",                to: "reviews#create"     
   #this page will show only the logged user's order_items
 
   # The priority is based upon order of creation: first created -> highest priority.

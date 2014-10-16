@@ -3,8 +3,8 @@
 Rails.application.routes.draw do
 
   root "products#index"
+  post "/users/new",              to: "users#create",       as: :create_user
   get "/users/login",             to: "users#login",        as: :user_login
-  post "/users/create",           to: "users#create",       as: :create_user
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user
   delete "users/:id/delete",      to: "users#delete",       as: :delete_user

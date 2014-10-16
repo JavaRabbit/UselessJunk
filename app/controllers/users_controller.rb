@@ -1,5 +1,8 @@
 
 class UsersController < ApplicationController
+  def index
+    @user = User.new
+  end
 
   def show
     @user = User.find_by id: params[:id]
@@ -11,24 +14,14 @@ class UsersController < ApplicationController
   end
 
   def create
-      @user = User.new(user_params)
-    if @user.save
-      session[:id] = @user.id
-      redirect_to create_path(@user.id)
+    @user = User.new(user_params)
+    if @vendor.save
+      session[:id] = @vendor.id
+      redirect_to vendors_path
     else
       render :new
     end
   end
-
-def login
-    if User.exists?(user_params)
-      @user = User.find(params[:user][:id])
-      session[:user_id] = @user.id
-      redirect_to user_path(@user.id)
-    else
-      redirect_to users_login_path
-    end
-end
 
 def login
     @user = User.new

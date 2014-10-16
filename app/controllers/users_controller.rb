@@ -13,24 +13,27 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-def signin(user)
-  if self.current_user = user
-    redirect_to root_path
-  else
-    render :new
+  def signin(user)
+    if self.current_user = user
+      redirect_to root_path
+    else
+      render :new
+    end
   end
-end
 
-def create
+  def create
     @user = User.new
     if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to UselessJunk!"
+      #sign_in @user
+      flash[:notice] = "You signed up successfully"
+      flash[:color] = "valid"
       redirect_to @user
     else
-    render :new
+      flash[:notice] = "Form is invalid"
+      flash[:color] = "invalid"
     end
-end
+    render :new
+  end
 
 #def login
 #    @user = User.new

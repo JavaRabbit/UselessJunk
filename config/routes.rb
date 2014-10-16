@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   get "/order_items",             to: "order_items#index",  as: :order_items
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
-
   post "/reviews/",               to: "reviews#create",     as: :new_review
 
   #this page will show only the logged user's order_items

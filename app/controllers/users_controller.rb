@@ -28,7 +28,10 @@ def signin
     else
       redirect_to users_login_path
     end
-  end
+end
+
+def login
+end
 
   def edit
     @user = User.find_by id: params[:id]

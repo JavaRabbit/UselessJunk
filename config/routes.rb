@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   delete "products/:id",          to: "products#destroy"
 
-  get "/products",              to: "products#index"
+  get "/products",                to: "products#index"
 
 
   get "/order_items",             to: "order_items#index",  as: :order_items

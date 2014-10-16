@@ -13,15 +13,10 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-  def create
-    @user = User.new(user_params)
-    if @vendor.save
-      session[:id] = @vendor.id
-      redirect_to vendors_path
-    else
-      render :new
-    end
-  end
+def create
+    @user = User.new
+    render :new
+end
 
 def login
     @user = User.new

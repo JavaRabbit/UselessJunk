@@ -10,10 +10,6 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-  def new
-    @user = User.new
-  end
-
   def create
       @user = User.new(params.require(:user).permit(:name))
     if @user.save

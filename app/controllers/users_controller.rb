@@ -14,13 +14,13 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
     if @user.save
       session[:id] = @user.id
-      redirect_to users_path(@user.id)
+      redirect_to create_path(@user.id)
     else
       render :new
     end
   end
 
-def signin
+def login
     if User.exists?(user_params)
       @user = User.find(params[:user][:id])
       session[:user_id] = @user.id

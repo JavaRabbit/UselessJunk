@@ -8,12 +8,24 @@
   <img src = <%= @product.imageurl %> alt = "Image of product">
   <p>Description: <%= @product.description %></p>
   <p>Price: <%= @product.price %> cents</p>
+  <% if @product.quantity == nil || @product.quantity == 0 %>
+    <p>Not in stock :(</p>
+  <% elsif @product.quantity > 0 %>
+    <p>In stock! </p>
+    <div class = "add_to_cart_button">
+      <!-- Update this link eventually -->
+      <%= link_to "Add to Cart", root_path  %>
+    </div>
+  <% end %>
+
 </div>
 
-<div class = "add_to_cart_button">
-  <!-- Update this link eventually -->
-  <%= link_to "Add to Cart", root_path  %>
+<div class = "delete_product">
+  <%= link_to "delete", @product, method: :delete %>
+  <%= link_to "edit", edit_product_path %>
 </div>
+
+
 
 <div class = "product_reviews">
   <h4>Reviews for <%= @product.name %></h4>

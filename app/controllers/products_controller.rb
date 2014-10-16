@@ -13,4 +13,15 @@ class ProductsController < ApplicationController
     end
     @review = Review.new
   end
+
+  def destroy
+    product = Product.find(params[:id])
+    delete_product(product)
+    redirect_to products_path
+  end
+
+  def edit
+    @product = Product.find(params[:id])
+  end
+
 end

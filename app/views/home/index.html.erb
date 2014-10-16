@@ -1,4 +1,4 @@
-<h1> Welcome to Useless Junk<h1>
+<h1> Welcome to UselessJunk<h1>
 
 <h2>Create an Account</h2>
 
@@ -13,13 +13,22 @@
   </p>
   <p>
     <%= f.label :password %>
-    <%= f.text_field :password %>
+    <%= f.text_field :password_digest %>
   </p>
   <p>
     <%= f.label :confirm_password %>
-    <%= f.text_field :password %>
+    <%= f.text_field :password_digest %>
   </p>
   <%= f.submit "Submit" %>
 <% end %>
 
 <section>Already a registered? <%= link_to "Sign in", users_login_path %><br/></section>
+
+
+<ul class = "errors">
+  <% @user.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>

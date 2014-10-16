@@ -5,8 +5,6 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-
-
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user
   delete "users/:id/delete",      to: "users#delete",       as: :delete_user

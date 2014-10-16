@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new
+    @user = User.new(params[:user])
     if @user.save
       #sign_in @user
       flash[:notice] = "You signed up successfully"
@@ -66,6 +66,6 @@ end
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_digest, :id)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
   end
 end

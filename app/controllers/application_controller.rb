@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
     User.find_by id: session[:user_id]
   end
 
-  def delete_vendor(vendor)
-    vendor.products.each do |product|
+  def delete_user(user)
+    user.products.each do |product|
       delete_product(product)
     end
-    vendor.destroy
+    user.destroy
   end
 
   def delete_product(product)
@@ -20,5 +20,7 @@ class ApplicationController < ActionController::Base
     end
     product.destroy
   end
+
+
 
 end

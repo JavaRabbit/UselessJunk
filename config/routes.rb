@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   delete "users/:id/delete",      to: "users#delete",       as: :delete_user
   patch "users/:id/edit",         to: "users#update"
 
-  get "/users/new",               to: "users#new",          as: :new_users
+  get "/users/new",               to: "users#new",          as: :new_user
   post "/users/new",              to: "users#create"
-  get "/users/login",             to: "users#login",        as: :users_login
+  get "/users/login",             to: "users#login",        as: :user_login
   post "/users/signin",           to: "users#signin",       as: :users
-  get "/users/logout",            to: "users#logout",       as: :users_logout
+  get "/users/logout",            to: "users#logout",       as: :user_logout
   post "/users/logout",           to: "users#destroy"
 
   get "/products/:id",            to: "products#show",      as: :product

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   delete "products/:id",          to: "products#destroy"
 
-  get "/products",            to: "products#index"
+  get "/products",                to: "products#index"
 
 
   get "/order_items",             to: "order_items#index",  as: :order_items
@@ -35,14 +35,10 @@ Rails.application.routes.draw do
   post "/reviews/",               to: "reviews#create"
 
   # delete "products/:id/delete",   to: "products#delete",    as: :delete_product
-  delete "products/:id",          to: "products#destroy"
-  get "/products",                to: "products#index"
 
-  get "/order_items",             to: "order_items#index",  as: :order_items
 
-  get "/reviews",                  to: "reviews#index",      as: :reviews
-  post "/reviews/",                to: "reviews#create"
-
+  get "/orders/:id",              to: "orders#show", as: :order
+  post "/orders/new",             to: "order#create", as: :new_order
   #this page will show only the logged user's order_items
 
 

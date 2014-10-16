@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   def show
-    raise session[:order_id].inspect
     @order = Order.find_by(id: session[:order_id])
   end
 
@@ -20,6 +19,7 @@ class OrdersController < ApplicationController
       @order_item = OrderItem.create(quantity_of_product: 1, order_id: session[:order_id], product_id: params[:order_item][:product_id])
     end
     # Should redirect to the page where you clicked add to cart, but doesn't yet!
+    @order_item.save
     redirect_to products_path
   end
 end

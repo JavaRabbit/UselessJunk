@@ -1,0 +1,11 @@
+<h2>Your Cart</h2>
+
+<p>All Orders: <%= Order.all.inspect %></p>
+<p>This Order: <%= @order.inspect %>
+<p>
+  Order Items for this order
+  <% @order.order_items.each do |item| %>
+    <p><%= item.product.name %></p>
+    <p>Quantity: <%= item.quantity_of_product %></p>
+  <% end %>
+</p>

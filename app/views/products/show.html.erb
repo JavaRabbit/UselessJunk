@@ -14,7 +14,12 @@
     <p>In stock! </p>
     <div class = "add_to_cart_button">
       <!-- Update this link eventually -->
-      <%= link_to "Add to Cart", root_path  %>
+
+      <form action = "/orders/new" method = "POST">
+        <input type="hidden" name="order_item[product_id]" value= "<%= @product.id %>"/>
+        <!-- <input type="hidden" name="product[vendor_id]" value="<%#=@vendor.id%>" /> -->
+        <input type = "submit" value = "Add to Cart"/>
+      </form>
     </div>
   <% end %>
 

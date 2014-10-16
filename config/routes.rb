@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
 
   get "/orders/:id",              to: "orders#show", as: :order
-  post "/orders/new",             to: "order#create", as: :new_order
+  post "/orders/new",             to: "orders#create", as: :new_order
   #this page will show only the logged user's order_items
 
 

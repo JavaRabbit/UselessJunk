@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post "/reviews/",               to: "reviews#create",     as: :new_review
 
   get "/orders/:id",              to: "orders#show",        as: :order
-  post "/orders/new",             to: "orders#create",      as: :new_order
+  post "/orders/new",             to: "orders#add_to_cart", as: :new_order
   patch "/orders/:id/edit",       to: "orders#update",      as: :edit_order
   #this page will show only the logged user's order_items
 

@@ -1,13 +1,19 @@
 <h2>Your Cart</h2>
 
 <p>All Orders: <%= Order.all.inspect %></p>
-<p>This Order: <%= @order.inspect %>
-<p>
-  Order Items for this order
-  <% @order.order_items.each do |item| %>
-    <p><%= item.product.name %></p>
-    <p>Quantity: <%= item.quantity_of_product %></p>
-  <% end %>
-</p>
+<p> This Order: <%= @order.inspect %> </p>
+<p> Total Cost: <%= @order.total_price %> </p>
 
+  <%= form_for @order_item, method: :patch, url: update_cart_path do |f| %>
+    Order Items for this order
+    <% @order.order_items.each do |item| %>
+      <p><strong><%= item.product.name %></strong></p>
+
+      <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %></p>
+      <p> Subtotal: <%= item.subtotal %> </p>
+    <% end %>
+    <%= f.submit "Update Cart" %>
+<% end %>
+
+<!-- # <%= button_to "Update Cart", edit_order_path(@order.id), method: :patch %> -->
 <%= button_to "Buy the things!!", edit_order_path(@order.id), method: :patch %>

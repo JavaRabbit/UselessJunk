@@ -11,7 +11,7 @@
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
   <% elsif @product.quantity > 0 %>
-    <p>In stock! </p>
+    <p>In stock: <%= @product.quantity %> </p>
     <div class = "add_to_cart_button">
       <!-- Update this link eventually -->
 

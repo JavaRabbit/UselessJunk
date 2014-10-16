@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "/products",                to: "products#index"
 
   get "/order_items",             to: "order_items#index",  as: :order_items
+  patch "/update_cart",           to: "order_items#update",  as: :update_cart
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review

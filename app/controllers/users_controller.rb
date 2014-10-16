@@ -13,14 +13,36 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-def create
-    @user = User.new
+def signin(user)
+  if self.current_user = user
+    redirect_to root_path
+  else
     render :new
+  end
 end
 
-def login
+def create
     @user = User.new
-    render :login
+    if @user.save
+      sign_in @user
+      flash[:success] = "Welcome to UselessJunk!"
+      redirect_to @user
+    else
+    render :new
+    end
+end
+
+#def login
+#    @user = User.new
+#    render :login
+#end
+def login
+  @user = User.new
+  if @user.password == params[:password]
+    give_token
+  else
+    redirect_to root_path
+  end
 end
 
   def edit
@@ -41,6 +63,6 @@ end
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :password_digest, :id)
+    params.require(:user).permit(:username, :email, :password, :password_digest, :id)
   end
 end

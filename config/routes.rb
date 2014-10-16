@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   get "/orders/:id",              to: "orders#show",        as: :order
   post "/orders/new",             to: "orders#create",      as: :new_order
+  patch "/orders/:id/edit",       to: "orders#update",      as: :edit_order
   #this page will show only the logged user's order_items
 
 

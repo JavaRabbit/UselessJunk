@@ -9,3 +9,5 @@
     <p>Quantity: <%= item.quantity_of_product %></p>
   <% end %>
 </p>
+
+<%= button_to "Buy the things!!", edit_order_path(@order.id), method: :patch %>

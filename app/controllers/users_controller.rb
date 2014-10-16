@@ -31,7 +31,8 @@ def signin
 end
 
 def login
-
+    @user = User.new
+    render :login
 end
 
   def edit

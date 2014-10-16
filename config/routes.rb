@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review
 
-  get "/orders/:id",              to: "orders#show", as: :order
-  post "/orders/new",             to: "orders#create", as: :new_order
+  get "/orders/:id",              to: "orders#show",        as: :order
+  post "/orders/new",             to: "orders#create",      as: :new_order
   #this page will show only the logged user's order_items
 
 

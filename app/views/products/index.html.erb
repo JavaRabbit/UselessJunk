@@ -13,7 +13,7 @@
         Create an account <%= link_to "Create Account", create_user_path %><br/></section>
 
 
-ul class = "errors">
+<ul class = "errors">
   <% @user.errors.each do |column, message| %>
     <li>
       <strong><%= column.capitalize %></strong> <%= message %>

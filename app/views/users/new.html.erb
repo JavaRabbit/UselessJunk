@@ -1,6 +1,5 @@
-<% @page_title = UserAuth | Signup %>
-<div class="Sign_Form"
   <h2>Create an Account</h2>
+  
   <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
 
     <p>
@@ -21,23 +20,3 @@
     </p>
     <%= f.submit "Save" %>
   <% end %>
-
-  <% if @user.errors.any? %>
-    <ul>class="Signup_Errors">
-      <% for message_error in @user.errors.full_messages %>
-        <li>*<% message_error %></li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
-
-
-
-
-<ul class = "errors">
-  <% @user.errors.each do |column, message| %>
-    <li>
-      <strong><%= column.capitalize %></strong> <%= message %>
-    </li>
-    <% end %>
-  </ul>

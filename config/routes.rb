@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
 
+
   root "products#index"
   get "/users/new",               to: "users#create",       as: :create_user
   get "/users/login",             to: "users#login",        as: :user_login
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review
+
+
 
   #this page will show only the logged user's order_items
 

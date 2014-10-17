@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       #sign_in @user
       flash[:notice] = "You signed up successfully"
       flash[:color] = "valid"
-      redirect_to @user
+      redirect_to root_path
     else
       flash[:notice] = "Form is invalid"
       flash[:color] = "invalid"
@@ -35,14 +35,9 @@ class UsersController < ApplicationController
     render :new
   end
 
-#def login
-#    @user = User.new
-#    render :login
-#end
 def login
   @user = User.new
   if @user.password == params[:password]
-    give_token
   else
     redirect_to root_path
   end

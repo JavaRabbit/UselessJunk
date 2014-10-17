@@ -62,4 +62,16 @@ end
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
   end
+
+  def destroy
+    user = User.find(params[:id])
+    delete_user(user)
+    redirect_to root_path
+  end
+
+  def delete
+    @user = User.find_by id: params[:id]
+    # for sessions, use session[:user_id]
+  end
+
 end

@@ -22,9 +22,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new
+    @user = User.new(user_params)
     if @user.save
-      #sign_in @user
       flash[:notice] = "You signed up successfully"
       flash[:color] = "valid"
       redirect_to root_path

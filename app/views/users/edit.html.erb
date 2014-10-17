@@ -9,7 +9,7 @@
 </ul>
 
 
-<%= form_for @user, url: {action: "update"} do |f| %>
+<%= form_for @user, method: :put, url: edit_user_path(@user.id) do |f| %>
   <p>
     <%= f.label :username %>
     <%= f.text_field :username %>

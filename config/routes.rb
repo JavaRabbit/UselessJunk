@@ -2,34 +2,35 @@
 
 Rails.application.routes.draw do
 
-
   root "products#index"
+
   get "/users/new",               to: "users#create",       as: :create_user
   get "/users/login",             to: "users#login",        as: :user_login
-  get "/users/:id",               to: "users#show",         as: :user
-  get "/users/:id/edit",          to: "users#edit",         as: :edit_user
-  get "users/:id/delete",         to: "users#delete",        as: :temp
-  patch "users/:id/edit",         to: "users#update"
+  put "/users/:id/edit",         to: "users#update"
   get "/users/new",               to: "users#new",          as: :new_users
   post "/users/new",              to: "users#create"
-  delete "users/:id",             to: "users#destroy",      as: :delete_user
-
   post "/users/signin",           to: "users#signin",       as: :users
   get "/users/logout",            to: "users#logout",       as: :user_logout
   post "/users/logout",           to: "users#destroy"
-  get "/products/:id",            to: "products#show",      as: :product
-  get "products/:id/edit",        to: "products#edit",      as: :edit_product
-  delete "products/:id",          to: "products#destroy",   as: :delete_product
-  get "/products",                to: "products#index"
+  get "/users/:id",               to: "users#show",         as: :user
+  get "/users/:id/edit",          to: "users#edit",         as: :edit_user
+  get "/users/:id/delete",         to: "users#delete",        as: :temp
+  delete "/users/:id",             to: "users#destroy",      as: :delete_user
+
+  get "/products/new",            to: "products#new",       as: :new_product
   post "/products/new",           to: "products#create"
-  get "products/new",             to: "products#new",       as: :new_product
+  get "/products",                to: "products#index"
+  get "/products/:id",            to: "products#show",      as: :product
+  get "/products/:id/edit",        to: "products#edit",      as: :edit_product
+  delete "/products/:id",          to: "products#destroy",   as: :delete_product
+
+
 
   get "/order_items",             to: "order_items#index",  as: :order_items
   #this page will show only the logged user's order_items
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.

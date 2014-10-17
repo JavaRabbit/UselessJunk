@@ -1,0 +1,25 @@
+<h1> Login</h1>
+
+<ul class = "errors">
+  <% @user.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>
+
+<%= form_for @user do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.text_field :password_digest %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end %>

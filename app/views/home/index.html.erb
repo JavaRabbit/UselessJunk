@@ -1,8 +1,34 @@
-<h1> Welcome to Useless Junk<h1>
+<h1> Welcome to UselessJunk<h1>
 
-<h2>Sign up</h2>
+<h2>Create an Account</h2>
 
-<form action="<%= users_login_path %>" method="POST">
+<%= form_for @user do |f| %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.text_field :password_digest %>
+  </p>
+  <p>
+    <%= f.label :confirm_password %>
+    <%= f.text_field :password_digest %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end %>
 
-    <input  type= "submit" value="submit" />
-</form>
+<section>Already a registered? <%= link_to "Sign in", user_login_path %><br/></section>
+
+
+<ul class = "errors">
+  <% @user.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>

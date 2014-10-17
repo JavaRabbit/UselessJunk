@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   post "/users/new",              to: "users#create"
   delete "users/:id",             to: "users#destroy",      as: :delete_user
 
-
   post "/users/signin",           to: "users#signin",       as: :users
   get "/users/logout",            to: "users#logout",       as: :user_logout
   post "/users/logout",           to: "users#destroy"
@@ -22,15 +21,15 @@ Rails.application.routes.draw do
   get "products/:id/edit",        to: "products#edit",      as: :edit_product
   delete "products/:id",          to: "products#destroy",   as: :delete_product
   get "/products",                to: "products#index"
+  post "/products/new",           to: "products#create"
+  get "products/new",             to: "products#new",       as: :new_product
 
   get "/order_items",             to: "order_items#index",  as: :order_items
+  #this page will show only the logged user's order_items
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review
 
-
-
-  #this page will show only the logged user's order_items
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   get "/users/login",             to: "users#login",        as: :user_login
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user
-  delete "users/:id/delete",      to: "users#delete",       as: :delete_user
+  get "users/:id/delete",         to: "users#delete",        as: :temp
   patch "users/:id/edit",         to: "users#update"
   get "/users/new",               to: "users#new",          as: :new_users
   post "/users/new",              to: "users#create"
+  delete "users/:id",             to: "users#destroy",      as: :delete_user
+
 
   post "/users/signin",           to: "users#signin",       as: :users
   get "/users/logout",            to: "users#logout",       as: :user_logout

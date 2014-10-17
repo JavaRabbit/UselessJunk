@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
     product.destroy
   end
 
+  def update_cart(quantity_diff, order_item)
+    order_item.quantity_of_product += quantity_diff
+    order_item.product.quantity -= quantity_diff
+    order_item.subtotal += (order_item.product.price * quantity_diff)
+    order_item.save
+    order_item.product.save
+  end
+
 end

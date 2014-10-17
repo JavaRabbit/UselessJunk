@@ -9,7 +9,7 @@
     <% @order.order_items.each do |item| %>
       <p><strong><%= item.product.name %></strong></p>
 
-      <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %></p>
+      <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %> x <%= item.product.price %></p>
       <p> Subtotal: <%= item.subtotal %> </p>
     <% end %>
     <%= f.submit "Update Cart" %>

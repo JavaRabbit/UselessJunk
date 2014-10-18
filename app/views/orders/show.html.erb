@@ -2,7 +2,18 @@
 
 <p>All Orders: <%= Order.all.inspect %></p>
 <p> This Order: <%= @order.inspect %> </p>
-<p> Total Cost: <%= @order.total_price %> </p>
+<p> Total Cost: <%#= @order.total_price %> </p>
+
+<ul class = "errors">
+  <% @order.order_items.each do |item| %>
+      <% item.errors.each do |column, message| %>
+        <li>
+          <strong><%= column.capitalize %></strong> <%= message %>
+        </li>
+      <% end %>
+  <% end %>
+</ul>
+
 
   <%= form_for @order_item, method: :patch, url: update_cart_path do |f| %>
     Order Items for this order

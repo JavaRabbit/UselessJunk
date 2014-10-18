@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
     if @product == nil
       redirect_to root_path
     end
+    @order_item = OrderItem.new
     @review = Review.new
   end
 

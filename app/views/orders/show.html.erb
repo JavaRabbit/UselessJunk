@@ -4,6 +4,7 @@
 <p> This Order: <%= @order.inspect %> </p>
 <p> Total Cost: <%#= @order.total_price %> </p>
 
+<p>Errors</p>
 <ul class = "errors">
   <% @order.order_items.each do |item| %>
       <% item.errors.each do |column, message| %>
@@ -15,15 +16,24 @@
 </ul>
 
 
-  <%= form_for @order_item, method: :patch, url: update_cart_path do |f| %>
-    Order Items for this order
-    <% @order.order_items.each do |item| %>
+<% @order.order_items.sort.each do |item| %>
+  <%= form_for item, method: :patch, url: update_cart_path do |f| %>
+    <p>Order Items for this order</p>
       <p><strong><%= item.product.name %></strong></p>
-
-      <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %> x <%= item.product.price %></p>
+      <p> <%= f.text_field item.id, value: item.quantity_of_product %> x <%= item.product.price %></p>
+      <p> Quantity available: <%= item.product.quantity %></p>
+      <ul class = "errors" >
+        <% item.errors.inspect %>
+        <% item.errors.each do |column, message| %>
+        <li>
+          <strong> <%= message %>
+        </li>
+        <% end %>
+      </ul>
       <p> Subtotal: <%= item.subtotal %> </p>
+      <%= f.submit "Update Cart" %>
     <% end %>
-    <%= f.submit "Update Cart" %>
+
 <% end %>
 
 <!-- # <%= button_to "Update Cart", edit_order_path(@order.id), method: :patch %> -->

@@ -4,32 +4,28 @@
 <p> This Order: <%= @order.inspect %> </p>
 <p> Total Cost: <%#= @order.total_price %> </p>
 
-<p>Errors</p>
-<ul class = "errors">
-  <% @order.order_items.each do |item| %>
-      <% item.errors.each do |column, message| %>
-        <li>
-          <strong><%= column.capitalize %></strong> <%= message %>
-        </li>
-      <% end %>
-  <% end %>
-</ul>
+
+
+
 
 
 <% @order.order_items.sort.each do |item| %>
   <%= form_for item, method: :patch, url: update_cart_path do |f| %>
     <p>Order Items for this order</p>
       <p><strong><%= item.product.name %></strong></p>
-      <p> <%= f.text_field item.id, value: item.quantity_of_product %> x <%= item.product.price %></p>
+      <p>ID =  <%= item.id %>
+      <p> <%= f.hidden_field :order_item_id, value: item.id %>
+      <p> <%= f.text_field :quantity, value: item.quantity_of_product %> x <%= item.product.price %></p>
       <p> Quantity available: <%= item.product.quantity %></p>
-      <ul class = "errors" >
-        <% item.errors.inspect %>
-        <% item.errors.each do |column, message| %>
-        <li>
-          <strong> <%= message %>
-        </li>
-        <% end %>
+      <% if @errors %>
+      <ul class = "errors">
+          <% @errors.each do |column, message| %>
+            <li>
+              <strong><%= column.capitalize %></strong> <%= message %>
+            </li>
+          <% end %>
       </ul>
+      <% end %>
       <p> Subtotal: <%= item.subtotal %> </p>
       <%= f.submit "Update Cart" %>
     <% end %>

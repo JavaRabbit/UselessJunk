@@ -14,13 +14,12 @@ class OrderItemsController < ApplicationController
     #   @errors = @order_item.errors
     # end
     # END OF WORKING PART
-    @order = Order.find_by(id: session[:order_id])
+
     @order_item = OrderItem.new
     @errors_array = []
     params[:order_item].each do |k, v|
       order_item = OrderItem.find_by(id: k)
       quantity_diff = v.to_i - order_item.quantity_of_product
-      #order_item.quantity_of_product += quantity_diff
       failed_save = update_cart(quantity_diff, order_item)
       if failed_save
         @errors_array << failed_save
@@ -28,7 +27,9 @@ class OrderItemsController < ApplicationController
     end
 
     params[:order_item][:quantity] == "0" ? @order_item.destroy : nil
+    @order = Order.find_by(id: session[:order_id])
     render "orders/show"
+
   end
 
 end

@@ -26,6 +26,7 @@
 
       <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %></p>
       <p> Subtotal: <%= item.subtotal %> </p>
+      <p> Quantity available: <%= item.product.quantity %></p>
     <% end %>
     <%= f.submit "Update Cart" %>
 <% end %>

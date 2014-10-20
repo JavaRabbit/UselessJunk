@@ -26,7 +26,6 @@ before_filter :authorize_order, only: [:buy, :pay]
   end
 
   def pay
-    raise params.inspect
     current_order.state = "paid"
     current_order.update(order_params)
     if current_order.save

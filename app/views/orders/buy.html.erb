@@ -19,9 +19,9 @@ This is a page where you put info to buy a thing!
     </p>
     <p>
       <%= f.label "Credit Card #"%>
-      <%= text_field_tag :nums, maxlength: 4, size: 4 %>
-      <%= text_field_tag :nums, maxlength: 4, size: 4 %>
-      <%= text_field_tag :nums, maxlength: 4, size: 4 %>
+      <%= text_field_tag :num, nil, maxlength: 4, size: 4 %>
+      <%= text_field_tag :num, nil, maxlength: 4, size: 4 %>
+      <%= text_field_tag :num, nil, maxlength: 4, size: 4 %>
       <%= f.text_field :last_four, :maxlength => 4, :size => 4 %>
     </p>
     <p>
@@ -30,7 +30,7 @@ This is a page where you put info to buy a thing!
     </p>
     <p>
       <%= label_tag "CVV" %>
-      <%= text_field_tag :cvv %>
+      <%= text_field_tag :cvv, nil, maxlength: 3, size: 3 %>
     </p>
     <p>
       <%= label_tag :b_zip, "Billing Zip Code" %>

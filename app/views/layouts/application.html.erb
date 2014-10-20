@@ -8,9 +8,9 @@
 </head>
 <body>
   <div id="container">
-    <div id="user_header">
+    <div id="user_header"> <!-- header section -->
       <% if current_user %>
-        Logged in as <%= current_user.email %>.
+        Logged in as <%= current_user.email %>. <!-- maybe username in the future?-->
         <%= link_to "Log Out", logout_path %>
       <% else %>
         <%= link_to "Sign Up", signup_path %> or
@@ -18,12 +18,12 @@
       <% end %>
     </div>
 
-    <% flash.each do |name, msg| %>
+    <% flash.each do |name, msg| %> <!-- flash message provided my rails--> 
       <%= content_tag :div, msg, id: "flash_#{name}" %>
     <% end %>
 
     <%= yield %>
-    
+
     </div>
   </body>
 </html>

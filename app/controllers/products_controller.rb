@@ -25,6 +25,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to root_path(params[:id])
+    else
+      render :edit
+    end
+  end
+
   def show
     @product = Product.find_by(id: params[:id])
     if @product == nil

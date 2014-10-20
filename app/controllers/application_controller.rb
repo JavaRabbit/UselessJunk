@@ -55,6 +55,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+# if current user 
+
 
 # to give access to specific page
   def authorize

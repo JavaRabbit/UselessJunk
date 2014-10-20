@@ -51,19 +51,27 @@ class ApplicationController < ActionController::Base
 # helper_method to fetch the current_user to be accessible in the view
   private
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by(id: session[:user_id])
   end
   helper_method :current_user
 
-# if current user 
+  def current_order
+    @current_order ||= Order.find_by(id: session[:order_id])
+  end
+  helper_method :current_order
+
+# if current user
 
 
 # to give access to specific page
   def authorize
     redirect_to login_url, alert: "Not authorized" if current_user.nil?
   end
-end
 
+  def authorize_order
+    redirect_to order_path("cart"), alert: "Expired Order" if current_order.id.to_s != params[:id]
+  end
+end
   #def logged_user
   #  User.find_by id: session[:user_id]
   #end

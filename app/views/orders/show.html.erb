@@ -3,6 +3,7 @@
 <p>All Orders: <%= Order.all.inspect %></p>
 <p> This Order: <%= @order.inspect %> </p>
 <p> Total Cost: <%= @order.total_price %> </p>
+<p> Session ID: <%= session[:order_id] %> </p>
 
 
 <% if @errors_array %>

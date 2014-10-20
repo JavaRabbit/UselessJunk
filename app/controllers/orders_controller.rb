@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+before_filter :authorize_order, only: [:buy, :pay]
 
   def show
     @order = find_or_create

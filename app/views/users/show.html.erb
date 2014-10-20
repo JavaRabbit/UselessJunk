@@ -2,7 +2,7 @@
   <h2> My Account </h2>
     <ul class = "horizontal">
       <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
-      <!--<li> <%= link_to "Delete My Account", delete_user_path(@user.id), method: :delete %> </li> -->
+      <!--<li> <%= link_to "Delete My Account", confirm_path(@user.id), method: :delete %> </li> -->
     </ul>
 
   <h3> My Products </h3>
@@ -40,4 +40,4 @@
 <% end %>
 
 <hr>
-<%= link_to "Delete this account", temp_path(@user.id), method: :get %>
+<%= link_to "Delete this account", confirm_path(@user.id), method: :get %>

@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     @user = User.first
     # @user = User.find_by(id: session[:user_id])
-    # once session works
+    # this^ once login/session works
   end
 
   def create
@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
       user_id = @product.user_id
       redirect_to user_path(user_id)
     else
+      @user = User.first
       render :new
     end
   end

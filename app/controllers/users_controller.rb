@@ -34,13 +34,13 @@ class UsersController < ApplicationController
     render :new
   end
 
-def login
-  @user = User.new
-  if @user.password == params[:password]
-  else
-    redirect_to root_path
+  def login
+    @user = User.new
+    if @user.password == params[:password]
+    else
+      redirect_to root_path
+    end
   end
-end
 
   def edit
     @user = User.find_by id: params[:id]

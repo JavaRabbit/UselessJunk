@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-
   def edit
     @user = User.find_by id: params[:id]
     @logged_user = User.first # just to test, later this should come from session
@@ -55,9 +54,9 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
   end
 
-  #def delete
-  #  @user = User.find_by id: params[:id]
-  #  # for sessions, use session[:user_id]
-  #end
+  def confirm
+   @user = User.find_by id: params[:id]
+   # for sessions, use session[:user_id]
+  end
 
 end

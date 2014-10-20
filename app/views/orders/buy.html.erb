@@ -1,1 +1,41 @@
 This is a page where you put info to buy a thing!
+
+
+<div class = "checkout">
+  <h4>Give us your info: </h4>
+  <%= form_for @order, method: :put, url: pay_path(current_order.id) do |f| %>
+    <p>
+      <%= f.label "Full Name" %>
+      <%= f.text_field :buyer_name %>
+    </p>
+    <p>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label "Mailing Address" %>
+      <%= f.text_area :address %>
+    </p>
+    <p>
+      <%= f.label "Credit Card #"%>
+      <!--These should only allow four numbers each-->
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <%= f.text_field :last_four %>
+    </p>
+    <p>
+      <%= f.label "Expiration Date" %>
+      <%= f.text_field :expiration %>
+    </p>
+    <p>
+      CVV:
+      <input type="text" name= "CVV">
+    </p>
+    <p>
+      Billing Zip:
+      <input type="text" name= "Billing Zip">
+    </p>
+    <p><%= f.submit %></p>
+  <% end %>
+</div>

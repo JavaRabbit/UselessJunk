@@ -13,6 +13,36 @@ before_filter :authorize_order, only: [:buy, :pay]
     redirect_to order_path(@order.id)
   end
 
+  def update
+    order = Order.find_by(id: session[:order_id])
+    order.state = "paid"
+    order.save
+    session[:order_id] = nil
+    redirect_to order_path(order.id)
+  end
+
+  def buy
+    @order = current_order
+  end
+
+  def pay
+    current_order.state = "paid"
+    current_order.update(order_params)
+    if current_order.save
+      redirect_to order_confirm_path(current_order.id), notice: "Order Approved! Thank you!"
+    else
+      render :buy, notice: "Order Incomplete!"
+    end
+  end
+
+  private
+
+  def new_order
+    order = Order.create(state: "pending", total_price: 0)
+    session[:order_id] = order.id
+    order
+  end
+
   def find_or_create
     Order.find_by(id: session[:order_id]) || new_order
   end
@@ -24,25 +54,10 @@ before_filter :authorize_order, only: [:buy, :pay]
       order_item = OrderItem.create(quantity_of_product: 0, order_id: session[:order_id], product_id: p_id, subtotal: 0)
     end
     update_cart(1, order_item)
-
   end
 
-  def update
-    order = Order.find_by(id: session[:order_id])
-    order.state = "paid"
-    order.save
-    session[:order_id] = nil
-    redirect_to order_path(order.id)
+  def order_params
+    params.require(:order).permit(:buyer_name, :email, :address, :last_four, :expiration)
   end
-
-  private
-
-  def new_order
-    order = Order.create(state: "pending", total_price: 0)
-    session[:order_id] = order.id
-    order
-  end
-
-
 
 end

@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery with: :exception
 
-  def logged_user
-    User.find_by id: session[:user_id]
-  end
-
   def delete_user(user)
     user.products.each do |product|
       delete_product(product)
@@ -23,5 +19,24 @@ class ApplicationController < ActionController::Base
   end
 
 
+# makes it available for all controllers.
+# find user model by sessions Id (stated earlier inside sessions
+# controller) when the user logged in only if session variable user exists
+# Cach instance variable so it can be fetched one time per request. It will be called many times.
 
+# helper_method to fetch the current_user to be accessible in the view
+  private
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
+
+# to give access to specific page
+  def authorize
+    redirect_to login_url, alert: "Not authorized" if current_user.nil?
+  end
 end
+
+  #def logged_user
+  #  User.find_by id: session[:user_id]
+  #end

@@ -2,16 +2,11 @@
 
 Rails.application.routes.draw do
 
-  root "products#index"
-
   get "/users/new",               to: "users#create",       as: :create_user
   get "/users/login",             to: "users#login",        as: :user_login
   put "/users/:id/edit",         to: "users#update"
   get "/users/new",               to: "users#new",          as: :new_users
   post "/users/new",              to: "users#create"
-  post "/users/signin",           to: "users#signin",       as: :users
-  get "/users/logout",            to: "users#logout",       as: :user_logout
-  post "/users/logout",           to: "users#destroy"
   get "/users/:id",               to: "users#show",         as: :user
   get "/users/:id/edit",          to: "users#edit",         as: :edit_user
   get "/users/:id/delete",         to: "users#delete",        as: :temp
@@ -19,7 +14,20 @@ Rails.application.routes.draw do
 
   get "/products/new",            to: "products#new",       as: :new_product
   post "/products/new",           to: "products#create"
-  get "/products",                to: "products#index"
+
+  get 'sessions/new'
+
+  get "signup",                   to: "users#new",           as: "signup"
+  get "login",                    to: "sessions#new",        as: "login"
+  get "logout",                   to: "sessions#destroy",    as: "logout"
+  #get "/users/:id",               to: "users#show",         as: :user
+  #get "/users/:id/edit",          to: "users#edit",         as: :edit_user
+  #delete "users/:id/delete",      to: "users#delete",       as: :delete_user
+  #patch "users/:id/edit",         to: "users#update"
+
+  resources :users
+  resources :sessions
+
   get "/products/:id",            to: "products#show",      as: :product
   get "/products/:id/edit",        to: "products#edit",      as: :edit_product
   delete "/products/:id",          to: "products#destroy",   as: :delete_product
@@ -32,6 +40,9 @@ Rails.application.routes.draw do
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review
 
+
+
+  root "products#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

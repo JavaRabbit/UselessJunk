@@ -28,9 +28,18 @@ class ApplicationController < ActionController::Base
   def update_cart(quantity_diff, order_item)
     order_item.quantity_of_product += quantity_diff
     order_item.product.quantity -= quantity_diff
-    order_item.subtotal += (order_item.product.price * quantity_diff)
-    order_item.save
-    order_item.product.save
+    price_change = order_item.product.price * quantity_diff
+    order_item.subtotal += price_change
+    if order_item.save
+      order_item.product.save
+      order_item.order.total_price += price_change
+      order_item.order.save
+      # raise order_item.order.inspect
+
+      return nil
+    else
+      return order_item
+    end
   end
 
 

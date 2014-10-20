@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-
   def edit
     @user = User.find_by id: params[:id]
     @logged_user = User.first # just to test, later this should come from session

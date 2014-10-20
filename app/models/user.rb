@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+
   has_many :products
   has_many :orderitems, through: :products
 
@@ -20,25 +21,15 @@ class User < ActiveRecord::Base
  #   end
  # end
 
-#  def clear_password
-#    self.password = nil
-#  end
+  # no need to validate presence of password or password
+  # confirmation, has_secure_password does that for you.
+  # validate format of email, length of password, etc.
 
-#  def self.authenticate(username_or_email="", login_password="")
-#  if  EMAIL_REGEX.match(username_or_email)
-#    user = User.find_by_email(username_or_email)
-#  else
-#    user = User.find_by_username(username_or_email)
-#  end
-#    if user && user.match_password(login_password)
-#      return user
-#    else
-#      return false
-#    end
-#  end
+  validates :email, presence: true, uniqueness: true
+  validates_uniqueness_of :email, format: {with: /@/}
 
-#  def match_password(login_password="")
-#    encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
-#  end
+
+  #has_many :products
+  #has_many :orderitems, through: :products
 
 end

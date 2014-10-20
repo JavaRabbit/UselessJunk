@@ -2,18 +2,20 @@
 
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-
   get "signup",                   to: "users#new",           as: "signup"
   get "login",                    to: "sessions#new",        as: "login"
   get "logout",                   to: "sessions#destroy",    as: "logout"
-  #get "/users/:id",               to: "users#show",         as: :user
-  #get "/users/:id/edit",          to: "users#edit",         as: :edit_user
-  #delete "users/:id/delete",      to: "users#delete",       as: :delete_user
-  #patch "users/:id/edit",         to: "users#update"
+  get "/users/:id",               to: "users#show",         as: :user
+  get "/users/:id/edit",          to: "users#edit",         as: :edit_user
+  delete "users/:id/delete",      to: "users#delete",       as: :delete_user
+  patch "users/:id/edit",         to: "users#update"
 
   resources :users
   resources :sessions
+
+# resources creates 7 routes that map to the users controller: index, new, create
+# show, edit, update, destroy
+# http://guides.rubyonrails.org/routing.html
 
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product

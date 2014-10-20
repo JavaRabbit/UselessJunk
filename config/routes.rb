@@ -2,39 +2,22 @@
 
 Rails.application.routes.draw do
 
-  get "/users/new",               to: "users#create",       as: :create_user
-  get "/users/login",             to: "users#login",        as: :user_login
-  put "/users/:id/edit",         to: "users#update"
-  get "/users/new",               to: "users#new",          as: :new_users
-  post "/users/new",              to: "users#create"
-  get "/users/:id",               to: "users#show",         as: :user
-  get "/users/:id/edit",          to: "users#edit",         as: :edit_user
-  get "/users/:id/delete",         to: "users#delete",        as: :temp
-  delete "/users/:id",             to: "users#destroy",      as: :delete_user
-
-  get "/products/new",            to: "products#new",       as: :new_product
-  post "/products/new",           to: "products#create"
-
-  get 'sessions/new'
-
   get "signup",                   to: "users#new",           as: "signup"
   get "login",                    to: "sessions#new",        as: "login"
   get "logout",                   to: "sessions#destroy",    as: "logout"
-  #get "/users/:id",               to: "users#show",         as: :user
-  #get "/users/:id/edit",          to: "users#edit",         as: :edit_user
-  #delete "users/:id/delete",      to: "users#delete",       as: :delete_user
-  #patch "users/:id/edit",         to: "users#update"
-
+  get "/users/:id/confirm",       to: "users#confirm",       as: :confirm
   resources :users
+
   resources :sessions
 
-  get "/products/:id",            to: "products#show",      as: :product
-  get "/products/:id/edit",        to: "products#edit",      as: :edit_product
-  delete "/products/:id",          to: "products#destroy",   as: :delete_product
+  get "/products/new",            to: "products#new",       as: :new_product
+  post "/products/new",           to: "products#create"
+  get "/products/:id",            to: "products#show",        as: :product
+  get "/products/:id/edit",        to: "products#edit",       as: :edit_product
+  delete "/products/:id",          to: "products#destroy",    as: :delete_product
 
-  get "/order_items",             to: "order_items#index",  as: :order_items
+  get "/order_items",             to: "order_items#index",    as: :order_items
   #this page will show only the logged user's order_items
-
   patch "/update_cart",           to: "order_items#update",  as: :update_cart
 
   get "/reviews",                 to: "reviews#index",      as: :reviews

@@ -2,22 +2,19 @@
 
 Rails.application.routes.draw do
 
+  get 'sessions/new'
 
-  root "products#index"
-  get "/users/new",               to: "users#create",       as: :create_user
-  get "/users/login",             to: "users#login",        as: :user_login
-  get "/users/:id",               to: "users#show",         as: :user
-  get "/users/:id/edit",          to: "users#edit",         as: :edit_user
-  get "users/:id/delete",         to: "users#delete",        as: :temp
-  patch "users/:id/edit",         to: "users#update"
-  get "/users/new",               to: "users#new",          as: :new_users
-  post "/users/new",              to: "users#create"
-  delete "users/:id",             to: "users#destroy",      as: :delete_user
+  get "signup",                   to: "users#new",           as: "signup"
+  get "login",                    to: "sessions#new",        as: "login"
+  get "logout",                   to: "sessions#destroy",    as: "logout"
+  #get "/users/:id",               to: "users#show",         as: :user
+  #get "/users/:id/edit",          to: "users#edit",         as: :edit_user
+  #delete "users/:id/delete",      to: "users#delete",       as: :delete_user
+  #patch "users/:id/edit",         to: "users#update"
 
+  resources :users
+  resources :sessions
 
-  post "/users/signin",           to: "users#signin",       as: :users
-  get "/users/logout",            to: "users#logout",       as: :user_logout
-  post "/users/logout",           to: "users#destroy"
   get "/products/:id",            to: "products#show",      as: :product
   get "products/:id/edit",        to: "products#edit",      as: :edit_product
   delete "products/:id",          to: "products#destroy",   as: :delete_product
@@ -34,6 +31,9 @@ Rails.application.routes.draw do
   post "/orders/new",             to: "orders#add_to_cart", as: :new_order
   patch "/orders/:id/edit",       to: "orders#update",      as: :edit_order
 
+
+
+  root "products#index"
 
 
   #this page will show only the logged user's order_items

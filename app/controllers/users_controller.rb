@@ -1,7 +1,19 @@
 
 class UsersController < ApplicationController
-  def index
+  before_filter :authorize, only: [:edit, :update]
+
+  def new
     @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_url, notice: "Thank you for signing up!"
+    else
+      render "new"
+    end
   end
 
   def show
@@ -13,35 +25,6 @@ class UsersController < ApplicationController
     @products = @user.products
   end
 
-  def signin(user)
-    if self.current_user = user
-      redirect_to root_path
-    else
-      render :new
-    end
-  end
-
-  def create
-    @user = User.new
-    if @user.save
-      #sign_in @user
-      flash[:notice] = "You signed up successfully"
-      flash[:color] = "valid"
-      redirect_to root_path
-    else
-      flash[:notice] = "Form is invalid"
-      flash[:color] = "invalid"
-    end
-    render :new
-  end
-
-def login
-  @user = User.new
-  if @user.password == params[:password]
-  else
-    redirect_to root_path
-  end
-end
 
   def edit
     @user = User.find_by id: params[:id]
@@ -60,19 +43,21 @@ end
     end
   end
 
-  def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
-  end
-
   def destroy
     user = User.find(params[:id])
     delete_user(user)
     redirect_to root_path
   end
 
-  def delete
-    @user = User.find_by id: params[:id]
-    # for sessions, use session[:user_id]
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
   end
+
+  #def delete
+  #  @user = User.find_by id: params[:id]
+  #  # for sessions, use session[:user_id]
+  #end
 
 end

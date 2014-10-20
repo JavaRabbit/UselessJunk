@@ -62,7 +62,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
 # to give access to specific page
   def authorize
     redirect_to login_url, alert: "Not authorized" if current_user.nil?

@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+
   helper :all
   protect_from_forgery with: :exception
+
+
+  def logged_user
+    User.find_by id: session[:user_id]
+  end
 
   def delete_user(user)
     user.products.each do |product|
@@ -19,6 +25,15 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def update_cart(quantity_diff, order_item)
+    order_item.quantity_of_product += quantity_diff
+    order_item.product.quantity -= quantity_diff
+    order_item.subtotal += (order_item.product.price * quantity_diff)
+    order_item.save
+    order_item.product.save
+  end
+
+
 # makes it available for all controllers.
 # find user model by sessions Id (stated earlier inside sessions
 # controller) when the user logged in only if session variable user exists
@@ -30,6 +45,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
+
 
 # to give access to specific page
   def authorize

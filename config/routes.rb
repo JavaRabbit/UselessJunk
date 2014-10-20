@@ -21,12 +21,20 @@ Rails.application.routes.draw do
   get "/products",                to: "products#index"
 
   get "/order_items",             to: "order_items#index",  as: :order_items
+  patch "/update_cart",           to: "order_items#update",  as: :update_cart
 
   get "/reviews",                 to: "reviews#index",      as: :reviews
   post "/reviews/",               to: "reviews#create",     as: :new_review
 
 
+  get "/orders/:id",              to: "orders#show",        as: :order
+  post "/orders/new",             to: "orders#add_to_cart", as: :new_order
+  patch "/orders/:id/edit",       to: "orders#update",      as: :edit_order
+
+
+
   root "products#index"
+
 
   #this page will show only the logged user's order_items
 

@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   get "login",                    to: "sessions#new",        as: "login"
   get "logout",                   to: "sessions#destroy",    as: "logout"
   get "/users/:id/confirm",       to: "users#confirm",       as: :confirm
+
   resources :users
-
   resources :sessions
+  # resources creates 7 routes that map to the users controller: index, new, create
+  # show, edit, update, destroy
+  # http://guides.rubyonrails.org/routing.html
 
-  get "/products/new",            to: "products#new",       as: :new_product
+  get "/products/new",            to: "products#new",         as: :new_product
   post "/products/new",           to: "products#create"
   get "/products/:id",            to: "products#show",        as: :product
   get "/products/:id/edit",        to: "products#edit",       as: :edit_product
@@ -18,14 +21,14 @@ Rails.application.routes.draw do
 
   get "/order_items",             to: "order_items#index",    as: :order_items
   #this page will show only the logged user's order_items
-  patch "/update_cart",           to: "order_items#update",  as: :update_cart
+  patch "/update_cart",           to: "order_items#update",   as: :update_cart
 
-  get "/reviews",                 to: "reviews#index",      as: :reviews
-  post "/reviews/",               to: "reviews#create",     as: :new_review
+  get "/reviews",                 to: "reviews#index",        as: :reviews
+  post "/reviews/",               to: "reviews#create",       as: :new_review
 
-  get "/orders/:id",              to: "orders#show",        as: :order
-  post "/orders/new",             to: "orders#add_to_cart", as: :new_order
-  patch "/orders/:id/edit",       to: "orders#update",      as: :edit_order
+  get "/orders/:id",              to: "orders#show",          as: :order
+  post "/orders/new",             to: "orders#add_to_cart",   as: :new_order
+  patch "/orders/:id/edit",       to: "orders#update",        as: :edit_order
 
   root "products#index"
 

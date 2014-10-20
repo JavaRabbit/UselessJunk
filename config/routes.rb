@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   delete "/products/:id",          to: "products#destroy",    as: :delete_product
 
   get "/order_items",             to: "order_items#index",    as: :order_items
-  #this page will show only the logged user's order_items
+  # this page will show only the logged user's order_items
   patch "/update_cart",           to: "order_items#update",  as: :update_cart
 
   get "/reviews",                 to: "reviews#index",      as: :reviews

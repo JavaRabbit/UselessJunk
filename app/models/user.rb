@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-
   has_many :products
   has_many :orderitems, through: :products
 
@@ -25,8 +24,7 @@ class User < ActiveRecord::Base
   # confirmation, has_secure_password does that for you.
   # validate format of email, length of password, etc.
 
-  validates :email, presence: true, uniqueness: true
-  validates_uniqueness_of :email, format: {with: /@/}
+  validates :email, presence: true, uniqueness: true, format: {with: /@/}
 
 
   #has_many :products

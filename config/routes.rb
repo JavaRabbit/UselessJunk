@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "logout",                   to: "sessions#destroy",    as: "logout"
   get "/users/:id/confirm",       to: "users#confirm",       as: :confirm
 
-  resources :users 
+  resources :users
   resources :sessions
   # resources creates 7 routes that map to the users controller: index, new, create
   # show, edit, update, destroy

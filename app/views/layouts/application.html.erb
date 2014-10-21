@@ -11,7 +11,7 @@
   <div id="container">
     <div id="user_header"> <!-- header section -->
       <% if current_user %>
-        Logged in as <%= current_user.email %>. <!-- maybe username in the future?-->
+        Logged in as <%= current_user.username %>.
         <%= link_to "Log Out", logout_path %>
       <% else %>
         <%= link_to "Sign Up", signup_path %> or

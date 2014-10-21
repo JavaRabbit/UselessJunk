@@ -7,7 +7,7 @@
 <div class = "basic_product">
   <img src = <%= @product.imageurl %> alt = "Image of product">
   <p>Description: <%= @product.description %></p>
-  <p>Price: <%= @product.price %> cents</p>
+  <p>Price: <%= format_money(@product.price) %> </p>
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
   <% elsif @product.quantity > 0 %>

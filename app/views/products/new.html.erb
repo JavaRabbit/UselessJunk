@@ -9,7 +9,7 @@
   </ul>
 
  <%= form_for @product, method: :post, url: new_product_path do |f|%>
-   <%= f.hidden_field :user_id, value: @user.id %>
+   <%= f.hidden_field :user_id, value: current_user.id %>
 
    <p>
      <%= f.label :name.capitalize %>
@@ -17,7 +17,7 @@
    </p>
    <p>
      <%= f.label :price.capitalize %>
-     <%= f.text_field :price %> 
+     <%= f.text_field :price %>
    </p>
    <p>
      <%= f.label :quantity.capitalize %>

@@ -3,25 +3,30 @@
 
 <%= form_for @product, method: :put, url: edit_product_path(@product.id)  do |f|%>
 
-  <p>
+  <div class="field">
     <%= f.label :name.capitalize %>
     <%= f.text_field :name %>
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :price.capitalize %>
     <%= f.text_field :price %> (in cents)
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :quantity.capitalize %>
     <%= f.text_field  :quantity %>
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :link_to_a_picture %>
     <%= f.text_field :imageurl %>
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
-  </p>
-  <p><%= f.submit %></p>
+  </div class="field">
+  <div class="field">
+    <%= f.label :description.capitalize %>
+    <%= f.text_area :description %>
+  </div class="field">
+
+  <%= f.submit %>
 <% end %>

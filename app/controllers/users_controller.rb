@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by id: params[:id]
-    @logged_user = User.first #just to test
+    @user = User.find_by( id: params[:id])
+    @logged_user = current_user
     if @user == nil
       redirect_to root_path
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by id: params[:id]
-    @logged_user = User.first # just to test, later this should come from session
+    @logged_user = current_user
     if @user != @logged_user
       redirect_to user_path(params[:id])
     end

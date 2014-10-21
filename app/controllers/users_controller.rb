@@ -48,6 +48,14 @@ before_filter :authorize, only: [:edit, :update]
 
   def my_orders
     @total_rev = my_total_revenue
+    @total_rev_pending = total_rev("pending")
+    @total_rev_paid = total_rev("paid")
+    @total_rev_complete = total_rev("complete")
+    @total_rev_cancelled = total_rev("cancelled")
+    @num_orders_pending = num_orders("pending")
+    @num_orders_paid = num_orders("paid")
+    @num_orders_complete = num_orders("complete")
+    @num_orders_cancelled = num_orders("cancelled")
   end
 
   private
@@ -64,9 +72,44 @@ before_filter :authorize, only: [:edit, :update]
   def my_total_revenue
     total_rev = 0
     current_user.order_items.each do |item|
-      total_rev += (item.subtotal * item.quantity_of_product)
+      unless item.order.state == "pending"
+        total_rev += (item.subtotal * item.quantity_of_product)
+      end
     end
     total_rev
   end
+
+  def total_rev_paid_orders
+    total_rev = 0
+    current_user.order_items.each do |item|
+      if item.order.state == "paid"
+        total_rev += (item.subtotal * item.quantity_of_product)
+      end
+    end
+    total_rev
+  end
+
+  def total_rev(state)
+    total_rev = 0
+    current_user.order_items.each do |item|
+      if item.order.state == state
+        total_rev += (item.subtotal * item.quantity_of_product)
+      end
+    end
+    total_rev
+  end
+
+  def num_orders(state)
+    order_num = 0
+    current_user.order_items.each do |item|
+      if item.order.state == state
+        order_num += 1
+      end
+    end
+    order_num
+  end
+
+
+
 
 end

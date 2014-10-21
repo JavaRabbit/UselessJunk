@@ -1,13 +1,40 @@
 <h2>Orders for My Products</h2>
-<h3>Total Revenue to date: <%= format_money(@total_rev) %></h3>
+<h4>Total Revenue to date: <%= format_money(@total_rev) %></h4>
+
+<h4>Pending Orders</h4>
+  <ul>
+    <li>Number of pending orders: <%= @num_orders_pending %></li>
+    <li>Revenue for pending orders: <%= format_money(@total_rev_pending) %> </li>
+  </ul>
+
+<h4>Paid Orders</h4>
+  <ul>
+    <li>Number of paid orders: <%= @num_orders_paid %></li>
+    <li>Revenue for paid orders: <%= format_money(@total_rev_paid) %> </li>
+  </ul>
+
+<h4>Complete Orders</h4>
+  <ul>
+    <li>Number of complete orders: <%= @num_orders_complete %></li>
+    <li>Revenue for paid orders: <%= format_money(@total_rev_complete) %> </li>
+  </ul>
+
+<h4>Cancelled Orders</h4>
+  <ul>
+    <li>Number of complete orders: <%= @num_orders_cancelled %></li>
+    <li>Revenue for paid orders: <%= format_money(@total_rev_complete) %> </li>
+  </ul>
+
+<h3>My Orders</h3>
+
 <ol>
   <% current_user.order_items.each do |item| %>
-
-    <li>Order Placed at: <%= item.order.updated_at %>
-      <% item.order.order_items.where(product_id: item.product_id).each do |item|  %>
-
-        <p><strong><%= link_to item.product.name, product_path(item.product.id) %></strong></p>
-        <p>State: <%= item.order.state %></p>
+  <li>
+    <p>Order Number: <%= item.order.id %></p>
+    <p>Placed at: <%= item.order.updated_at %></p>
+    <% item.order.order_items.where(product_id: item.product_id).each do |item|  %>
+      <p><strong><%= link_to item.product.name, product_path(item.product.id) %></strong></p>
+      <p>State: <%= item.order.state %></p>
 
       <ul>
         <li>Quantity: <%= item.quantity_of_product %></li>

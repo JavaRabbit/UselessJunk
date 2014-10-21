@@ -6,4 +6,11 @@ class Order < ActiveRecord::Base
   # validates :email, presence: true, uniqueness: true
   # validates_uniqueness_of :email, format: {with: /@/}
 
+  validates :email, format: {with: /@/}, if: :paid?
+  validates :name, presence: true, if: :paid?
+
+  def paid?
+    :status == "paid"
+  end
+
 end

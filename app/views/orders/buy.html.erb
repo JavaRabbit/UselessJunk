@@ -1,10 +1,17 @@
 This is a page where you put info to buy a thing!
 
+<ul class = "errors">
+  <% current_order.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>
 
 <div class = "checkout">
 
 <h4>Give us your info: </h4>
-<%= form_for @order, url: pay_for_order_path(current_order.id), method: :put do |f| %>
+<%= form_for current_order, url: pay_for_order_path(current_order.id), method: :put do |f| %>
     <p>
       <%= f.label :buyer_name, "Full Name" %>
       <%= f.text_field :buyer_name %>

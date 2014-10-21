@@ -15,8 +15,8 @@ before_filter :authorize_order, only: [:buy, :pay]
 
   def update
     order = Order.find_by(id: session[:order_id])
-    order.state = "paid"
-    order.save
+    # order.state = "paid"
+    # order.save
     session[:order_id] = nil
     redirect_to order_path(order.id)
   end
@@ -27,7 +27,6 @@ before_filter :authorize_order, only: [:buy, :pay]
 
   def pay
     current_order.state = "paid"
-    current_order.save
     if current_order.update(order_params)
       redirect_to order_confirm_path(current_order.id), notice: "Order Approved! Thank you!"
     else

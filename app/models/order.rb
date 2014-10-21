@@ -7,10 +7,10 @@ class Order < ActiveRecord::Base
   # validates_uniqueness_of :email, format: {with: /@/}
 
   validates :email, format: {with: /@/}, if: :paid?
-  validates :name, presence: true, if: :paid?
+  validates :buyer_name, presence: true, if: :paid?
 
   def paid?
-    :state == "paid"
+    state == "paid"
   end
 
 end

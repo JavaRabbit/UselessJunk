@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
+
     @user = User.find_by id: params[:id]
     if @user == nil
       redirect_to root_path
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
     user = User.find_by id: params[:id]
     if user != current_user
       redirect_to user_path(params[:id]), notice: "You can't edit other accounts."
+
     end
   end
 

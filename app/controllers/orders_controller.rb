@@ -2,8 +2,9 @@ class OrdersController < ApplicationController
 before_filter :authorize_order, only: [:buy, :pay]
 
   def show
-    @order = find_or_create
+    find_or_create
     @order_item = OrderItem.new
+    @order_items = current_order.order_items
   end
 
   def add_to_cart
@@ -13,14 +14,6 @@ before_filter :authorize_order, only: [:buy, :pay]
     redirect_to order_path(@order.id)
   end
 
-  def update
-    order = Order.find_by(id: session[:order_id])
-    # order.state = "paid"
-    # order.save
-    session[:order_id] = nil
-    redirect_to order_path(order.id)
-  end
-
   def buy
     @order = current_order
   end
@@ -28,6 +21,7 @@ before_filter :authorize_order, only: [:buy, :pay]
   def pay
     current_order.state = "paid"
     if current_order.update(order_params)
+      session[:order_id] = nil
       redirect_to order_confirm_path(current_order.id), notice: "Order Approved! Thank you!"
     else
       render :buy, notice: "Order Incomplete!"
@@ -43,7 +37,7 @@ before_filter :authorize_order, only: [:buy, :pay]
   end
 
   def find_or_create
-    Order.find_by(id: session[:order_id]) || new_order
+    current_order || new_order
   end
 
   def add_order_item(order)

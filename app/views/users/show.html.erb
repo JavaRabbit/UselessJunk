@@ -1,4 +1,4 @@
-<% if @user == @logged_user %>
+<% if @user == current_user %>
   <h2> My Account </h2>
     <ul class = "horizontal">
       <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>

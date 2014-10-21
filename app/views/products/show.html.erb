@@ -29,10 +29,11 @@
   <% end %>
 
 </div>
-
-<div class = "delete_product">
-  <%= link_to "delete", @product, method: :delete %>
-  <%= link_to "edit", edit_product_path %>
+  <div class = "delete_product">
+    <% if current_user %>
+      <%= link_to "delete", @product, method: :delete %>
+      <%= link_to "edit", edit_product_path %>
+    <% end %>
 </div>
 
 

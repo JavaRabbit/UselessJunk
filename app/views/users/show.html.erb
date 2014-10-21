@@ -1,4 +1,4 @@
-<% if @user == @logged_user %>
+<% if @user == current_user %>
   <h2> My Account </h2>
     <ul class = "horizontal">
       <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
@@ -40,4 +40,6 @@
 <% end %>
 
 <hr>
+<% if current_user %>
 <%= link_to "Delete this account", confirm_path(@user.id), method: :get %>
+<% end %>

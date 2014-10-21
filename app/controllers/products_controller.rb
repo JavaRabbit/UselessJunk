@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :authorize, only: [:edit, :update]
+  before_filter :user_is_current_user, :authorize, only: [:edit, :update]
 
   def index
     @user = User.new
@@ -9,8 +9,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @user = User.first
-    # @user = User.find_by(id: session[:user_id])
+    @user = current_user
     # this^ once login/session works
   end
 
@@ -46,15 +45,26 @@ class ProductsController < ApplicationController
   def destroy
     product = Product.find(params[:id])
     delete_product(product)
+
     redirect_to root_path
+
   end
 
   def edit
     @product = Product.find(params[:id])
   end
 
+
   def product_params
     params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id)
   end
 
+  private
+  def user_is_current_user
+
+    unless current_user.id == Product.find(params[:id]).user_id
+      flash[:notice] = "You may only edit/delete your own products."
+      redirect_to root_path
+    end
+  end
 end

@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   put "/orders/:id",              to: "orders#pay",           as: :pay_for_order
   get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
 
+  get "categories/new",           to: "categories#new",       as: :new_category
+
   root "products#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

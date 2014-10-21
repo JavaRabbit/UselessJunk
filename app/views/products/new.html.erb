@@ -31,5 +31,13 @@
      <%= f.label :description.capitalize %>
      <%= f.text_area :description %>
    </p>
+     <% @categories.each do |cat| %>
+        <div class = "select_category">
+          <%= check_box_tag(cat.label) %>
+          <%= label_tag(cat.label, cat.label) %>
+        </div>
+     <% end %>
+
+     <button class = "in_a_form"> <%= link_to "Add a Category", new_category_path, method: :get %> </button>
    <p><%= f.submit %></p>
  <% end %>

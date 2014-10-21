@@ -9,11 +9,11 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @user = current_user
-    # this^ once login/session works
+    @categories = Category.all
   end
 
   def create
+    @categories = Category.all
     @product = Product.new(product_params)
     if @product.save
       redirect_to @product

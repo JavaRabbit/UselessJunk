@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   validates :name, presence: true, if: :paid?
 
   def paid?
-    :status == "paid"
+    :state == "paid"
   end
 
 end

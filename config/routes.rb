@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get "/order_items",             to: "order_items#index",    as: :order_items
 
   # this page will show only the logged user's order_items
-  patch "/update_cart",           to: "order_items#update",  as: :update_cart
+  patch "/update_cart",           to: "order_items#update",   as: :update_cart
 
   get "/reviews",                 to: "reviews#index",        as: :reviews
   post "/reviews/",               to: "reviews#create",       as: :new_review
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   post "/orders/new",             to: "orders#add_to_cart",   as: :new_order
   patch "/orders/:id/edit",       to: "orders#update",        as: :edit_order
   get "/orders/:id/buy",          to: "orders#buy",           as: :buy_order
-  put "/orders/:id",          to: "orders#pay",           as: :pay_for_order
+  put "/orders/:id",              to: "orders#pay",           as: :pay_for_order
   get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
 
   root "products#index"

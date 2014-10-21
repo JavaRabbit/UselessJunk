@@ -1,8 +1,10 @@
 <h2>Your Cart</h2>
 
 <p>All Orders: <%= Order.all.inspect %></p>
-<p> This Order: <%= @order.inspect %> </p>
-<p> Total Cost: <%= format_money(@order.total_price) %> </p>
+
+<p> This Order: <%= current_order.inspect %> </p>
+<p> Total Cost: <%= format_money(current_order.total_price) %> </p>
+<p> Session ID: <%= session[:order_id] %> </p>
 
 
 <% if @errors_array %>
@@ -18,10 +20,10 @@
   <% end %>
 <% end %>
 
-
+<% unless @order_items.empty? %>
   <%= form_for @order_item, method: :patch, url: update_cart_path do |f| %>
     Order Items for this order
-    <% @order.order_items.sort.each do |item| %>
+    <% current_order.order_items.sort.each do |item| %>
       <p><strong><%= item.product.name %></strong></p>
 
       <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %>  x <%= format_money(item.product.price) %> </p>
@@ -31,5 +33,7 @@
     <%= f.submit "Update Cart" %>
 <% end %>
 
-<!-- # <%= button_to "Update Cart", edit_order_path(@order.id), method: :patch %> -->
-<%= button_to "Buy the things!!", edit_order_path(@order.id), method: :patch %>
+<%= button_to "Buy the things!!", buy_order_path(current_order.id), method: :get %>
+<% else %>
+  Your cart is empty :(
+<% end %>

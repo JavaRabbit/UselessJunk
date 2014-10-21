@@ -1,7 +1,7 @@
 <h2> Edit Your Profile </h2>
 
 <ul class = "errors">
-  <% @user.errors.each do |column, message| %>
+  <% current_user.errors.each do |column, message| %>
     <li>
       <strong><%= column.capitalize %></strong> <%= message %>
     </li>
@@ -9,7 +9,7 @@
 </ul>
 
 
-<%= form_for @user, method: :put, url: edit_user_path(@user.id) do |f| %>
+<%= form_for current_user, url: user_path(current_user.id) do |f| %>
   <p>
     <%= f.label :username %>
     <%= f.text_field :username %>

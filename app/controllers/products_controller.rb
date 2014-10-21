@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
 
   def index
     @user = User.new
-    @product = current_user.products
     @products = Product.all
     @product = Product.find_by(id: params[:id])
   end

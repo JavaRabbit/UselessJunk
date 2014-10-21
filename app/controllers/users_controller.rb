@@ -1,5 +1,5 @@
-  class UsersController < ApplicationController
-  before_filter :authorize, only: [:edit, :update]
+class UsersController < ApplicationController
+before_filter :authorize, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -44,6 +44,10 @@
     user = User.find(params[:id])
     delete_user(user)
     redirect_to root_path
+  end
+
+  def my_orders
+
   end
 
   private

@@ -47,7 +47,7 @@ before_filter :authorize, only: [:edit, :update]
   end
 
   def my_orders
-
+    @total_rev = my_total_revenue
   end
 
   private
@@ -59,6 +59,14 @@ before_filter :authorize, only: [:edit, :update]
   def confirm
    @user = User.find_by id: params[:id]
    # for sessions, use session[:user_id]
+  end
+
+  def my_total_revenue
+    total_rev = 0
+    current_user.order_items.each do |item|
+      total_rev += (item.subtotal * item.quantity_of_product)
+    end
+    total_rev
   end
 
 end

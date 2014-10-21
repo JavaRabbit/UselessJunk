@@ -1,5 +1,5 @@
-<h2>These orders contain one or more of my products.</h2>
-
+<h2>Orders for My Products</h2>
+<h3>Total Revenue to date: <%= format_money(@total_rev) %></h3>
 <ol>
   <% current_user.order_items.each do |item| %>
 

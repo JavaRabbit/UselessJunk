@@ -1,0 +1,48 @@
+This is a page where you put info to buy a thing!
+
+<ul class = "errors">
+  <% current_order.errors.each do |column, message| %>
+    <li>
+      <strong><%= column.capitalize %></strong> <%= message %>
+    </li>
+  <% end %>
+</ul>
+
+<div class = "checkout">
+
+<h4>Give us your info: </h4>
+<%= form_for current_order, url: pay_for_order_path(current_order.id), method: :put do |f| %>
+    <p>
+      <%= f.label :buyer_name, "Full Name" %>
+      <%= f.text_field :buyer_name %>
+    </p>
+    <p>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label "Mailing Address" %>
+      <%= f.text_area :address %>
+    </p>
+    <p>
+      <%= f.label "Credit Card #"%>
+      <%= text_field_tag :num, nil, maxlength: 4, size: 4 %>
+      <%= text_field_tag :num, nil, maxlength: 4, size: 4 %>
+      <%= text_field_tag :num, nil, maxlength: 4, size: 4 %>
+      <%= f.text_field :last_four, :maxlength => 4, :size => 4 %>
+    </p>
+    <p>
+      <%= f.label "Expiration Date" %>
+      <%= f.text_field :expiration, :maxlength => 7, :size => 5 %>
+    </p>
+    <p>
+      <%= label_tag "CVV" %>
+      <%= text_field_tag :cvv, nil, maxlength: 3, size: 3 %>
+    </p>
+    <p>
+      <%= label_tag :b_zip, "Billing Zip Code" %>
+      <%= text_field_tag :b_zip, params[:zip] %>
+    </p>
+    <p><%= f.submit %></p>
+  <% end %>
+</div>

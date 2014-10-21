@@ -1,7 +1,7 @@
-<% if current_user %>
+<% if @user == current_user %>
   <h2> My Account </h2>
     <ul class = "horizontal">
-      <li> <%= link_to "Edit", edit_user_path(@user.id) %> </li>
+      <li> <%= link_to "Edit", edit_user_path(current_user.id) %> </li>
       <!--<li> <%= link_to "Delete My Account", confirm_path(@user.id), method: :delete %> </li> -->
     </ul>
 
@@ -19,6 +19,9 @@
 
     <% end %>
 
+  <h3> <%= link_to "View My Orders", order_items_path %> </h3>
+  <h3> <%= link_to "Add a Product", new_product_path %> </h3>
+
 <% else %>
 
     <h2><%= @user.username %></h2>
@@ -33,8 +36,7 @@
   <% end %>
 
 <% end %>
-<h4> <%= link_to "View My Orders", order_items_path %> </h4>
-<h4> <%= link_to "Add a Product", new_product_path %> </h4>
+
 <hr>
 <% if current_user %>
 <%= link_to "Delete this account", confirm_path(@user.id), method: :get %>

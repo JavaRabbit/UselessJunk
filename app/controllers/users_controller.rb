@@ -1,5 +1,4 @@
-
-class UsersController < ApplicationController
+  class UsersController < ApplicationController
   before_filter :authorize, only: [:edit, :update]
 
   def new
@@ -17,8 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by( id: params[:id])
-    @logged_user = current_user
+    @user = User.find_by id: params[:id]
     if @user == nil
       redirect_to root_path
     end
@@ -26,10 +24,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by id: params[:id]
-    @logged_user = current_user
-    if @user != @logged_user
-      redirect_to user_path(params[:id])
+    user = User.find_by id: params[:id]
+    if user != current_user
+      redirect_to user_path(params[:id]), notice: "You can't edit other accounts."
+
     end
   end
 

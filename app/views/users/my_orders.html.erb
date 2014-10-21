@@ -1,27 +1,31 @@
 <h2>These orders contain one or more of my products.</h2>
 
+<ol>
+  <% current_user.order_items.each do |item| %>
 
-<% current_user.order_items.each do |item| %>
-  <ol>
     <li>Order Placed at: <%= item.order.updated_at %>
-      <p><% item.order.order_items.where(product_id: item.product_id).each do |item|  %></p>
+      <% item.order.order_items.where(product_id: item.product_id).each do |item|  %>
 
-      <p><strong><%= link_to item.product.name, product_path(item.product.id) %></strong></p>
+        <p><strong><%= link_to item.product.name, product_path(item.product.id) %></strong></p>
+        <p>State: <%= item.order.state %></p>
+
       <ul>
         <li>Quantity: <%= item.quantity_of_product %></li>
-        <li>Subtotal: <%= item.subtotal %></li>
+        <li>Subtotal: <%= format_money(item.subtotal) %></li>
       </ul>
 
-      <p>State: <%= item.order.state %></p>
       <p>Buyer Info</p>
       <ul>
-        <li><%= item.order.buyer_name %></li>
-        <li><%= item.order.address %></li>
+        <li>Buyer Name: <%= item.order.buyer_name %></li>
+        <li>Address: <%= item.order.address %></li>
         <li>Date Order was placed: <%= item.order.updated_at %></li>
-        <li></li>
-        <li></li>
+        <li>Email: <%= item.order.email %></li>
+        <li>Credit Card: **** **** **** <%= item.order.last_four %></li>
+        <li>Expiration date: <%= item.order.expiration %></li>
       </ul>
+      <br>
       <% end %>
     </li>
-  </ol>
-<% end %>
+
+  <% end %>
+</ol>

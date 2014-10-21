@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+#user_header { background-color: #99FFCC;
+    width: 100%;
+    padding: 0px;
+
+    margin: 0px; padding: 5px 0;
+    text-align: right;
+
+    font-family: 'Poiret One', cursive;
+    } */
+
+#logo{
+  text-align:left;
+  /*text-size: 133px; */
+}
+
+/*#uselessJunk{
+  text-align: center;
+}*/
+/*#title{
+  text-align: center;
+  text-size: 48px;
+} */

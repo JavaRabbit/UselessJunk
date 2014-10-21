@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>UselessJunk</title>
+  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,6 +10,9 @@
 <body>
   <div id="container">
     <div id="user_header"> <!-- header section -->
+      <div id = "logo">
+        Crapsy
+      </div>
       <% if current_user %>
         Logged in as <%= current_user.email %>. <!-- maybe username in the future?-->
         <%= link_to "Log Out", logout_path %>
@@ -18,7 +22,7 @@
       <% end %>
     </div>
 
-    <% flash.each do |name, msg| %> <!-- flash message provided my rails--> 
+    <% flash.each do |name, msg| %> <!-- flash message provided my rails-->
       <%= content_tag :div, msg, id: "flash_#{name}" %>
     <% end %>
 

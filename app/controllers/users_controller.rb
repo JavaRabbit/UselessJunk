@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by( id: params[:id])
+    @user = User.find_by(user_params)
     @logged_user = current_user
     if @user == nil
       redirect_to root_path
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by id: params[:id]
+    @user = User.find_by(user_params)
     @logged_user = current_user
     if @user != @logged_user
       redirect_to user_path(params[:id])
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(user_params)
     if @user.update(user_params)
       redirect_to user_path(params[:id])
     else
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
+    user = User.find(user_params)
     delete_user(user)
     redirect_to root_path
   end

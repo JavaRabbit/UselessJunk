@@ -1,0 +1,27 @@
+<h2>These orders contain one or more of my products.</h2>
+
+
+<% current_user.order_items.each do |item| %>
+  <ol>
+    <li>Order Placed at: <%= item.order.updated_at %>
+      <p><% item.order.order_items.where(product_id: item.product_id).each do |item|  %></p>
+
+      <p><strong><%= link_to item.product.name, product_path(item.product.id) %></strong></p>
+      <ul>
+        <li>Quantity: <%= item.quantity_of_product %></li>
+        <li>Subtotal: <%= item.subtotal %></li>
+      </ul>
+
+      <p>State: <%= item.order.state %></p>
+      <p>Buyer Info</p>
+      <ul>
+        <li><%= item.order.buyer_name %></li>
+        <li><%= item.order.address %></li>
+        <li>Date Order was placed: <%= item.order.updated_at %></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <% end %>
+    </li>
+  </ol>
+<% end %>

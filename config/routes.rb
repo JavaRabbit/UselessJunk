@@ -1,4 +1,4 @@
-# @logged_user will forever mean the currently logged user
+# current_user will forever mean the currently logged user
 
 Rails.application.routes.draw do
 
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "logout",                   to: "sessions#destroy",    as: "logout"
   get "/users/:id/confirm",       to: "users#confirm",       as: :confirm
 
-  resources :users 
+  resources :users
   resources :sessions
   # resources creates 7 routes that map to the users controller: index, new, create
   # show, edit, update, destroy
@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get "/orders/:id",              to: "orders#show",          as: :order
   post "/orders/new",             to: "orders#add_to_cart",   as: :new_order
   patch "/orders/:id/edit",       to: "orders#update",        as: :edit_order
+  get "/orders/:id/buy",          to: "orders#buy",           as: :buy_order
+  put "/orders/:id",          to: "orders#pay",           as: :pay_for_order
+  get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
 
   root "products#index"
 

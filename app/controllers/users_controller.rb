@@ -1,4 +1,3 @@
-
 class UsersController < ApplicationController
   before_filter :authorize, only: [:edit, :update]
 
@@ -18,7 +17,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by id: params[:id]
-    @logged_user = User.first #just to test
     if @user == nil
       redirect_to root_path
     end
@@ -26,10 +24,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by id: params[:id]
-    @logged_user = User.first # just to test, later this should come from session
-    if @user != @logged_user
-      redirect_to user_path(params[:id])
+    user = User.find_by id: params[:id]
+    if user != current_user
+      redirect_to user_path(params[:id]), notice: "You can't edit other accounts."
+
     end
   end
 

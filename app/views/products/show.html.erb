@@ -1,13 +1,13 @@
 <h2><%= @product.name %></h2>
 
 <h3>Sold by:
-  <%= link_to @product.user.username, user_path(@product.user) %>
+  <%= link_to @product.user.email, user_path(@product.user) %>
 </h3>
 
 <div class = "basic_product">
   <img src = <%= @product.imageurl %> alt = "Image of product">
   <p>Description: <%= @product.description %></p>
-  <p>Price: <%= @product.price %> cents</p>
+  <p>Price: <%= format_money(@product.price) %> </p>
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
   <% elsif @product.quantity > 0 %>
@@ -29,10 +29,11 @@
   <% end %>
 
 </div>
-
-<div class = "delete_product">
-  <%= link_to "delete", @product, method: :delete %>
-  <%= link_to "edit", edit_product_path %>
+  <div class = "delete_product">
+    <% if current_user %>
+      <%= link_to "delete", @product, method: :delete %>
+      <%= link_to "edit", edit_product_path %>
+    <% end %>
 </div>
 
 

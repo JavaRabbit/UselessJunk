@@ -8,6 +8,9 @@ class Order < ActiveRecord::Base
 
   validates :email, format: {with: /@/}, if: :paid?
   validates :buyer_name, presence: true, if: :paid?
+  validates :last_four, numericality: { only_integer: true }, length:  { is: 4 }, if: :paid?
+  validates :address, presence: true, if: :paid?
+  validates :expiration, format: {with: /\//}, length: { in: 4..7 }, if: :paid?
 
   def paid?
     state == "paid"

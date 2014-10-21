@@ -55,13 +55,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  def product_current_user
-    unless current_user.id == params[:user_id]
-      flash[:notice] = "You may only edit/delete your own products."
-      redirect_to root_path
-    end
-  end
-
 # to give access to specific page
   def authorize
     redirect_to login_url, alert: "Not authorized" if current_user.nil?

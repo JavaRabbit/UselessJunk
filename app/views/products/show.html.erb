@@ -1,7 +1,7 @@
 <h2><%= @product.name %></h2>
 
 <h3>Sold by:
-  <%= link_to @product.user.username, user_path(@product.user) %>
+  <%= link_to @product.user.email, user_path(@product.user) %>
 </h3>
 
 <div class = "basic_product">

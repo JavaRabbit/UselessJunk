@@ -56,32 +56,33 @@ before_filter :authorize, only: [:edit, :update]
     @num_orders_complete = num_orders("complete")
     @num_orders_cancelled = num_orders("cancelled")
 
-    @order_items, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], []
+    @orders, @order_items, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], [], []
 
     current_user.order_items.each do |o_item|
       o_item.order.order_items.where(product_id: o_item.product_id).each do |item|
         @order_items << item
+        @orders << item.order
       end
     end
 
-    # @orders.each do |order|
-    #   @pending_orders << order if order.state == 'pending'
-    #   @paid_orders << order if order.state == 'paid'
-    #   @compelte_orders << order if order.state == 'complete'
-    #   @cancelled_orders << order if order.state == 'cancelled'
-    # end
+
+    @orders.each do |order|
+      @pending_orders << order if order.state == 'pending'
+      @paid_orders << order if order.state == 'paid'
+      @compelte_orders << order if order.state == 'complete'
+      @cancelled_orders << order if order.state == 'cancelled'
+    end
 
   end
 
   def filter_orders
     state = params[:state]
-    @order_items = filtered_order_items(state)
+    @orders = filtered_orders(state)
 
     render :my_orders
   end
 
   private
-
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
@@ -132,16 +133,24 @@ before_filter :authorize, only: [:edit, :update]
     order_num
   end
 
-  def filtered_order_items(state)
-    order_items = []
-
-    current_user.order_items.each do |item|
-      if item.order.state == state
-        order_items << item
+  def filtered_orders(state)
+    orders = []
+    unless state == "all"
+      current_user.order_items.each do |item|
+        if item.order.state == state
+          unless orders.include? item.order
+            orders << item.order
+          end
+        end
+      end
+    else
+      current_user.order_items.each do |item|
+        unless orders.include? item.order
+          orders << item.order
+        end
       end
     end
-
-    order_items
+    orders
   end
 
 

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
+before_filter :user_owns_product, only: [:edit, :update, :destroy]
 
 
   def index
@@ -10,7 +10,7 @@ before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
 
   def new
     @product = Product.new
-    @categories = Category.all
+    @all_categories = Category.all
   end
 
 # product categories are updated only when successfully saved, because
@@ -60,7 +60,8 @@ before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
   end
 
   def edit
-    @product = Product.find(params[:id])
+  @all_categories = Category.all
+  @product = Product.find(params[:id])
   end
 
 
@@ -69,11 +70,10 @@ before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
   end
 
   private
-  def user_is_current_user
 
-    unless current_user.id == Product.find(params[:id]).user_id
-      flash[:notice] = "You may only edit/delete your own products."
-      redirect_to root_path
-    end
+  def user_owns_product
+    product = Product.find_by(id: params[:id])
+    redirect_to product_path(product.id), alert: "Not authorized" if current_user != product.user
   end
+
 end

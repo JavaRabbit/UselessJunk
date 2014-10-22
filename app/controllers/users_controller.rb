@@ -56,5 +56,4 @@
    @user = User.find_by id: params[:id]
    # for sessions, use session[:user_id]
   end
-
 end

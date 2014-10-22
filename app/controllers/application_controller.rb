@@ -59,7 +59,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_order
 
-# if current user 
+  def if_not_owned_by_current_user
+    @current_user.id != Product.find_by(id: params[:id]).user_id
+  end
+  helper_method :if_not_owned_by_current_user
+
+# if current user
 
 # to give access to specific page
   def authorize
@@ -70,6 +75,3 @@ class ApplicationController < ActionController::Base
     redirect_to order_path("cart"), alert: "Expired Order" if current_order.id.to_s != params[:id]
   end
 end
-  #def logged_user
-  #  User.find_by id: session[:user_id]
-  #end

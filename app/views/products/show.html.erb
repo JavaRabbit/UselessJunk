@@ -50,6 +50,7 @@
 </div>
 
 <div class = "review_form">
+<% if !current_user || if_not_owned_by_current_user %>
   <h4>Add a review: </h4>
   <%= form_for @review do |f| %>
     <%= f.hidden_field :product_id, value: @product.id %>
@@ -69,4 +70,5 @@
     </p>
     <p><%= f.submit %></p>
     <% end %>
+  <% end %>
 </div>

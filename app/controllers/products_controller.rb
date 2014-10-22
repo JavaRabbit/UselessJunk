@@ -57,7 +57,6 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id)
   end
 
-  private
   def user_is_current_user
     unless current_user.id == Product.find(params[:id]).user_id
       flash[:notice] = "You may only edit/delete your own products."

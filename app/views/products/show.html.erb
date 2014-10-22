@@ -50,7 +50,6 @@
 </div>
 
 <div class = "review_form">
-  <% disabled = current_user %>
   <h4>Add a review: </h4>
   <%= form_for @review do |f| %>
     <%= f.hidden_field :product_id, value: @product.id %>

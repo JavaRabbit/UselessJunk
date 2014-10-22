@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :user_is_current_user,  only: [:edit, :update]
+  before_filter :user_is_current_user, :authorize, only: [:edit, :update]
 
   def index
     @user = User.new
@@ -59,7 +59,6 @@ class ProductsController < ApplicationController
 
   private
   def user_is_current_user
-
     unless current_user.id == Product.find(params[:id]).user_id
       flash[:notice] = "You may only edit/delete your own products."
       redirect_to root_path

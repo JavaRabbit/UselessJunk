@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-before_filter :authorize, only: [:edit, :update]
+
+  before_filter :user_is_current_user, only: [:edit, :update, :destroy]
+
 
   def new
     @user = User.new
@@ -111,7 +113,6 @@ before_filter :authorize, only: [:edit, :update]
   end
 
 
-
   def total_rev(state)
     total_rev = 0
     current_user.order_items.each do |item|
@@ -160,7 +161,11 @@ before_filter :authorize, only: [:edit, :update]
   end
 
 
-
-
+  def user_is_current_user
+    unless current_user.id == params[:id].to_i
+      flash[:notice] = "You may only edit/delete your own account."
+      redirect_to root_path
+    end
+  end
 
 end

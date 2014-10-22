@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_filter :if_not_owned_by_current_user, only: [:create]
 
   def create
     @review = Review.new(review_params)

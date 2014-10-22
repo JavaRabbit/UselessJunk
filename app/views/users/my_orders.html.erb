@@ -1,16 +1,29 @@
 <h2>Orders for My Products</h2>
 <h4>Total Revenue to date: <%= format_money(@total_rev) %></h4>
 
+Filter by:
+<%= button_to "Pending Orders", method: :patch, url: "/users/#{current_user.id}/orders/pending"  %>
+<%= button_to "Paid Orders", my_orders_path(current_user.id), method: :patch  %>
+<%= button_to "Complete Orders", my_orders_path(current_user.id), method: :patch  %>
+<%= button_to "Cancelled Orders", my_orders_path(current_user.id), method: :patch  %>
+
+
+Paid Orders
+Complete Orders
+Cancelled Orders
+
 <h4>Pending Orders</h4>
   <ul>
     <li>Number of pending orders: <%= @num_orders_pending %></li>
     <li>Revenue for pending orders: <%= format_money(@total_rev_pending) %> </li>
+    <li>@pending_orders is <%= @pending_orders.inspect %>
   </ul>
 
 <h4>Paid Orders</h4>
   <ul>
     <li>Number of paid orders: <%= @num_orders_paid %></li>
     <li>Revenue for paid orders: <%= format_money(@total_rev_paid) %> </li>
+    <li>@paid_orders is <%= @paid_orders.inspect %>
   </ul>
 
 <h4>Complete Orders</h4>
@@ -27,6 +40,17 @@
 
 <h3>My Orders</h3>
 
+
+<ol>
+  <% @orders.each do |order| %>
+    
+    <li>Order placed: <%= order.updated_at %></li>
+    <% if order.buyer_name %>
+      <li>Buyer Name: <%= order.buyer_name %></li>
+    <% end %>
+
+  <% end %>
+</ol>
 <ol>
   <% current_user.order_items.each do |item| %>
   <li>

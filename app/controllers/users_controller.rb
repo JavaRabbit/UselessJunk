@@ -56,9 +56,32 @@ before_filter :authorize, only: [:edit, :update]
     @num_orders_paid = num_orders("paid")
     @num_orders_complete = num_orders("complete")
     @num_orders_cancelled = num_orders("cancelled")
+
+    @orders, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], []
+
+    current_user.order_items.each do |o_item|
+      o_item.order.order_items.where(product_id: o_item.product_id).each do |item|
+        @orders << item.order
+      end
+    end
+
+    @orders.each do |order|
+      @pending_orders << order if order.state == 'pending'
+      @paid_orders << order if order.state == 'paid'
+      @compelte_orders << order if order.state == 'complete'
+      @cancelled_orders << order if order.state == 'cancelled'
+    end
+
+  end
+
+  def filter_orders
+    #raise params[:state].inspect
+    @orders = pending_orders
+    render :my_orders
   end
 
   private
+
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
@@ -107,6 +130,16 @@ before_filter :authorize, only: [:edit, :update]
       end
     end
     order_num
+  end
+
+  def pending_orders
+    orders = []
+    current_user.order_items.each do |item|
+      if item.order.state == "pending"
+        orders << item.order
+      end
+    end
+    orders
   end
 
 

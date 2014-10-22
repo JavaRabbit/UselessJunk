@@ -9,7 +9,7 @@ before_filter :authorize_user_owns_product, only: [:edit, :update, :destroy]
 
   def new
     @product = Product.new
-    @categories = Category.all
+    @all_categories = Category.all
   end
 
 # product categories are updated only when successfully saved, because

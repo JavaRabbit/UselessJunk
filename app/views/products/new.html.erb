@@ -37,7 +37,8 @@
           <%= cat.label %>
         </div>
      <% end %>
-
-     <button class = "in_a_form"> <%= link_to "Add a Category", new_category_path, method: :get %> </button>
    <p><%= f.submit %></p>
+
  <% end %>
+
+ <% button_to "Add a Category", new_category_path, method: :get %>

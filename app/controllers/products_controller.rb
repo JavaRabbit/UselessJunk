@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :user_is_current_user, :authorize, only: [:edit, :update]
+  before_filter :user_is_current_user,  only: [:edit, :update]
 
   def index
     @user = User.new

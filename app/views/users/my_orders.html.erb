@@ -36,9 +36,9 @@ Filter by:
         <li><%= link_to item.product.name, product_path(item.product.id)  %></li>
 
         <p><%= item.quantity_of_product %> x <%= format_money(item.product.price) %> = <%= format_money(item.subtotal) %></p>
-        <% if !item.shipped %>
+        <% if item.order.state != "pending" && !item.shipped %>
           <%= button_to "Ship this item", "/users/#{current_user.id}/orders/#{item.id}" %>
-        <% else %>
+        <% elsif item.order.state == "paid" || item.order.state == "complete" %>
           <p>This item has been shipped already!</p>
         <% end %>
       <% end %>

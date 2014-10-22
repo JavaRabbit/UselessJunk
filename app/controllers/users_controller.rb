@@ -85,7 +85,18 @@ before_filter :authorize, only: [:edit, :update]
     order_item = OrderItem.find(params[:item_id])
     order_item.shipped = true
     order_item.save
-    redirect_to :my_orders
+    complete = true
+    this_order = order_item.order
+    this_order.order_items.each do |item|
+      if item.shipped == false
+        complete = false
+      end
+    end
+    if complete == true
+      this_order.state = "complete"
+      this_order.save
+    end
+    redirect_to my_orders_path
   end
 
   private

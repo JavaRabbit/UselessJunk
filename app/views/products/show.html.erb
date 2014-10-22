@@ -34,7 +34,13 @@
       <%= link_to "delete", @product, method: :delete %>
       <%= link_to "edit", edit_product_path %>
     <% end %>
-</div>
+  </div>
+
+  Categories: <% @product.categories.each do |cat| %>
+              <%= cat.label %>
+              <% end %>
+  <<< These should link to the products#index, sorted by category
+  <!--Store cat id in params-->
 
 
 

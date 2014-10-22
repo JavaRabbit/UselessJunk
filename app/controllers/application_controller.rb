@@ -59,9 +59,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_order
 
-# if current user
-
-# to give access to specific page
+  # to give access to specific page
   def authorize
     redirect_to login_url, alert: "Not authorized" if current_user.id != params[:id]
   end

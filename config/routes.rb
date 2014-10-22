@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get "/products/new",            to: "products#new",         as: :new_product
   post "/products/new",           to: "products#create"
+  get "/products/:id/edit/categories/new", to: "categories#new", as: :edit_product_to_new_category
+  get "/products/new/categories/new", to: "categories#new",     as: :new_product_to_new_category
   get "/products/:id",            to: "products#show",        as: :product
   get "/products/:id/edit",       to: "products#edit"
   put "/products/:id/edit",       to: "products#update",      as: :edit_product
@@ -34,6 +36,9 @@ Rails.application.routes.draw do
   get "/orders/:id/buy",          to: "orders#buy",           as: :buy_order
   put "/orders/:id",              to: "orders#pay",           as: :pay_for_order
   get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
+
+  get "categories/new",           to: "categories#new",       as: :new_category
+  post "categories/new",          to: "categories#create"
 
   root "products#index"
 

@@ -42,7 +42,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
 # makes it available for all controllers.
 # find user model by sessions Id (stated earlier inside sessions
 # controller) when the user logged in only if session variable user exists
@@ -64,7 +63,7 @@ class ApplicationController < ActionController::Base
 
 # to give access to specific page
   def authorize
-    redirect_to login_url, alert: "Not authorized" if current_user.nil?
+    redirect_to login_url, alert: "Not authorized" if current_user != params[:id]
   end
 
   def authorize_order

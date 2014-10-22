@@ -17,9 +17,9 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       user_id = @product.user_id
-      redirect_to user_path(user_id)
+      redirect_to @product
     else
-      @user = User.first
+      @user = User.current_user
       render :new
     end
   end
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
   def destroy
     product = Product.find(params[:id])
     delete_product(product)
-    redirect_to current_user
+    redirect_to current_user, notice: "Product deleted!"
   end
 
   def edit

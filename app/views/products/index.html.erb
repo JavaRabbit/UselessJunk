@@ -3,14 +3,27 @@
   Useless Crapsey Products!
 </div>
 
+<!-- <div id = "column">
+  blah
+  blah
+</div> -->
+
+
+
 <% @products.collect do |product| %>
+<div class='square-box'>
+    <div class='square-content'><div><span>
     <ul>
       <li>
          <a href = "/products/<%= product.id %>"><%= product.name %></a><br>
          <%= product.description %>
+         <img src="http://placekitten.com/g/200/300" alt="Kitten" >
       </li>
     </ul>
+  </span></div></div>
+</div>
 <% end %>
+
 
 
 

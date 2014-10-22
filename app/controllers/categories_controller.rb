@@ -1,11 +1,14 @@
 class CategoriesController < ApplicationController
+before_filter :authorize, only: [:new, :update, :destroy]
+
   def new
     @category = Category.new
     session[:product_id] = params[:id]
-  end
-
-  def set_prev_page
-    session[:prev_page] = params[:page_id]
+    #I use the session so that when you create the category,
+    # it knows to redirect you back to either the new_product_path or the
+    # edit_product_path. There may be a better way to do this.
+    # (this way is limited b/c you have to build a new route for every place
+    # that you link to new from) -Cate
   end
 
   def create

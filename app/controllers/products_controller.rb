@@ -1,10 +1,5 @@
 class ProductsController < ApplicationController
-<<<<<<< HEAD
-before_filter :authorize_user_owns_product, only: [:edit, :update, :destroy]
-=======
 before_filter :user_owns_product, only: [:edit, :update, :destroy]
->>>>>>> temp
-
 
   def index
     @user = User.new
@@ -15,17 +10,6 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
   def new
     @product = Product.new
     @all_categories = Category.all
-<<<<<<< HEAD
-  end
-
-  def new_cat
-    @product = Product.new
-    @category = Category.new
-    @all_categories = Category.all
-    @new_cat = true
-    render :new
-=======
->>>>>>> temp
   end
 
 # product categories are updated only when successfully saved, because
@@ -79,13 +63,8 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
   end
 
   def edit
-<<<<<<< HEAD
     @product = Product.find(params[:id])
     @all_categories = Category.all
-=======
-  @all_categories = Category.all
-  @product = Product.find(params[:id])
->>>>>>> temp
   end
 
 

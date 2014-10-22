@@ -59,6 +59,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_order
 
+  # to give access to specific page
+  def authorize
+    redirect_to login_url, alert: "Not authorized" if current_user != params[:id]
+  end
+
   def authorize_order
     redirect_to order_path("cart"), alert: "Expired Order" if current_order.id.to_s != params[:id]
   end

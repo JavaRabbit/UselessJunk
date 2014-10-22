@@ -29,14 +29,30 @@
     font-family: 'Poiret One', cursive;
     }
 
+#main_container {
+ width: 90%;
+ margin: 20px auto;
+ border: 3px solid #cccccc;
+ padding: 5px;
+}
 
-.square-box{
+.square-box {
+ float: left;
+ width: 200px;
+ height: 200px;
+ border: 1px solid #990000;
+ margin: 10px;
+}
+
+/*.square-box{
+  float: left;
     position: relative;
-    width: 25%;
+    width: 300px;
     overflow: hidden;
-    background: #4679BD;
+   background: #4679BD;
     border-style: solid;
 }
+
 .square-box:before{
     content: "";
     display: block;
@@ -60,8 +76,8 @@
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    color: white
-}
+    color: white;
+}*/
 
 
 

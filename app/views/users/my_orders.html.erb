@@ -1,5 +1,4 @@
 <h2>Orders for My Products</h2>
-<h4>Total Revenue to date: <%= format_money(@total_rev) %></h4>
 
 Filter by:
 <%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
@@ -24,13 +23,25 @@ Filter by:
 <% end %>
 
 
-<h3>My Orders</h3>
-
-<% @orders.each do |order| %>
+<h3><%= @state.capitalize %> Orders</h3>
+<p>Number of <%= @state %> orders: <%= @orders.count %></p>
+<p>Total Revenue: <%= format_money(@total_rev) %></p>
+<% @orders.sort.each do |order| %>
   <h4>Order Number: <%= order.id %></h4>
-  <% order.order_items.each do |item| %>
-    <% if item.product.user == current_user %>
-      <%= item.product.name %>
+  <p>status: <%= order.state %></p>
+  <p>order placed: <%= order.updated_at.strftime("%m/%d/%y, %H:%M") %></p>
+  <ul>
+    <% order.order_items.each do |item| %>
+      <% if item.product.user == current_user %>
+        <li><%= link_to item.product.name, product_path(item.product.id)  %></li>
+
+        <p><%= item.quantity_of_product %> x <%= format_money(item.product.price) %> = <%= format_money(item.subtotal) %></p>
+        <% if !item.shipped %>
+          <%= button_to "Ship this item", "/users/#{current_user.id}/orders/#{item.id}" %>
+        <% else %>
+          <p>This item has been shipped already!</p>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
+  </ul>
 <% end %>

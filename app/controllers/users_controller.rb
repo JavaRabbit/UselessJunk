@@ -46,40 +46,46 @@ before_filter :authorize, only: [:edit, :update]
   end
 
   def my_orders
-    @total_rev = my_total_revenue
-    @total_rev_pending = total_rev("pending")
-    @total_rev_paid = total_rev("paid")
-    @total_rev_complete = total_rev("complete")
-    @total_rev_cancelled = total_rev("cancelled")
+    @state = "all"
+    @total_rev = total_rev(@state)
+
     @num_orders_pending = num_orders("pending")
     @num_orders_paid = num_orders("paid")
     @num_orders_complete = num_orders("complete")
     @num_orders_cancelled = num_orders("cancelled")
+    @orders = filtered_orders(@state)
+    @order_items, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], []
 
-    @orders, @order_items, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], [], []
-
-    current_user.order_items.each do |o_item|
-      o_item.order.order_items.where(product_id: o_item.product_id).each do |item|
-        @order_items << item
-        @orders << item.order
-      end
-    end
+    # current_user.order_items.each do |o_item|
+    #   o_item.order.order_items.where(product_id: o_item.product_id).each do |item|
+    #     @order_items << item
+    #     @orders << item.order
+    #   end
+    # end
 
 
-    @orders.each do |order|
-      @pending_orders << order if order.state == 'pending'
-      @paid_orders << order if order.state == 'paid'
-      @compelte_orders << order if order.state == 'complete'
-      @cancelled_orders << order if order.state == 'cancelled'
-    end
+    # @orders.each do |order|
+    #   @pending_orders << order if order.state == 'pending'
+    #   @paid_orders << order if order.state == 'paid'
+    #   @compelte_orders << order if order.state == 'complete'
+    #   @cancelled_orders << order if order.state == 'cancelled'
+    # end
 
   end
 
   def filter_orders
     state = params[:state]
     @orders = filtered_orders(state)
-
+    @total_rev = total_rev(state)
+    @state = state
     render :my_orders
+  end
+
+  def ship_order_item
+    order_item = OrderItem.find(params[:item_id])
+    order_item.shipped = true
+    order_item.save
+    redirect_to :my_orders
   end
 
   private
@@ -93,32 +99,21 @@ before_filter :authorize, only: [:edit, :update]
    # for sessions, use session[:user_id]
   end
 
-  def my_total_revenue
-    total_rev = 0
-    current_user.order_items.each do |item|
-      unless item.order.state == "pending"
-        total_rev += (item.subtotal * item.quantity_of_product)
-      end
-    end
-    total_rev
-  end
 
-  def total_rev_paid_orders
-    total_rev = 0
-    current_user.order_items.each do |item|
-      if item.order.state == "paid"
-        total_rev += (item.subtotal * item.quantity_of_product)
-      end
-    end
-    total_rev
-  end
 
   def total_rev(state)
     total_rev = 0
     current_user.order_items.each do |item|
-      if item.order.state == state
-        total_rev += (item.subtotal * item.quantity_of_product)
+      if state == "all"
+        total_rev += item.subtotal
+      elsif state == item.order.state
+        total_rev += item.subtotal
       end
+      # if item.order.state == state
+      #   total_rev += (item.subtotal * item.quantity_of_product)
+      # end
+
+
     end
     total_rev
   end

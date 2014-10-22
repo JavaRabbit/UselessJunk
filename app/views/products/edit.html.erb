@@ -23,13 +23,10 @@
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
   </div class="field">
-  <div class="field">
-    <%= f.label :description.capitalize %>
-    <%= f.text_area :description %>
-  </div class="field">
   <% @all_categories.each do |cat| %>
      <div class = "select_category">
-       <%= check_box_tag "category_ids[]", cat.id %>
+       <% checked = @product.categories.include? cat %>
+       <%= check_box_tag "category_ids[]", cat.id, checked %>
        <%= cat.label %>
      </div>
   <% end %>

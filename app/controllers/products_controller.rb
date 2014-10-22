@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
-
+before_filter :authorize_user_owns_product, only: [:edit, :update, :destroy]
 
   def index
     @user = User.new
@@ -32,11 +31,15 @@ before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
   end
 
   def update
+    @all_categories = Category.all
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      params[:category_ids].each do |id|
-        cat = Category.find_by(id: id)
-        @product.categories << cat
+      @product.categories = []
+      if params[:category_ids]
+        params[:category_ids].each do |id|
+          cat = Category.find_by(id: id)
+          @product.categories << cat
+        end
       end
       redirect_to @product
     else
@@ -61,6 +64,7 @@ before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
 
   def edit
     @product = Product.find(params[:id])
+    @all_categories = Category.all
   end
 
 

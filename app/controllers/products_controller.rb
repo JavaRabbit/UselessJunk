@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_filter :user_is_current_user, :authorize, only: [:edit, :update]
+before_filter :user_owns_product, :authorize, only: [:edit, :update, :destroy]
+
 
   def index
     @user = User.new
@@ -12,12 +13,18 @@ class ProductsController < ApplicationController
     @categories = Category.all
   end
 
+# product categories are updated only when successfully saved, because
+# pushing a category into .categories saves automatically.
+# If a creation or an update is not successful (rollback), we don't want
+# a version of it lingering with only categories. I think.
   def create
     @all_categories = Category.all
     @product = Product.new(product_params)
-    params[:category_ids]
-    @product.categories <<
     if @product.save
+      params[:category_ids].each do |id|
+        cat = Category.find_by(id: id)
+        @product.categories << cat
+      end
       redirect_to @product
     else
       render :new
@@ -27,6 +34,10 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
+      params[:category_ids].each do |id|
+        cat = Category.find_by(id: id)
+        @product.categories << cat
+      end
       redirect_to @product
     else
       render :edit

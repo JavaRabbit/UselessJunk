@@ -62,8 +62,13 @@ class ApplicationController < ActionController::Base
 # if current user
 
 # to give access to specific page
-  def authorize
+  def authorize_user_is_current_user
     redirect_to login_url, alert: "Not authorized" if current_user != params[:id]
+  end
+
+  def authorize_user_owns_product
+    product = Product.find_by(id: params[:id])
+    redirect_to product_path(product.id), alert: "Not authorized" if current_user != product.user
   end
 
   def authorize_order

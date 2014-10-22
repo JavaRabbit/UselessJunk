@@ -27,6 +27,12 @@
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
   </div class="field">
+  <% @all_categories.each do |cat| %>
+     <div class = "select_category">
+       <%= check_box_tag "category_ids[]", cat.id %>
+       <%= cat.label %>
+     </div>
+  <% end %>
 
   <%= f.submit %>
 <% end %>

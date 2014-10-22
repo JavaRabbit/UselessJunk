@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  #before_filter :review_is_current_user, :authorize, except: [:create]
+  before_filter :review_is_current_user, :authorize, only: [:create]
 
   def create
     @review = Review.new(review_params)
@@ -14,6 +14,13 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  def review_is_current_user
+    if current_user.id == Product.find(params[:id]).user_id
+      flash[:notice] = "You are prohibited from reviewing your own products."
+      redirect_to root_path
+    end
+  end
 
   def set_product_id
     @product = Product.find(params[:id])

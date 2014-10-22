@@ -31,10 +31,10 @@
      <%= f.label :description.capitalize %>
      <%= f.text_area :description %>
    </p>
-     <% @categories.each do |cat| %>
+     <% @all_categories.each do |cat| %>
         <div class = "select_category">
-          <%= check_box_tag(cat.label) %>
-          <%= label_tag(cat.label, cat.label) %>
+          <%= check_box_tag "category_ids[]", cat.id %>
+          <%= cat.label %>
         </div>
      <% end %>
 

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
 
   get "categories/new",           to: "categories#new",       as: :new_category
+  post "categories/new",          to: "categories#create"
 
   root "products#index"
 

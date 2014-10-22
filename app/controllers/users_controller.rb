@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def user_is_current_user
-    unless current_user.id == params[:id]
+    unless current_user.id == params[:id].to_i
       flash[:notice] = "You may only edit/delete your own account."
       redirect_to root_path
     end

@@ -41,4 +41,18 @@
 
  <% end %>
 
- <% button_to "Add a Category", new_category_path, method: :get %>
+
+ <% if (defined? @category) && @new_cat == true %>
+   <%= form_for @category, method: :post, url: new_category_path do |f|%>
+     <p>
+       <%= f.label :label.capitalize %>
+       <%= f.text_field :label %>
+     </p>
+
+     <p><%= f.submit %></p>
+   <% end %>
+
+ <% else %>
+
+   <%= button_to "Add a Category", add_category_path, method: :patch %>
+ <% end %>

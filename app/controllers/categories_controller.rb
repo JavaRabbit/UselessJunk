@@ -4,12 +4,13 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @product = 
     @category = Category.new(category_params)
+    @product = Product.new
+    @all_categories = Category.all
     if @category.save
-      redirect_to @product
+      render "products/new"
     else
-      render :new
+      render "products/new"
     end
   end
 

@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 before_filter :authorize_user_owns_product, only: [:edit, :update, :destroy]
 
+
   def index
     @user = User.new
     @products = Product.all
@@ -10,6 +11,14 @@ before_filter :authorize_user_owns_product, only: [:edit, :update, :destroy]
   def new
     @product = Product.new
     @all_categories = Category.all
+  end
+
+  def new_cat
+    @product = Product.new
+    @category = Category.new
+    @all_categories = Category.all
+    @new_cat = true
+    render :new
   end
 
 # product categories are updated only when successfully saved, because

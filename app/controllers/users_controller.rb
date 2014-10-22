@@ -50,29 +50,7 @@ class UsersController < ApplicationController
   def my_orders
     @state = "all"
     @total_rev = total_rev(@state)
-
-    @num_orders_pending = num_orders("pending")
-    @num_orders_paid = num_orders("paid")
-    @num_orders_complete = num_orders("complete")
-    @num_orders_cancelled = num_orders("cancelled")
     @orders = filtered_orders(@state)
-    @order_items, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], []
-
-    # current_user.order_items.each do |o_item|
-    #   o_item.order.order_items.where(product_id: o_item.product_id).each do |item|
-    #     @order_items << item
-    #     @orders << item.order
-    #   end
-    # end
-
-
-    # @orders.each do |order|
-    #   @pending_orders << order if order.state == 'pending'
-    #   @paid_orders << order if order.state == 'paid'
-    #   @compelte_orders << order if order.state == 'complete'
-    #   @cancelled_orders << order if order.state == 'cancelled'
-    # end
-
   end
 
   def filter_orders
@@ -121,24 +99,10 @@ class UsersController < ApplicationController
       elsif state == item.order.state
         total_rev += item.subtotal
       end
-      # if item.order.state == state
-      #   total_rev += (item.subtotal * item.quantity_of_product)
-      # end
-
-
     end
     total_rev
   end
 
-  def num_orders(state)
-    order_num = 0
-    current_user.order_items.each do |item|
-      if item.order.state == state
-        order_num += 1
-      end
-    end
-    order_num
-  end
 
   def filtered_orders(state)
     orders = []

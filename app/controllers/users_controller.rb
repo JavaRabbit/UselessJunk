@@ -1,5 +1,5 @@
-  class UsersController < ApplicationController
-  before_filter :authorize, only: [:edit, :update]
+class UsersController < ApplicationController
+  before_filter :user_is_current_user, only: [:edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -56,4 +56,12 @@
    @user = User.find_by id: params[:id]
    # for sessions, use session[:user_id]
   end
+
+  def user_is_current_user
+    unless current_user.id == params[:id].to_i
+      flash[:notice] = "You may only edit/delete your own account."
+      redirect_to root_path
+    end
+  end
+
 end

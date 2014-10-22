@@ -58,8 +58,8 @@ class UsersController < ApplicationController
   end
 
   def user_is_current_user
-    unless current_user.id == Product.find(params[:id]).user_id
-      flash[:notice] = "You may only edit/delete your own products."
+    unless current_user.id == params[:id]
+      flash[:notice] = "You may only edit/delete your own account."
       redirect_to root_path
     end
   end

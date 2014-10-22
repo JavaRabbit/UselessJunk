@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_is_current_user
-    if current_user.id == Product.find(params[:id]).user_id
+    if current_user == @product_id
       flash[:notice] = "You are prohibited from reviewing your own products."
       redirect_to root_path
     end

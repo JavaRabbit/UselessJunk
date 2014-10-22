@@ -27,7 +27,6 @@ before_filter :authorize, only: [:edit, :update]
     user = User.find_by id: params[:id]
     if user != current_user
       redirect_to user_path(params[:id]), notice: "You can't edit other accounts."
-
     end
   end
 
@@ -57,26 +56,27 @@ before_filter :authorize, only: [:edit, :update]
     @num_orders_complete = num_orders("complete")
     @num_orders_cancelled = num_orders("cancelled")
 
-    @orders, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], []
+    @order_items, @pending_orders , @paid_orders, @complete_orders, @cancelled_orders = [], [], [], [], []
 
     current_user.order_items.each do |o_item|
       o_item.order.order_items.where(product_id: o_item.product_id).each do |item|
-        @orders << item.order
+        @order_items << item
       end
     end
 
-    @orders.each do |order|
-      @pending_orders << order if order.state == 'pending'
-      @paid_orders << order if order.state == 'paid'
-      @compelte_orders << order if order.state == 'complete'
-      @cancelled_orders << order if order.state == 'cancelled'
-    end
+    # @orders.each do |order|
+    #   @pending_orders << order if order.state == 'pending'
+    #   @paid_orders << order if order.state == 'paid'
+    #   @compelte_orders << order if order.state == 'complete'
+    #   @cancelled_orders << order if order.state == 'cancelled'
+    # end
 
   end
 
   def filter_orders
-    #raise params[:state].inspect
-    @orders = pending_orders
+    state = params[:state]
+    @order_items = filtered_order_items(state)
+
     render :my_orders
   end
 
@@ -132,15 +132,18 @@ before_filter :authorize, only: [:edit, :update]
     order_num
   end
 
-  def pending_orders
-    orders = []
+  def filtered_order_items(state)
+    order_items = []
+
     current_user.order_items.each do |item|
-      if item.order.state == "pending"
-        orders << item.order
+      if item.order.state == state
+        order_items << item
       end
     end
-    orders
+
+    order_items
   end
+
 
 
 

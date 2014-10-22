@@ -2,15 +2,22 @@
 <h4>Total Revenue to date: <%= format_money(@total_rev) %></h4>
 
 Filter by:
-<%= button_to "Pending Orders", method: :patch, url: "/users/#{current_user.id}/orders/pending"  %>
-<%= button_to "Paid Orders", my_orders_path(current_user.id), method: :patch  %>
-<%= button_to "Complete Orders", my_orders_path(current_user.id), method: :patch  %>
-<%= button_to "Cancelled Orders", my_orders_path(current_user.id), method: :patch  %>
-
-
-Paid Orders
-Complete Orders
-Cancelled Orders
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "pending"  %>
+  <%= submit_tag "Pending Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "paid"  %>
+  <%= submit_tag "Paid Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "complete"  %>
+  <%= submit_tag "Complete Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "cancelled"  %>
+  <%= submit_tag "Cancelled Orders" %>
+<% end %>
 
 <h4>Pending Orders</h4>
   <ul>
@@ -38,45 +45,18 @@ Cancelled Orders
     <li>Revenue for paid orders: <%= format_money(@total_rev_complete) %> </li>
   </ul>
 
+*********************************************<br>
 <h3>My Orders</h3>
 
-
-<ol>
-  <% @orders.each do |order| %>
-    
-    <li>Order placed: <%= order.updated_at %></li>
-    <% if order.buyer_name %>
-      <li>Buyer Name: <%= order.buyer_name %></li>
-    <% end %>
-
-  <% end %>
-</ol>
-<ol>
-  <% current_user.order_items.each do |item| %>
-  <li>
-    <p>Order Number: <%= item.order.id %></p>
+  <% @order_items.each do |item| %>
+    <h4>Order Number: <%= item.order.id %></h4>
     <p>Placed at: <%= item.order.updated_at %></p>
     <% item.order.order_items.where(product_id: item.product_id).each do |item|  %>
       <p><strong><%= link_to item.product.name, product_path(item.product.id) %></strong></p>
       <p>State: <%= item.order.state %></p>
-
       <ul>
         <li>Quantity: <%= item.quantity_of_product %></li>
         <li>Subtotal: <%= format_money(item.subtotal) %></li>
       </ul>
-
-      <p>Buyer Info</p>
-      <ul>
-        <li>Buyer Name: <%= item.order.buyer_name %></li>
-        <li>Address: <%= item.order.address %></li>
-        <li>Date Order was placed: <%= item.order.updated_at %></li>
-        <li>Email: <%= item.order.email %></li>
-        <li>Credit Card: **** **** **** <%= item.order.last_four %></li>
-        <li>Expiration date: <%= item.order.expiration %></li>
-      </ul>
-      <br>
-      <% end %>
-    </li>
-
+    <% end %>
   <% end %>
-</ol>

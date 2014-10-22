@@ -1,5 +1,9 @@
 class ProductsController < ApplicationController
+<<<<<<< HEAD
+  before_filter :user_is_current_user, only: [:edit, :update]
+=======
 before_filter :user_owns_product, only: [:edit, :update, :destroy]
+>>>>>>> master
 
   def index
     @user = User.new
@@ -67,16 +71,18 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
     @all_categories = Category.all
   end
 
+private
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id, :categories)
   end
 
-  private
-
   def user_owns_product
     product = Product.find_by(id: params[:id])
-    redirect_to product_path(product.id), alert: "Not authorized" if current_user != product.user
+    unless current_user == product.user
+      flash[:notice] = "You may only edit/delete your own products."
+      redirect_to product_path(product.id)
+    end
   end
 
 end

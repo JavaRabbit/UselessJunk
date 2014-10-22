@@ -30,6 +30,8 @@
        <%= cat.label %>
      </div>
   <% end %>
+  <button class = "in_a_form"> <%= link_to "Add a Category", edit_product_to_new_category_path, method: :get %> </button>
+  Warning: Creating a new category now will discard your current work on the product
 
   <%= f.submit %>
 <% end %>

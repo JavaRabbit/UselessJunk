@@ -1,6 +1,11 @@
 class CategoriesController < ApplicationController
   def new
     @category = Category.new
+    session[:product_id] = params[:id]
+  end
+
+  def set_prev_page
+    session[:prev_page] = params[:page_id]
   end
 
   def create
@@ -8,7 +13,11 @@ class CategoriesController < ApplicationController
     @product = Product.new
     @all_categories = Category.all
     if @category.save
-      render "products/new"
+      if session[:product_id]
+        redirect_to edit_product_path(session[:product_id])
+      else
+        redirect_to new_product_path
+      end
     else
       render "products/new"
     end

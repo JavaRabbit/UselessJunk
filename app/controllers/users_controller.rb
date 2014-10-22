@@ -1,5 +1,5 @@
-  class UsersController < ApplicationController
-  before_filter :authorize_user_is_current_user, only: [:edit, :update]
+class UsersController < ApplicationController
+  before_filter :user_is_current_user, only: [:edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -55,6 +55,13 @@
   def confirm
    @user = User.find_by id: params[:id]
    # for sessions, use session[:user_id]
+  end
+
+  def user_is_current_user
+    unless current_user.id == Product.find(params[:id]).user_id
+      flash[:notice] = "You may only edit/delete your own products."
+      redirect_to root_path
+    end
   end
 
 end

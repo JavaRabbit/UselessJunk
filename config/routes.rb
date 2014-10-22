@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
   get "/products/new",            to: "products#new",         as: :new_product
   post "/products/new",           to: "products#create"
-  patch "/product/new/add_category", to: "products#new_cat",   as: :add_category 
+  get "/products/:id/edit/categories/new", to: "categories#new", as: :edit_product_to_new_category
+  get "/products/new/categories/new", to: "categories#new",     as: :new_product_to_new_category
   get "/products/:id",            to: "products#show",        as: :product
   get "/products/:id/edit",       to: "products#edit"
   put "/products/:id/edit",       to: "products#update",      as: :edit_product

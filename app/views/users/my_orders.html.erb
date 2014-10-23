@@ -27,7 +27,7 @@ Filter by:
 <p>Number of <%= @state %> orders: <%= @orders.count %></p>
 <p>Total Revenue: <%= format_money(@total_rev) %></p>
 <% @orders.sort.each do |order| %>
-  <h4>Order Number: <%= order.id %></h4>
+  <h4><%= link_to "Order Number #{order.id}", order_path(order.id) %></h4>
   <p>status: <%= order.state %></p>
   <p>order placed: <%= order.updated_at.strftime("%m/%d/%y, %H:%M") %></p>
   <ul>

@@ -3,7 +3,6 @@ module OrderHelper
   def format_order(order)
     id = order.id
     status = order.state
-    total_price = order.total_price
     buyer_name = order.buyer_name
     email = order.email
     address = order.address
@@ -12,7 +11,6 @@ module OrderHelper
     order_date = order.updated_at
     html = "<h3>Order #{id}</h3>" +
           "<p>Status: #{status}</p>" +
-          "<p>Total Price: " + format_money(total_price) + "</p>" +
           "<p>Order Placed: #{order_date}</p>" +
           "<p>Buyer Info</p>" +
           "<ul>" +

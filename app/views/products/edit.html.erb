@@ -10,7 +10,7 @@
   </div class="field">
   <div class="field">
     <%= f.label :price.capitalize %>
-    <%= f.text_field :price, :class => "price", :value => (number_with_precision(f.object.price, :precision => 2) || 0)%> (in cents)
+    <%= f.text_field :price %> (in cents)
   </div class="field">
   <div class="field">
     <%= f.label :quantity.capitalize %>

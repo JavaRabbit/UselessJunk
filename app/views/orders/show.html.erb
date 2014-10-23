@@ -1,10 +1,9 @@
 <h2>Your Cart</h2>
 
-<p>All Orders: <%= Order.all.inspect %></p>
 
-<p> This Order: <%= current_order.inspect %> </p>
+
 <p> Total Cost: <%= format_money(current_order.total_price) %> </p>
-<p> Session ID: <%= session[:order_id] %> </p>
+
 
 
 <% if @errors_array %>
@@ -22,9 +21,9 @@
 
 <% unless @order_items.empty? %>
   <%= form_for @order_item, method: :patch, url: update_cart_path do |f| %>
-    Order Items for this order
+    <h3>Items in your cart</h3>
     <% current_order.order_items.sort.each do |item| %>
-      <p><strong><%= item.product.name %></strong></p>
+      <p><strong><%= link_to item.product.name.capitalize, product_path(item.product.id) %></strong></p>
 
       <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %>  x <%= format_money(item.product.price) %> </p>
       <p> Subtotal: <%= format_money(item.subtotal) %> </p>

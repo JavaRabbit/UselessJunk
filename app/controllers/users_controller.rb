@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :user_is_current_user, only: [:edit, :update, :destroy]
+  before_filter :user_is_current_user, only: [:edit, :update, :destroy, :my_orders, :filter_orders]
 
 
   def new

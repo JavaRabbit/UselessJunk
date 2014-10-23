@@ -8,7 +8,9 @@ module OrderHelper
     address = order.address
     last_four = order.last_four
     expiration = order.expiration
-    order_date = order.date_ordered
+    if order.date_ordered
+      order_date = order.date_ordered.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%y, %I:%M")
+    end
     html = "<h3>Order #{id}</h3>" +
           "<p>Status: #{status}</p>" +
           "<p>Order Placed: #{order_date}</p>" +

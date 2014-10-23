@@ -30,7 +30,7 @@ Filter by:
   <h4><%= link_to "Order Number #{order.id}", order_path(order.id) %></h4>
   <p>status: <%= order.state %></p>
   <% if order.date_ordered %>
-    <p>Order Placed: <%= order.date_ordered.strftime("%m/%d/%y, %H:%M") %></p>
+    <p>Order Placed: <%= order.date_ordered.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%y, %I:%M") %></p>
   <% end %>
   <ul>
     <% order.order_items.each do |item| %>

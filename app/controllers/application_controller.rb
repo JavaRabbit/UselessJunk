@@ -64,6 +64,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :if_not_owned_by_current_user
 
+
 # if current user
 
 # to give access to specific page
@@ -74,5 +75,15 @@ class ApplicationController < ActionController::Base
 
   def authorize_order
     redirect_to order_path("cart"), alert: "Expired Order" if current_order.id.to_s != params[:id]
+  end
+
+  def authorize_user_has_order
+    my_order = false
+    current_user.order_items.each do |item|
+      if item.order.id == params[:id].to_i
+        my_order = true
+      end
+    end
+    redirect_to root_path, alert: "No access to this order" if my_order == false
   end
 end

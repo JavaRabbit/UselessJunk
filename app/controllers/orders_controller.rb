@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
 before_filter :authorize_order, only: [:buy, :pay]
+before_filter :authorize_user_has_order, only: [:show]
 
   def show
+    @order = Order.find_by(id: params[:id])
+  end
+
+  def cart
     find_or_create
     @order_item = OrderItem.new
     @order_items = current_order.order_items
@@ -11,7 +16,7 @@ before_filter :authorize_order, only: [:buy, :pay]
     @order = find_or_create
     add_order_item(@order)
     # Should redirect to the page where you clicked add to cart, but doesn't yet!
-    redirect_to order_path(@order.id)
+    redirect_to cart_path
   end
 
   def buy

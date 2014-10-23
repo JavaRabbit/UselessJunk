@@ -36,6 +36,16 @@ before_filter :authorize, only: [:new, :update, :destroy]
     render 'products/index'
   end
 
+  def sort
+    products = []
+    params[:category_id].each do |cat_id|
+      Product.find
+      categories << Category.find(cat_id)
+    end
+
+
+  end
+
   private
 
   def category_params

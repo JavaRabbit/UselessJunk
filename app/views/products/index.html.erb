@@ -32,9 +32,12 @@
 <aside class="categories">
   <!--links for each category, all pointing to the same method in categories_controller-->
   <!--Sets a new @products, filled with only the categories that match the clicked one-->
-  <% all_categories.each do |cat| %>
-    <%= link_to cat.label, category_path(cat.id) %>
-    <br>
+  <% form_tag %>
+<% all_categories.each do |cat| %>
+     <% checked = @products.categories.include? cat %>
+     <%= check_box_tag "category_ids[]", cat.id, checked %>
+     <%= cat.label %>
+     <%= submit_tag("Sort"), category_sort_path %>
   <% end %>
 </aside>
 

@@ -54,6 +54,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def all_categories
+    Category.all
+  end
+  helper_method :all_categories
+
   def current_order
     @current_order ||= Order.find_by(id: session[:order_id])
   end

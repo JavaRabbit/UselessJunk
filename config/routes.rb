@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get "/products/:id/edit",       to: "products#edit"
   put "/products/:id/edit",       to: "products#update",      as: :edit_product
   delete "/products/:id",         to: "products#destroy",     as: :delete_product
+  get "/products/:id/retire",     to: "products#retire",      as: :retire_product
+  post "/products/:id/retire/confirm", to: "products#confirm", as: :confirm_retire
 
   get "/order_items",             to: "order_items#index",    as: :order_items
 

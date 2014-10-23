@@ -5,7 +5,7 @@
 </h3>
 
 <div class = "basic_product">
-  <img src = <%= @product.imageurl %> alt = "Image of product">
+  <p><img src = <%= @product.imageurl %> alt = "Image of product"></p>
   <p>Description: <%= @product.description %></p>
   <p>Price: <%= format_money(@product.price) %> </p>
   <% if @product.quantity == nil || @product.quantity == 0 %>

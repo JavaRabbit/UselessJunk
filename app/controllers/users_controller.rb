@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   before_filter :user_is_current_user, only: [:edit, :update, :destroy, :my_orders, :filter_orders]
 
-
   def new
     @user = User.new
   end
@@ -39,6 +38,10 @@ class UsersController < ApplicationController
       # raise current_user.errors.inspect
       render :edit
     end
+  end
+
+  def confirm
+   @user = User.find_by id: params[:id]
   end
 
   def destroy
@@ -83,10 +86,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :id)
-  end
-
-  def confirm
-   @user = User.find_by id: params[:id]
   end
 
   def total_rev(state)

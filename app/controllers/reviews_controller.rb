@@ -2,9 +2,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    @order_item = OrderItem.new
+    product_id = @review.product_id
+    @product = Product.find(product_id)
     if @review.save
-      product_id = @review.product_id
       redirect_to product_path(product_id)
+    else
+      render "products/show"
     end
   end
 

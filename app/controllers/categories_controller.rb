@@ -27,6 +27,7 @@ before_filter :authorize, only: [:new, :update, :destroy]
 
   def show
     category = Category.find_by(id: params[:id])
+    @categories = [category]
     @products = []
     Product.all.each do |product|
       if product.categories.include? category

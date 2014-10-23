@@ -26,7 +26,7 @@
     <% all_categories.each do |cat| %>
       <% if defined? @categories %>
         <% checked = @categories.include?(cat) %>
-      <% else %>
+      <% else%>
         <% checked = false %>
       <% end %>
       <% unless cat.products.empty? %>

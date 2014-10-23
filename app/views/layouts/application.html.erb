@@ -2,13 +2,20 @@
 <html>
 <head>
   <title>UselessJunk</title>
+  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <div id="container">
     <div id="user_header"> <!-- header section -->
+
+      <div id = "logo">
+        Crapsy
+      </div>
+
       <%= link_to "Home", root_path %>
       <%= link_to "My Cart", current_order %>
       <% if current_user %>

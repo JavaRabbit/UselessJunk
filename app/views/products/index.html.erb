@@ -1,14 +1,39 @@
-<h2>Useless Junk Products!</h2>
-<%= current_user.inspect %>
+
+<div id= 'title'>
+  Useless Crapsey Products!
+</div>
+
+
+<div id="main_container">
+ <p>Some content.</p>
+
+
 <% @products.collect do |product| %>
+<!-- <div class='square-box'>
+    <div class='square-content'><div><span>
     <ul>
       <li>
          <a href = "/products/<%= product.id %>"><%= product.name %></a><br>
          <%= product.description %>
+         <img src="http://placekitten.com/g/200/300" alt="Kitten" >
       </li>
     </ul>
+  </span></div></div>
+</div> -->
+
+<div class = 'square-box'>
+  <%= product.name %><br>
+  <%= product.description %><br>
+  <%= product.price %><br>
+  <img src="http://placekitten.com/g/40/60" alt="Kitten" >
+</div>
 <% end %>
 
+
+
+
+
+</div> <!-- end of main container-->
 
 
 <ul class = "errors">

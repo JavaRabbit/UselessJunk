@@ -61,7 +61,13 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
   def destroy
     product = Product.find(params[:id])
     delete_product(product)
+
+
+    #redirect_to root_path
+
+
     redirect_to current_user, notice: "Product deleted!"
+
   end
 
   def edit

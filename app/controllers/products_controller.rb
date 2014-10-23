@@ -19,9 +19,11 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
   def create
     @product = Product.new(product_params)
     if @product.save
-      params[:category_ids].each do |id|
-        cat = Category.find_by(id: id)
-        @product.categories << cat
+      if params[:category_ids]
+        params[:category_ids].each do |id|
+          cat = Category.find(id)
+          @product.categories << cat
+        end
       end
       redirect_to @product
     else

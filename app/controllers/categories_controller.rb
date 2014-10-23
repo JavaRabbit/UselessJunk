@@ -39,11 +39,9 @@ before_filter :authorize, only: [:new, :update, :destroy]
   def sort
     products = []
     params[:category_id].each do |cat_id|
-      Product.find
-      categories << Category.find(cat_id)
+      products << Product.includes(:categories).where(categories:{id: cat_id})
     end
-
-
+    raise products.inspect
   end
 
   private

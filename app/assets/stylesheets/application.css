@@ -15,16 +15,29 @@
  */
 #logo{
   text-align:left;
+  width: 100%;
   /*text-size: 133px; */
 }
+
+body {
+  margin: 0;
+}
+
+.container{
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+
 
 #user_header {
     background-color: #99FFCC;
     width: 100%;
-    padding: 0px;
-    position: fixed;
-    margin: 0px; padding: 0px ;
-    text-align: right;
+
+    /*position: fixed;*/
+    text-align: left;
+
 
     font-family: 'Poiret One', cursive;
     }
@@ -51,6 +64,11 @@
 .error_messages {
   color: red;
 }
+
+.nav {
+  text-align: right;
+}
+
 
 /*.square-box{
   float: left;

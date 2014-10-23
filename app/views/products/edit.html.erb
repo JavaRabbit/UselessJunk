@@ -23,6 +23,7 @@
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
   </div class="field">
+  
   <% @all_categories.each do |cat| %>
      <div class = "select_category">
        <% checked = @product.categories.include? cat %>

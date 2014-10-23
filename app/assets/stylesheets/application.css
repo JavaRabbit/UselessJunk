@@ -25,6 +25,7 @@
     background-size:cover;
     background-position:50% 50%;
     margin: auto;
+    border-radius: 2%;
 }
 
 body {
@@ -63,6 +64,7 @@ body {
  height: 300px;
  border: 1px solid #990000;
  margin: 10px;
+ padding-top: 1em;
 }
 
 .square-box * {

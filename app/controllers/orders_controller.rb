@@ -23,6 +23,7 @@ before_filter :authorize_user_has_order, only: [:show]
 
   def pay
     current_order.state = "paid"
+    current_order.date_ordered = DateTime.now
     if current_order.update(order_params)
       session[:order_id] = nil
       redirect_to order_confirm_path(current_order.id), notice: "Order Approved! Thank you!"

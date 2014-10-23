@@ -8,7 +8,7 @@ module OrderHelper
     address = order.address
     last_four = order.last_four
     expiration = order.expiration
-    order_date = order.updated_at
+    order_date = order.date_ordered
     html = "<h3>Order #{id}</h3>" +
           "<p>Status: #{status}</p>" +
           "<p>Order Placed: #{order_date}</p>" +

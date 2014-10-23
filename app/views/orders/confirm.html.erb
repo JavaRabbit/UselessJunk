@@ -2,12 +2,7 @@
 <p>This is your order confirmation page.  Please print it out for your records.</p>
 
 <h2>Your Order</h2>
-<ul>
-  <li>Total Price: <%= format_money(@order.total_price) %></li>
-  <li>Order Number: <%= @order.id %></li>
-  <li>Order Placed: <%= @order.updated_at.strftime("%m/%d/%Y, %I:%m %Z") %></li>
-  <li>Current Order Status: <%= @order.state %></li>
-</ul>
+<%= format_order(@order) %>
 
 <h3>Order Items</h3>
 <% @order.order_items.each do |item| %>

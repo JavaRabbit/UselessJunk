@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
 
     params[:order_item][:quantity] == "0" ? @order_item.destroy : nil
     @order = Order.find_by(id: session[:order_id])
-    render "orders/show"
+    render "orders/cart"
 
   end
 

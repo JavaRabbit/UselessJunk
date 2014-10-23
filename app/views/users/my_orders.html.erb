@@ -29,7 +29,9 @@ Filter by:
 <% @orders.sort.each do |order| %>
   <h4><%= link_to "Order Number #{order.id}", order_path(order.id) %></h4>
   <p>status: <%= order.state %></p>
-  <p>order placed: <%= order.updated_at.strftime("%m/%d/%y, %H:%M") %></p>
+  <% if order.date_ordered %>
+    <p>Order Placed: <%= order.date_ordered.strftime("%m/%d/%y, %H:%M") %></p>
+  <% end %>
   <ul>
     <% order.order_items.each do |item| %>
       <% if item.product.user == current_user %>

@@ -1,5 +1,6 @@
 <h2> Edit Your Product </h2>
 
+<%= error_message(@product) %>
 
 <%= form_for @product, method: :put, url: edit_product_path(@product.id)  do |f|%>
 

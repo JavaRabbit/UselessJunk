@@ -4,7 +4,6 @@ before_filter :authorize_order, only: [:buy, :pay]
   def show
     find_or_create
     @order_item = OrderItem.new
-    @order_items = current_order.order_items
   end
 
   def add_to_cart
@@ -15,7 +14,6 @@ before_filter :authorize_order, only: [:buy, :pay]
   end
 
   def buy
-    @order = current_order
   end
 
   def pay

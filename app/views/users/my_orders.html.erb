@@ -1,0 +1,47 @@
+<h2>Orders for My Products</h2>
+
+Filter by:
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "all"  %>
+  <%= submit_tag "All Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "pending"  %>
+  <%= submit_tag "Pending Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "paid"  %>
+  <%= submit_tag "Paid Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "complete"  %>
+  <%= submit_tag "Complete Orders" %>
+<% end %>
+<%= form_tag "/users/#{current_user.id}/orders/", class: :button_to do  %>
+  <%= hidden_field_tag "state", "cancelled"  %>
+  <%= submit_tag "Cancelled Orders" %>
+<% end %>
+
+
+<h3><%= @state.capitalize %> Orders</h3>
+<p>Number of <%= @state %> orders: <%= @orders.count %></p>
+<p>Total Revenue: <%= format_money(@total_rev) %></p>
+<% @orders.sort.each do |order| %>
+  <h4>Order Number: <%= order.id %></h4>
+  <p>status: <%= order.state %></p>
+  <p>order placed: <%= order.updated_at.strftime("%m/%d/%y, %H:%M") %></p>
+  <ul>
+    <% order.order_items.each do |item| %>
+      <% if item.product.user == current_user %>
+        <li><%= link_to item.product.name, product_path(item.product.id)  %></li>
+
+        <p><%= item.quantity_of_product %> x <%= format_money(item.product.price) %> = <%= format_money(item.subtotal) %></p>
+        <% if item.order.state != "pending" && !item.shipped %>
+          <%= button_to "Ship this item", "/users/#{current_user.id}/orders/#{item.id}" %>
+        <% elsif item.order.state == "paid" || item.order.state == "complete" %>
+          <p>This item has been shipped already!</p>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

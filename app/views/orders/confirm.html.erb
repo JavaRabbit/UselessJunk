@@ -1,3 +1,21 @@
-Your order is confirmed!!!!!!
+<h2>Your order is complete, thank you!</h2>
+<p>This is your order confirmation page.  Please print it out for your records.</p>
 
-<%= current_order.inspect %>
+<h2>Your Order</h2>
+<ul>
+  <li>Total Price: <%= format_money(@order.total_price) %></li>
+  <li>Order Number: <%= @order.id %></li>
+  <li>Order Placed: <%= @order.updated_at.strftime("%m/%d/%Y, %I:%m %Z") %></li>
+  <li>Current Order Status: <%= @order.state %></li>
+</ul>
+
+<h3>Order Items</h3>
+<% @order.order_items.each do |item| %>
+  <p><strong><%= link_to item.product.name.titleize, product_path(item.product.id)  %></strong></p>
+  <ul>
+    <li>Quantity: <%= item.quantity_of_product %></li>
+    <li>Price of Item: <%= item.product.price %></li>
+    <li>Subtotal: <%= item.quantity_of_product %> x <%= format_money(item.product.price) %> = <%= format_money(item.subtotal) %></li>
+  </ul>
+
+<% end %>

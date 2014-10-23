@@ -1,0 +1,7 @@
+<br>
+<br>
+<br>
+<p>Are you sure you want to retire this product? </p>
+  <p><%= link_to @product.name, product_path(@product.id) %></p>
+<%= button_to "Yes", confirm_retire_path %>
+<%= button_to "Cancel", user_path(current_user.id), method: :get %>

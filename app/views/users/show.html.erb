@@ -9,15 +9,20 @@
 
     <% @products.each do |product| %>
        <div class = "basic_product">
-         <img src = <%= product.imageurl %> >
-         <%= link_to  product.name, product_path(product.id) %>
+         <p><img src= "<%= product.imageurl %>" ></p>
+         <%= link_to  product.name.titleize, product_path(product.id) %>
             <ul class = "horizontal">
               <li><%= link_to "Edit", edit_product_path(product.id) %></li>
               <li><%= link_to "Delete", delete_product_path(product.id), method: :delete %></li>
+              <li><%= link_to "Retire this Product", retire_product_path(product.id) %></li>
+
             </ul>
       </div>
 
     <% end %>
+
+    <h3>Retired Products</h3>
+    
 
   <h3> <%= link_to "View My Orders", my_orders_path(current_user.id) %> </h3>
   <h3> <%= link_to "Add a Product", new_product_path %> </h3>

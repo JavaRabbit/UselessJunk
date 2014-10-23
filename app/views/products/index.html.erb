@@ -9,13 +9,15 @@
 
 
 <% @products.collect do |product| %>
+  <% unless @product.retired %>
 
-  <div class = 'square-box'>
-    <%= product.name %><br>
-    <%= product.description %><br>
-    <%= product.price %><br>
-    <img src="http://placekitten.com/g/40/60" alt="Kitten" >
-  </div>
+    <div class = 'square-box'>
+      <%= product.name %><br>
+      <%= product.price %><br>
+      <img src="http://placekitten.com/g/40/60" alt="Kitten" >
+    </div>
+
+  <% end %>
 <% end %>
 
 <aside class="categories">

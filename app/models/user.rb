@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :products
-  has_many :orderitems, through: :products
+  has_many :order_items, through: :products
 
 #  EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
 #  validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }

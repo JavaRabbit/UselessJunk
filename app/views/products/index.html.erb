@@ -1,6 +1,6 @@
 
 <div id= 'title'>
-  Useless Crapsey Products!
+  <h2> Useless Crapsey Products!</h2>
 </div>
 
 
@@ -9,39 +9,36 @@
 
 
 <% @products.collect do |product| %>
-<!-- <div class='square-box'>
-    <div class='square-content'><div><span>
-    <ul>
-      <li>
-         <a href = "/products/<%= product.id %>"><%= product.name %></a><br>
-         <%= product.description %>
-         <img src="http://placekitten.com/g/200/300" alt="Kitten" >
-      </li>
-    </ul>
-  </span></div></div>
-</div> -->
 
-<div class = 'square-box'>
-  <%= product.name %><br>
-  <%= product.description %><br>
-  <%= product.price %><br>
-  <img src="http://placekitten.com/g/40/60" alt="Kitten" >
-</div>
+  <div class = 'square-box'>
+    <%= product.name %><br>
+    <%= product.description %><br>
+    <%= product.price %><br>
+    <img src="http://placekitten.com/g/40/60" alt="Kitten" >
+  </div>
 <% end %>
 
 <aside class="categories">
+
   <!--links for each category, all pointing to the same method in categories_controller-->
   <!--Sets a new @products, filled with only the categories that match the clicked one-->
-  <% form_tag %>
-<% all_categories.each do |cat| %>
-     <%= check_box_tag "category_ids[]", cat.id %>
-     <%= cat.label %>
+  <%= form_tag category_sort_path do %>
+    <% all_categories.each do |cat| %>
+      <% if defined? @categories %>
+        <% checked = @categories.include?(cat) %>
+      <% else %>
+        <% checked = false %>
+      <% end %>
+      <% unless cat.products.empty? %>
+        <%= check_box_tag "category_ids[]", cat.id, checked %>
+        <%= cat.label %>
+        <br>
+      <% end %>
+    <% end %>
+     <%= submit_tag("Sort")%>
   <% end %>
-  <%= submit_tag "Sort", url: category_sort_path %>
 
 </aside>
 
 
-
-
-</div> <!-- end of main container-->
+</div> <!-- last of main container-->

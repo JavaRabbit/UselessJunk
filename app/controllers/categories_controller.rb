@@ -37,11 +37,24 @@ before_filter :authorize, only: [:new, :update, :destroy]
   end
 
   def sort
-    products = []
-    params[:category_id].each do |cat_id|
-      products << Product.includes(:categories).where(categories:{id: cat_id})
+    @products = []
+    @categories = []
+    if params[:category_ids]
+      params[:category_ids].each do |cat_id|
+        product_set = Product.includes(:categories).where(categories:{id: cat_id})
+        product_set.each do |product|
+          unless @products.include? product
+            @products << product
+            product.categories.each do |cat|
+              @categories << cat
+            end
+          end
+        end
+      end
+      render "products/index"
+    else
+      redirect_to root_path
     end
-    raise products.inspect
   end
 
   private

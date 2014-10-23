@@ -5,8 +5,17 @@
 </h3>
 
 <div class = "basic_product">
+
   <img src = <%= @product.imageurl %> alt = "Image of product">
-  <p>Description: <%= @product.description %></p>
+
+  <p><%= @product.description %></p>
+
+  <% unless @product.categories.empty? %>
+    Categories: <% @product.categories.each do |cat| %>
+                <%= link_to cat.label, category_path(cat.id) %>
+                <% end %>
+  <% end %>
+
   <p>Price: <%= format_money(@product.price) %> </p>
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
@@ -30,30 +39,34 @@
 
 </div>
   <div class = "product">
-    <% if current_user %>
+    <% if current_user == @product.user%>
       <%= link_to "delete", @product, method: :delete %>
       <%= link_to "edit", edit_product_path %>
     <% end %>
   </div>
 
-  Categories: <% @product.categories.each do |cat| %>
-              <%= link_to cat.label, category_path(cat.id) %>
-              <% end %>
 
 <div class = "product_reviews">
-  <h4>Reviews for <%= @product.name %></h4>
-  <div class = "product-rating">
-    <% @product.reviews.each do |review| %>
-      <p><strong><%= review.title %></strong><p>
-      <p> <%= review.content %></p>
-      <p>Rating = <%= review.rating %></p>
-    <% end %>
+  <% if @product.reviews.empty? %>
+    There are no reviews for <%= @product.name.titleize %> yet.
+  <% else %>
+    <h4>Reviews for <%= @product.name %></h4>
+    <div class = "product-rating">
+      <% @product.reviews.each do |review| %>
+        <h4><%= review.title %></h4>
+          <h5> Written <%= time_ago_in_words(review.created_at)%> ago</h5>
+          <p>Rating = <%= review.rating %></p>
+        <p> <%= review.content %></p>
+      <% end %>
+  <% end %>
   </div>
 </div>
 
+
 <div class = "review_form">
-<% if !current_user || if_not_owned_by_current_user %>
+<% unless @product.user == current_user %>
   <h4>Add a review: </h4>
+  <%= error_message(@review) %>
   <%= form_for @review do |f| %>
     <%= f.hidden_field :product_id, value: @product.id %>
     <!-- This is what it will create -->
@@ -71,6 +84,9 @@
       <%= f.text_field :rating %>
     </p>
     <p><%= f.submit %></p>
-    <% end %>
   <% end %>
+
+  <% else %>
+    You cannot review your own product.
+<% end %>
 </div>

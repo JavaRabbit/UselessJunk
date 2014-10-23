@@ -64,11 +64,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_order
 
-  def if_not_owned_by_current_user
-    @current_user.id != Product.find_by(id: params[:id]).user_id
-  end
-  helper_method :if_not_owned_by_current_user
-
 
 # if current user
 

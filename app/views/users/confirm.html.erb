@@ -2,9 +2,9 @@ Are you sure you want to delete your account? <br><br>
 
 If so, push this button: <br><br>
 
-<%= button_to "Yes, remove this account", "/users/#{@user.id}", method: :delete %>
+<%= button_to "Yes, remove this account", user_path(current_user.id), method: :delete %>
 
 
 <br><br>
 
-<%= link_to "No.  Take me to the home page", "/" %>
+<%= button_to "No.  Take me to the home page", root_path %>

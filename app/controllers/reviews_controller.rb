@@ -1,11 +1,14 @@
 class ReviewsController < ApplicationController
-  before_filter :if_not_owned_by_current_user, only: [:create]
 
   def create
     @review = Review.new(review_params)
+    @order_item = OrderItem.new
+    product_id = @review.product_id
+    @product = Product.find(product_id)
     if @review.save
-      product_id = @review.product_id
       redirect_to product_path(product_id)
+    else
+      render "products/show"
     end
   end
 

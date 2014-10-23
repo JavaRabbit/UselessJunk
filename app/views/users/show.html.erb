@@ -38,6 +38,6 @@
 <% end %>
 
 <hr>
-<% if current_user %>
-<%= link_to "Delete this account", confirm_path(@user.id), method: :get %>
+<% if current_user == @user %>
+  <%= link_to "Delete this account", confirm_path(@user.id), method: :get %>
 <% end %>

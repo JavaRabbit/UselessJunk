@@ -5,13 +5,6 @@
 </h3>
 
 <div class = "basic_product">
-<<<<<<< HEAD
-  <img src = <%= @product.imageurl %> alt = "Image of product">
-
-  <h3> Description: <%= @product.description %> </h3>
-  <h3> Price: <%= format_money(@product.price) %> </h3>
-
-=======
 
   <img src = <%= @product.imageurl %> alt = "Image of product">
 
@@ -24,7 +17,7 @@
   <% end %>
 
   <p>Price: <%= format_money(@product.price) %> </p>
->>>>>>> master
+
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
 

@@ -19,6 +19,13 @@
   /*text-size: 133px; */
 }
 
+.small-product-pic {
+    width: 200px;
+    height: 200px;
+    background-size:cover;
+    background-position:50% 50%;
+}
+
 body {
   margin: 0;
 }

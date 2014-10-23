@@ -9,13 +9,18 @@
 
 
 <% @products.collect do |product| %>
-  <% unless @product.retired %>
+  <% unless product.retired %>
 
     <div class = 'square-box'>
-      <%= product.name %><br>
-      <%= average_rating(product) %>
-      <%= product.price %><br>
-      <img src="http://placekitten.com/g/40/60" alt="Kitten" >
+
+        <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)">
+        </div>
+
+        <h4> <%= product.name %> </h4>
+
+        Rated: <%= average_rating(product) %> <br>
+
+        <%= format_money(product.price) %><br>
     </div>
 
   <% end %>

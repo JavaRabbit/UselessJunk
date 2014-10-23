@@ -1,18 +1,17 @@
 <h2><%= @product.name %></h2>
 
-<h3>Sold by:
-  <%= link_to @product.user.username, user_path(@product.user) %>
+<h3>
+  Sold by:
+    <%= link_to @product.user.username, user_path(@product.user) %>
 </h3>
 
 <div class = "basic_product">
 
-  <img src = <%= @product.imageurl %> alt = "Image of product">
-
+  <img src = "<%= @product.imageurl %>" alt = "Image of product">
   <p><%= @product.description %></p>
-
   <% unless @product.categories.empty? %>
     Categories: <% @product.categories.each do |cat| %>
-                <%= link_to cat.label, category_path(cat.id) %>
+                  <%= link_to cat.label, category_path(cat.id) %>
                 <% end %>
   <% end %>
 
@@ -21,23 +20,17 @@
     <p>Not in stock :(</p>
   <% elsif @product.quantity > 0 %>
     <p>In stock: <%= @product.quantity %> </p>
-    <div class = "add_to_cart_button">
-      <!-- Update this link eventually -->
 
+    <div class = "add_to_cart_button">
       <%= form_for @order_item, url: new_order_path do |f| %>
         <%= f.hidden_field :product_id, value: @product.id %>
         <%= f.submit "Add to Cart"%>
       <% end %>
-
-      <!-- <form action = "/orders/new" method = "POST">
-        <input type="hidden" name="order_item[product_id]" value= "<%= @product.id %>"/>
-        <!-- <input type="hidden" name="product[vendor_id]" value="<%#=@vendor.id%>" /> -->
-        <!-- <input type = "submit" value = "Add to Cart"/> -->
-      <!-- </form>  -->
-    </div>
+    </div> <!-- add_to_cart -->
   <% end %>
 
-</div>
+</div> <!-- basic_product -->
+
   <div class = "product">
     <% if current_user == @product.user%>
       <%= link_to "delete", @product, method: :delete %>
@@ -48,7 +41,7 @@
 
 <div class = "product_reviews">
   <% if @product.reviews.empty? %>
-    There are no reviews for <%= @product.name.titleize %> yet.
+    <p>There are no reviews for <%= @product.name.titleize %> yet.</p>
   <% else %>
     <h4>Reviews for <%= @product.name %></h4>
     <div class = "product-rating">
@@ -80,8 +73,12 @@
       <%= f.text_area :content %>
     </p>
     <p>
-      <%= f.label :rating %>
-      <%= f.text_field :rating %>
+        <p><%= f.label :rating %></p>
+      1 <%= f.radio_button :rating, "1" %>&nbsp
+      2 <%= f.radio_button :rating, "2" %>&nbsp
+      3 <%= f.radio_button :rating, "3" %>&nbsp
+      4 <%= f.radio_button :rating, "4" %>&nbsp
+      5 <%= f.radio_button :rating, "5" %>&nbsp
     </p>
     <p><%= f.submit %></p>
   <% end %>

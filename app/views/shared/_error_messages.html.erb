@@ -1,9 +1,0 @@
-<% if @post.errors.any? %>
-  <ul class="errors">
-    <% @post.errors.each do |column_name, message| %>
-      <li>
-        <strong><%= column_name.capitalize %></strong> <%= message %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>

@@ -33,6 +33,7 @@ before_filter :authorize, only: [:new, :update, :destroy]
         @products << product
       end
     end
+    render 'products/index'
   end
 
   private

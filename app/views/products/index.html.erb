@@ -34,11 +34,11 @@
   <!--Sets a new @products, filled with only the categories that match the clicked one-->
   <% form_tag %>
 <% all_categories.each do |cat| %>
-     <% checked = @products.categories.include? cat %>
-     <%= check_box_tag "category_ids[]", cat.id, checked %>
+     <%= check_box_tag "category_ids[]", cat.id %>
      <%= cat.label %>
-     <%= submit_tag("Sort"), category_sort_path %>
   <% end %>
+  <%= submit_tag "Sort", url: category_sort_path %>
+
 </aside>
 
 

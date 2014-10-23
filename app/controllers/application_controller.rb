@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
 # to give access to specific page
 
   def authorize
-    redirect_to login_url, alert: "Not authorized" if current_user != params[:id]
+    redirect_to login_url, alert: "Not authorized" if !current_user
   end
 
   def authorize_order

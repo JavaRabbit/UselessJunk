@@ -44,6 +44,14 @@
  margin: 10px;
 }
 
+.field_with_errors {
+  display: inline-block;
+}
+
+.errors_messages {
+  color: red;
+}
+
 /*.square-box{
   float: left;
     position: relative;

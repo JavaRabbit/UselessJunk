@@ -5,17 +5,11 @@
 <% if @errors_array %>
   <% @errors_array.each do |item| %>
     <%= item.product.name %>
-    <ul>
-      <% item.errors.each do |column, message| %>
-        <li>
-          <%= column %> <%= message %>
-        </li>
-      <% end %>
-    </ul>
+    <%= error_message(item) %>
   <% end %>
 <% end %>
 
-<% unless @order_items.empty? %>
+<% unless current_order.order_items.empty? %>
   <%= form_for @order_item, method: :patch, url: update_cart_path do |f| %>
     <h3>Items in your cart</h3>
     <% current_order.order_items.sort.each do |item| %>
@@ -24,10 +18,10 @@
       <p> Subtotal: <%= format_money(item.subtotal) %> </p>
       <p> Quantity available: <%= item.product.quantity %></p>
     <% end %>
-    <%= f.submit "Update Cart" %>
-  <% end %>
+    <%= f.submit "Update Cart", url: update_cart_path %>
+<% end %>
 
-  <%= button_to "Buy the things!!", buy_order_path(current_order.id), method: :get %>
+<%= button_to "Buy the things!!", buy_order_path(current_order.id), method: :get %>
 <% else %>
   Your cart is empty :(
 <% end %>

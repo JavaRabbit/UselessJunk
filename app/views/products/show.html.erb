@@ -37,12 +37,8 @@
   </div>
 
   Categories: <% @product.categories.each do |cat| %>
-              <%= cat.label %>
+              <%= link_to cat.label, category_path(cat.id) %>
               <% end %>
-  <<< These should link to the products#index, sorted by category
-  <!--Store cat id in params-->
-
-
 
 <div class = "product_reviews">
   <h4>Reviews for <%= @product.name %></h4>

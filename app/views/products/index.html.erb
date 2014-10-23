@@ -29,17 +29,19 @@
 </div>
 <% end %>
 
+<aside class="categories">
+  <!--links for each category, all pointing to the same method in categories_controller-->
+  <!--Sets a new @products, filled with only the categories that match the clicked one-->
+  <% form_tag %>
+<% all_categories.each do |cat| %>
+     <% checked = @products.categories.include? cat %>
+     <%= check_box_tag "category_ids[]", cat.id, checked %>
+     <%= cat.label %>
+     <%= submit_tag("Sort"), category_sort_path %>
+  <% end %>
+</aside>
 
 
 
 
 </div> <!-- end of main container-->
-
-
-<ul class = "errors">
-  <% @user.errors.each do |column, message| %>
-    <li>
-      <strong><%= column.capitalize %></strong> <%= message %>
-    </li>
-  <% end %>
-</ul>

@@ -54,6 +54,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def all_categories
+    Category.all
+  end
+  helper_method :all_categories
+
   def current_order
     @current_order ||= Order.find_by(id: session[:order_id])
   end
@@ -64,15 +69,26 @@ class ApplicationController < ActionController::Base
   end
   helper_method :if_not_owned_by_current_user
 
+
 # if current user
 
 # to give access to specific page
 
   def authorize
-    redirect_to login_url, alert: "Not authorized" if current_user != params[:id]
+    redirect_to login_url, alert: "Not authorized" if !current_user
   end
 
   def authorize_order
     redirect_to order_path("cart"), alert: "Expired Order" if current_order.id.to_s != params[:id]
+  end
+
+  def authorize_user_has_order
+    my_order = false
+    current_user.order_items.each do |item|
+      if item.order.id == params[:id].to_i
+        my_order = true
+      end
+    end
+    redirect_to root_path, alert: "No access to this order" if my_order == false
   end
 end

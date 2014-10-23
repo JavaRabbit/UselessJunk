@@ -14,7 +14,6 @@ before_filter only: [:new, :update, :destroy]
   def create
     @category = Category.new(category_params)
     @product = Product.new
-    @all_categories = Category.all
     if @category.save
       if session[:product_id]
         redirect_to edit_product_path(session[:product_id])
@@ -24,6 +23,25 @@ before_filter only: [:new, :update, :destroy]
     else
       render "products/new"
     end
+  end
+
+  def show
+    category = Category.find_by(id: params[:id])
+    @products = []
+    Product.all.each do |product|
+      if product.categories.include? category
+        @products << product
+      end
+    end
+    render 'products/index'
+  end
+
+  def sort
+    products = []
+    params[:category_id].each do |cat_id|
+      products << Product.includes(:categories).where(categories:{id: cat_id})
+    end
+    raise products.inspect
   end
 
   private

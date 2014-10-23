@@ -1,5 +1,6 @@
 <h2> Edit Your Product </h2>
 
+<%= error_message(@product) %>
 
 <%= form_for @product, method: :put, url: edit_product_path(@product.id)  do |f|%>
 
@@ -23,8 +24,7 @@
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
   </div class="field">
-
-  <% @all_categories.each do |cat| %>
+  <% all_categories.each do |cat| %>
      <div class = "select_category">
        <% checked = @product.categories.include? cat %>
        <%= check_box_tag "category_ids[]", cat.id, checked %>

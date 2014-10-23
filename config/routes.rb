@@ -32,16 +32,18 @@ Rails.application.routes.draw do
   get "/reviews",                 to: "reviews#index",        as: :reviews
   post "/reviews/",               to: "reviews#create",       as: :new_review
 
-  get "/orders/:id",              to: "orders#show",          as: :order
+  get "/orders/cart",             to: "orders#cart",          as: :cart
   post "/orders/new",             to: "orders#add_to_cart",   as: :new_order
   patch "/orders/:id/edit",       to: "orders#update",        as: :edit_order
+  get "/orders/:id",              to: "orders#show",          as: :order
   get "/orders/:id/buy",          to: "orders#buy",           as: :buy_order
   put "/orders/:id",              to: "orders#pay",           as: :pay_for_order
   get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
 
   get "categories/new",           to: "categories#new",       as: :new_category
   post "categories/new",          to: "categories#create"
-
+  get "categories/:id",           to: "categories#show",      as: :category
+  get "categories/sort",          to: "categories#sort",      as: :category_sort
   root "products#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

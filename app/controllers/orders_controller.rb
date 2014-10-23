@@ -1,25 +1,29 @@
 class OrdersController < ApplicationController
 before_filter :authorize_order, only: [:buy, :pay]
+before_filter :authorize_user_has_order, only: [:show]
 
   def show
+    @order = Order.find_by(id: params[:id])
+  end
+
+  def cart
     find_or_create
     @order_item = OrderItem.new
-    @order_items = current_order.order_items
   end
 
   def add_to_cart
     @order = find_or_create
     add_order_item(@order)
     # Should redirect to the page where you clicked add to cart, but doesn't yet!
-    redirect_to order_path(@order.id)
+    redirect_to cart_path
   end
 
   def buy
-    @order = current_order
   end
 
   def pay
     current_order.state = "paid"
+    current_order.date_ordered = DateTime.now
     if current_order.update(order_params)
       session[:order_id] = nil
       redirect_to order_confirm_path(current_order.id), notice: "Order Approved! Thank you!"

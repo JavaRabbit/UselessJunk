@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
 
 before_filter :user_owns_product, only: [:edit, :update, :destroy]
 
-
   def index
     @user = User.new
     @products = Product.all
@@ -11,7 +10,6 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
 
   def new
     @product = Product.new
-    @all_categories = Category.all
   end
 
 # product categories are updated only when successfully saved, because
@@ -19,7 +17,6 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
 # If a creation or an update is not successful (rollback), we don't want
 # a version of it lingering with only categories. I think.
   def create
-    @all_categories = Category.all
     @product = Product.new(product_params)
     if @product.save
       params[:category_ids].each do |id|
@@ -33,7 +30,6 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
   end
 
   def update
-    @all_categories = Category.all
     @product = Product.find(params[:id])
     if @product.update(product_params)
       @product.categories = []
@@ -72,7 +68,6 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
 
   def edit
     @product = Product.find(params[:id])
-    @all_categories = Category.all
   end
 
 private

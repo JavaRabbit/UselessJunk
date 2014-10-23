@@ -1,10 +1,6 @@
 <h2>Your Cart</h2>
 
-
-
 <p> Total Cost: <%= format_money(current_order.total_price) %> </p>
-
-
 
 <% if @errors_array %>
   <% @errors_array.each do |item| %>
@@ -24,7 +20,6 @@
     <h3>Items in your cart</h3>
     <% current_order.order_items.sort.each do |item| %>
       <p><strong><%= link_to item.product.name.capitalize, product_path(item.product.id) %></strong></p>
-
       <p> Quantity: <%= f.text_field item.id, value: item.quantity_of_product %>  x <%= format_money(item.product.price) %> </p>
       <p> Subtotal: <%= format_money(item.subtotal) %> </p>
       <p> Quantity available: <%= item.product.quantity %></p>

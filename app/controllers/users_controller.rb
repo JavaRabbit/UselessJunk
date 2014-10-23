@@ -87,9 +87,7 @@ class UsersController < ApplicationController
 
   def confirm
    @user = User.find_by id: params[:id]
-   # for sessions, use session[:user_id]
   end
-
 
   def total_rev(state)
     total_rev = 0
@@ -102,7 +100,6 @@ class UsersController < ApplicationController
     end
     total_rev
   end
-
 
   def filtered_orders(state)
     orders = []

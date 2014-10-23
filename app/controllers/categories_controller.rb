@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-before_filter :authorize, only: [:new, :update, :destroy]
+before_filter only: [:new, :update, :destroy]
 
   def new
     @category = Category.new

@@ -18,7 +18,7 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
 # pushing a category into .categories saves automatically.
 # If a creation or an update is not successful (rollback), we don't want
 # a version of it lingering with only categories. I think.
-  def create
+  def create 
     @all_categories = Category.all
     @product = Product.new(product_params)
     if @product.save
@@ -72,6 +72,7 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
 
   def edit
     @product = Product.find(params[:id])
+
     @all_categories = Category.all
   end
 

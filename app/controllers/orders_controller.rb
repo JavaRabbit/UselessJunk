@@ -28,6 +28,10 @@ before_filter :authorize_order, only: [:buy, :pay]
     end
   end
 
+  def confirm
+    @order = Order.find(params[:id])
+  end
+
   private
 
   def new_order

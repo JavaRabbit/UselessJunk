@@ -1,9 +1,7 @@
 class ProductsController < ApplicationController
-<<<<<<< HEAD
-  before_filter :user_is_current_user, only: [:edit, :update]
-=======
+
 before_filter :user_owns_product, only: [:edit, :update, :destroy]
->>>>>>> master
+
 
   def index
     @user = User.new

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   get "categories/new",           to: "categories#new",       as: :new_category
   post "categories/new",          to: "categories#create"
+  get "categories/:id",           to: "categories#show",      as: :category
 
   root "products#index"
 

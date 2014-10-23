@@ -5,32 +5,30 @@
 </h3>
 
 <div class = "basic_product">
-  <p><img src = <%= @product.imageurl %> alt = "Image of product"></p>
-  <p>Description: <%= @product.description %></p>
-  <p>Price: <%= format_money(@product.price) %> </p>
+  <img src = <%= @product.imageurl %> alt = "Image of product">
+
+  <h3> Description: <%= @product.description %> </h3>
+  <h3> Price: <%= format_money(@product.price) %> </h3>
+
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
-  <% elsif @product.quantity > 0 %>
-    <p>In stock: <%= @product.quantity %> </p>
-    <div class = "add_to_cart_button">
-      <!-- Update this link eventually -->
 
+  <% elsif @product.quantity > 0 %>
+    <p><%= @product.quantity %> remaing! </p>
+
+    <div class = "add_to_cart_button">
+      <!-- Update this link eventually, to return you to the same page? -->
       <%= form_for @order_item, url: new_order_path do |f| %>
         <%= f.hidden_field :product_id, value: @product.id %>
         <%= f.submit "Add to Cart"%>
       <% end %>
-
-      <!-- <form action = "/orders/new" method = "POST">
-        <input type="hidden" name="order_item[product_id]" value= "<%= @product.id %>"/>
-        <!-- <input type="hidden" name="product[vendor_id]" value="<%#=@vendor.id%>" /> -->
-        <!-- <input type = "submit" value = "Add to Cart"/> -->
-      <!-- </form>  -->
     </div>
-  <% end %>
 
+  <% end %>
 </div>
-  <div class = "product">
-    <% if current_user %>
+
+  <div class = "product-options">
+    <% if current_user == @product.user %>
       <%= link_to "delete", @product, method: :delete %>
       <%= link_to "edit", edit_product_path %>
     <% end %>

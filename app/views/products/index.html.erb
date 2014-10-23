@@ -32,7 +32,10 @@
 <aside class="categories">
   <!--links for each category, all pointing to the same method in categories_controller-->
   <!--Sets a new @products, filled with only the categories that match the clicked one-->
-  <%= %>
+  <% all_categories.each do |cat| %>
+    <%= link_to cat.label, category_path(cat.id) %>
+    <br>
+  <% end %>
 </aside>
 
 

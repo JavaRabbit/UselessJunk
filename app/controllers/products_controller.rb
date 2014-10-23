@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  before_filter :user_is_current_user, :authorize, only: [:edit, :update]
+
+before_filter :user_owns_product, only: [:edit, :update, :destroy]
+
 
   def index
     @user = User.new
@@ -9,25 +11,39 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @user = current_user
-    # this^ once login/session works
+    @all_categories = Category.all
   end
 
+# product categories are updated only when successfully saved, because
+# pushing a category into .categories saves automatically.
+# If a creation or an update is not successful (rollback), we don't want
+# a version of it lingering with only categories. I think.
   def create
+    @all_categories = Category.all
     @product = Product.new(product_params)
     if @product.save
-      user_id = @product.user_id
+      params[:category_ids].each do |id|
+        cat = Category.find_by(id: id)
+        @product.categories << cat
+      end
       redirect_to @product
     else
-      @user = User.current_user
       render :new
     end
   end
 
   def update
+    @all_categories = Category.all
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to root_path(params[:id])
+      @product.categories = []
+      if params[:category_ids]
+        params[:category_ids].each do |id|
+          cat = Category.find_by(id: id)
+          @product.categories << cat
+        end
+      end
+      redirect_to @product
     else
       render :edit
     end
@@ -50,19 +66,21 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @all_categories = Category.all
   end
 
+private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id)
+    params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id, :categories)
   end
 
-  private
-  def user_is_current_user
-
-    unless current_user.id == Product.find(params[:id]).user_id
+  def user_owns_product
+    product = Product.find_by(id: params[:id])
+    unless current_user == product.user
       flash[:notice] = "You may only edit/delete your own products."
-      redirect_to root_path
+      redirect_to product_path(product.id)
     end
   end
+
 end

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get "login",                    to: "sessions#new",        as: "login"
   get "logout",                   to: "sessions#destroy",    as: "logout"
   get "/users/:id/confirm",       to: "users#confirm",       as: :confirm
-
+  get "/users/:id/orders",        to: "users#my_orders",     as: :my_orders
+  post "/users/:id/orders/",      to: "users#filter_orders"
+  post "/users/:id/orders/:item_id", to: "users#ship_order_item", as: :ship_order_item
   resources :users
   resources :sessions
   # resources creates 7 routes that map to the users controller: index, new, create
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
 
   get "/products/new",            to: "products#new",         as: :new_product
   post "/products/new",           to: "products#create"
+  get "/products/:id/edit/categories/new", to: "categories#new", as: :edit_product_to_new_category
+  get "/products/new/categories/new", to: "categories#new",     as: :new_product_to_new_category
   get "/products/:id",            to: "products#show",        as: :product
   get "/products/:id/edit",       to: "products#edit"
   put "/products/:id/edit",       to: "products#update",      as: :edit_product
@@ -34,6 +38,9 @@ Rails.application.routes.draw do
   get "/orders/:id/buy",          to: "orders#buy",           as: :buy_order
   put "/orders/:id",              to: "orders#pay",           as: :pay_for_order
   get "/orders/:id/confirm",      to: "orders#confirm",       as: :order_confirm
+
+  get "categories/new",           to: "categories#new",       as: :new_category
+  post "categories/new",          to: "categories#create"
 
   root "products#index"
 

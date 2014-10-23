@@ -9,7 +9,7 @@
   </ul>
 
  <%= form_for @product, method: :post, url: new_product_path do |f|%>
-   <%= f.hidden_field :user_id, value: @user.id %>
+   <%= f.hidden_field :user_id, value: current_user.id %>
 
    <p>
      <%= f.label :name.capitalize %>
@@ -17,7 +17,7 @@
    </p>
    <p>
      <%= f.label :price.capitalize %>
-     <%= f.text_field :price %> 
+     <%= f.text_field :price %>
    </p>
    <p>
      <%= f.label :quantity.capitalize %>
@@ -31,5 +31,15 @@
      <%= f.label :description.capitalize %>
      <%= f.text_area :description %>
    </p>
+     <% @all_categories.each do |cat| %>
+        <div class = "select_category">
+          <%= check_box_tag "category_ids[]", cat.id %>
+          <%= cat.label %>
+        </div>
+     <% end %>
+
+   <button class = "in_a_form"> <%= link_to "Add a Category", new_product_to_new_category_path, method: :get %> </button>
+   Warning: Creating a new category now will discard your current work on the new product
    <p><%= f.submit %></p>
+
  <% end %>

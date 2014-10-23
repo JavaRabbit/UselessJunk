@@ -10,6 +10,8 @@ module MoneyHelper
     html.html_safe
   end
 
+  private
+
   def decimal_length(decimal)
     loop do
       if decimal.length == 2

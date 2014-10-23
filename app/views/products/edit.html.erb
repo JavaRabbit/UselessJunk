@@ -3,25 +3,35 @@
 
 <%= form_for @product, method: :put, url: edit_product_path(@product.id)  do |f|%>
 
-  <p>
+  <div class="field">
     <%= f.label :name.capitalize %>
     <%= f.text_field :name %>
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :price.capitalize %>
     <%= f.text_field :price %> (in cents)
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :quantity.capitalize %>
     <%= f.text_field  :quantity %>
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :link_to_a_picture %>
     <%= f.text_field :imageurl %>
-  </p>
-  <p>
+  </div class="field">
+  <div class="field">
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
-  </p>
-  <p><%= f.submit %></p>
+  </div class="field">
+  <% @all_categories.each do |cat| %>
+     <div class = "select_category">
+       <% checked = @product.categories.include? cat %>
+       <%= check_box_tag "category_ids[]", cat.id, checked %>
+       <%= cat.label %>
+     </div>
+  <% end %>
+  <button class = "in_a_form"> <%= link_to "Add a Category", edit_product_to_new_category_path, method: :get %> </button>
+  Warning: Creating a new category now will discard your current work on the product
+
+  <%= f.submit %>
 <% end %>

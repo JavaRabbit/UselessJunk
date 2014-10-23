@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get "categories/new",           to: "categories#new",       as: :new_category
   post "categories/new",          to: "categories#create"
   get "categories/:id",           to: "categories#show",      as: :category
-  get "categories/sort",          to: "categories#sort",      as: :category_sort
+  post "categories/sort",          to: "categories#sort",      as: :category_sort
   root "products#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

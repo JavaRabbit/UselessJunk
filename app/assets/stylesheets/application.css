@@ -38,8 +38,8 @@
 
 .square-box {
  float: left;
- width: 200px;
- height: 200px;
+ width: 300px;
+ height: 300px;
  border: 1px solid #990000;
  margin: 10px;
 }

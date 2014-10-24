@@ -53,8 +53,8 @@ header {
 #main_container {
  width: 90%;
  margin: 0px auto;
- border: 1px solid #cccccc;
- padding: 5px;
+ border: 10px solid #cccccc;
+ padding: 10%;
  clear: both;
 }
 

@@ -3,6 +3,7 @@
 <head>
   <title>UselessJunk</title>
   <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link type = "text/css" rel= "stylesheet" href = "/assets/stylesheets/resets.css" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,7 +11,7 @@
 </head>
 <body>
 
-  <div id="user_header"> <!-- header section -->
+  <header> <!-- header section -->
     <div class="container">
 
       <div id = "logo">
@@ -29,7 +30,7 @@
         <% end %>
       </div> <!-- nav-container -->
     </div>
-  </div>
+  </header>
 
     <% flash.each do |name, msg| %> <!-- flash message provided my rails-->
       <%= content_tag :div, msg, id: "flash_#{name}" %>

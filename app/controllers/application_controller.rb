@@ -27,10 +27,10 @@ class ApplicationController < ActionController::Base
 
   def update_cart(quantity_diff, order_item)
     order_item.quantity_of_product += quantity_diff
-    order_item.product.quantity -= quantity_diff
     price_change = order_item.product.price * quantity_diff
     order_item.subtotal += price_change
     if order_item.save
+      order_item.product.quantity -= quantity_diff
       order_item.product.save
       order_item.order.total_price += price_change
       order_item.order.save
@@ -67,8 +67,17 @@ class ApplicationController < ActionController::Base
   def retired_products
     Product.where(retired: true)
   end
-  
   helper_method :retired_products
+
+  def order_total_price
+    current_order.total_price = 0
+    current_order.order_items.each do |item|
+      current_order.total_price += item.subtotal
+    end
+    current_order.save
+    return current_order.total_price
+  end
+  helper_method :order_total_price
 
 # if current user
 

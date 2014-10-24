@@ -1,42 +1,42 @@
 <% if @user == current_user %>
   <h2> My Account </h2>
-    <ul class = "horizontal">
-      <li> <%= link_to "Edit", edit_user_path(current_user.id) %> </li>
-      <!--<li> <%= link_to "Delete My Account", confirm_path(@user.id), method: :delete %> </li> -->
-    </ul>
-
-  <h3> My Products </h3>
-
-    <% @products.each do |product| %>
-       <div class = "basic_product">
-         <p><img src= "<%= product.imageurl %>" ></p>
-         <%= link_to  product.name.titleize, product_path(product.id) %>
-            <ul class = "horizontal">
-              <li><%= link_to "Edit", edit_product_path(product.id) %></li>
-              <li><%= link_to "Delete", delete_product_path(product.id), method: :delete %></li>
-              <li><%= link_to "Retire this Product", retire_product_path(product.id) %></li>
-
-            </ul>
-      </div>
-
-    <% end %>
-
-    <h3>Retired Products</h3>
-    
+  <%= link_to "Edit my account", edit_user_path(current_user.id) %>
 
   <h3> <%= link_to "View My Orders", my_orders_path(current_user.id) %> </h3>
   <h3> <%= link_to "Add a Product", new_product_path %> </h3>
-
-<% else %>
-
-    <h2><%= @user.username %></h2>
-
-    <h3><%= @user.username %>'s  Products </h3>
+  <h3> My Products </h3>
 
   <% @products.each do |product| %>
      <div class = "basic_product">
+       <p><img src= "<%= product.imageurl %>"></p>
+       <h4><%= link_to  product.name.titleize, product_path(product.id) %></h4>
+        <ul class = "horizontal">
+          <li><%= link_to "Edit", edit_product_path(product.id) %></li>
+          <li><%= link_to "Delete", delete_product_path(product.id), method: :delete %></li>
+          <li><%= link_to "Retire this Product", retire_product_path(product.id) %></li>
+        </ul>
+     </div>
+  <% end %>
+
+  <h3>Retired Products</h3>
+
+<% else %>
+
+  <h2><%= @user.username.titleize %></h2>
+  <h3><%= @user.username.titleize %>'s  Products </h3>
+
+  <% @products.each do |product| %>
+     <div class = "basic_product">
+       <h4><%= link_to product.name.titleize, product_path(product.id) %></h4>
        <img src = <%= product.imageurl %> >
-       <%= link_to  product.name, product_path(product.id) %>
+
+       <p><%= format_money(product.price) %></p>
+       <p><%= product.description %></p>
+       <% if product.quantity > 0 %>
+          <p>In stock!</p>
+       <% else %>
+          <p>Not in stock :(</p>
+       <% end %>
     </div>
   <% end %>
 

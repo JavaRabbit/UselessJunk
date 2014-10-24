@@ -1,25 +1,22 @@
-
 <div id="main_container">
+  <% @products.collect do |product| %>
+    <% unless product.retired %>
 
+      <div class = 'square-box'>
+        <%= link_to product_path(product.id) do %>
+          <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)">
+          </div>
+          <% end %>
 
-<% @products.collect do |product| %>
-  <% unless product.retired %>
-
-    <div class = 'square-box'>
-      <%= link_to product_path(product.id) do %>
-        <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)">
+          <section>
+            <h4> <%= link_to product.name, product_path(product.id) %> </h4>
+            Rated: <%= average_rating(product) %> <br>
+            <%= format_money(product.price) %> <br>
+          </section>
         </div>
-      <% end %>
 
-        <section>
-          <h4> <%= link_to product.name, product_path(product.id) %> </h4>
-          Rated: <%= average_rating(product) %> <br>
-          <%= format_money(product.price) %> <br>
-        </section>
-    </div>
-
+    <% end %>
   <% end %>
-<% end %>
 
 <aside class="categories">
     <!--Sets a new @products, filled with only the categories that match the clicked one-->

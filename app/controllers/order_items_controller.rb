@@ -20,7 +20,6 @@ class OrderItemsController < ApplicationController
       end
     end
 
-    #setting quantity of product to 0 should delete
     # adding something to cart should not update stock, only when you buy it
 
     render "orders/cart"

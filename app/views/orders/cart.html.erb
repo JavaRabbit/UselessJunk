@@ -1,6 +1,6 @@
 <h2>Your Cart</h2>
 
-<p> Total Cost: <%= format_money(current_order.total_price) %> </p>
+<p> Total Cost: <%= format_money(order_total_price) %> </p>
 
 <% if @errors_array %>
   <% @errors_array.each do |item| %>

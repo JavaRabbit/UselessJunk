@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 
   def create
+    params = ""
     @review = Review.new(review_params)
     @order_item = OrderItem.new
     product_id = @review.product_id
@@ -17,6 +18,10 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  def rating_to_int(string)
+    string.to_i
+  end
 
   def set_product_id
     @product = Product.find(params[:id])

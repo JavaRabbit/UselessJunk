@@ -15,11 +15,17 @@
     <% end %>
 
   <p>Price: <%= format_money(@product.price) %> </p>
+
   <% if @product.quantity == nil || @product.quantity == 0 %>
     <p>Not in stock :(</p>
+
   <% elsif @product.quantity > 0 %>
     <p>In stock: <%= @product.quantity %> </p>
+
+    <p><%= @product.quantity %> remaining! </p>
+
     <div class = "add_to_cart_button">
+      <!-- Update this link eventually, to return you to the same page? -->
       <%= form_for @order_item, url: new_order_path do |f| %>
         <%= f.hidden_field :product_id, value: @product.id %>
         <%= f.submit "Add to Cart"%>
@@ -28,6 +34,14 @@
   <% end %>
 
 </div> <!-- basic_product -->
+
+
+  <div class = "product-options">
+    <% if current_user == @product.user %>
+      <%= link_to "delete", @product, method: :delete %>
+      <%= link_to "edit", edit_product_path %>
+    <% end %>
+  </div>
 
 <div class = "product">
   <% if current_user == @product.user%>

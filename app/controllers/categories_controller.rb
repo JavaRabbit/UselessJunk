@@ -34,6 +34,7 @@ before_filter only: [:new, :update, :destroy]
         @products << product
       end
     end
+    raise @products.inspect
     render 'products/index'
   end
 

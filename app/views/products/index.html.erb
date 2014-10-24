@@ -9,13 +9,22 @@
 
 
 <% @products.collect do |product| %>
+  <% unless product.retired %>
 
-  <div class = 'square-box'>
-    <%= product.name %><br>
-    <%= product.description %><br>
-    <%= product.price %><br>
-    <img src="http://placekitten.com/g/40/60" alt="Kitten" >
-  </div>
+    <div class = 'square-box'>
+      <%= link_to product_path(product.id) do %>
+        <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)">
+        </div>
+      <% end %>
+
+        <section>
+          <h4> <%= link_to product.name, product_path(product.id) %> </h4>
+          Rated: <%= average_rating(product) %> <br>
+          <%= format_money(product.price) %> <br>
+        </section>
+    </div>
+
+  <% end %>
 <% end %>
 
 <aside class="categories">
@@ -29,7 +38,7 @@
       <% else%>
         <% checked = false %>
       <% end %>
-      <% unless cat.products.empty? %>
+      <% unless (cat.products.empty?) || ( retired_products - cat.products ).empty? %>
         <%= check_box_tag "category_ids[]", cat.id, checked %>
         <%= cat.label %>
         <br>

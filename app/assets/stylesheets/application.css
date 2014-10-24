@@ -32,28 +32,34 @@ body {
   margin: 0;
 }
 
-.container{
+#header-container{
   width: 95%;
   margin: 0 auto;
 }
 
-
 header {
+    top: 0;
     background-color: #99FFCC;
-    width: 100%;
-
-    /*position: fixed;*/
+    width: 100vw;
+    height: 3em;
+    position: fixed;
     text-align: left;
-
-
     font-family: 'Poiret One', cursive;
+    /*display: none;*/
     }
+
+
+#page {
+  margin-top: 3em;
+  /*clear: both;*/
+}
 
 #main_container {
  width: 90%;
  margin: 20px auto;
  border: 3px solid #cccccc;
  padding: 5px;
+ clear: both;
 }
 
 .square-box {

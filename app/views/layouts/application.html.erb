@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Crapsy</title>
-  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-</head>
-<body>
 
-  <div id="user_header"> <!-- header section -->
-    <div class="container">
+  <head>
+    <title>Crapsy</title>
+    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link type = "text/css" rel= "stylesheet" href = "/assets/stylesheets/resets.css" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
 
-      <div id = "logo">
-        <h1>Crapsy</h1>
+
+    <header> <!-- header section -->
+      <div id="header-container">
+
+        <div id = "logo">
+          <h1>Crapsy</h1>
+        </div>
+        <div class = "nav">
+          <%= link_to "Home", root_path %>
+          <%= link_to "My Cart", cart_path %>
+          <% if current_user %>
+            <%= link_to "My Account", current_user %>
+            Logged in as <%= current_user.username %>.
+            <%= link_to "Log Out", logout_path %>
+          <% else %>
+            <%= link_to "Sign Up", signup_path %> or
+            <%= link_to "Log In", login_path %>
+          <% end %>
+        </div> <!-- nav-container -->
       </div>
-      <div class = "nav">
-        <%= link_to "Home", root_path %>
-        <%= link_to "My Cart", cart_path %>
-        <% if current_user %>
-          <%= link_to "My Account", current_user %>
-          Logged in as <%= current_user.username %>.
-          <%= link_to "Log Out", logout_path %>
-        <% else %>
-          <%= link_to "Sign Up", signup_path %> or
-          <%= link_to "Log In", login_path %>
-        <% end %>
-      </div> <!-- nav-container -->
-    </div>
-  </div>
+    </header>
 
-    <% flash.each do |name, msg| %> <!-- flash message provided my rails-->
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
-    <% end %>
-      <div class = "page">
-        <%= yield %>
-      </div> <!-- page_container -->
+
+    <div id = "page">
+      <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <% end %>
+      <%= yield %>
+    </div> <!-- page_container -->
+
   </body>
 </html>

@@ -4,7 +4,7 @@ class OrderItem < ActiveRecord::Base
 
 
   validate :product_stock_must_exceed_order_item_quantity
-  validates :quantity_of_product, numericality: {greater_than: 0}
+  validates :quantity_of_product, numericality: {greater_than: -1}
 
   def product_stock_must_exceed_order_item_quantity
     if quantity_of_product > product.quantity

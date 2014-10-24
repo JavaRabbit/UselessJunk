@@ -1,20 +1,18 @@
-<h2><%= @product.name %></h2>
+<h2><%= @product.name.titleize %></h2>
 
-<h3>Sold by:
-  <%= link_to @product.user.username, user_path(@product.user) %>
+<h3>
+  Sold by: <%= link_to @product.user.username, user_path(@product.user) %>
 </h3>
 
 <div class = "basic_product">
 
-  <img src = <%= @product.imageurl %> alt = "Image of product">
-
+  <img src = "<%= @product.imageurl %>" alt = "Image of product">
   <p><%= @product.description %></p>
-
   <% unless @product.categories.empty? %>
     Categories: <% @product.categories.each do |cat| %>
-                <%= link_to cat.label, category_path(cat.id) %>
+                  <%= link_to cat.label, category_path(cat.id) %>
                 <% end %>
-  <% end %>
+    <% end %>
 
   <p>Price: <%= format_money(@product.price) %> </p>
 
@@ -22,6 +20,7 @@
     <p>Not in stock :(</p>
 
   <% elsif @product.quantity > 0 %>
+
     <p><%= @product.quantity %> remaining! </p>
 
     <div class = "add_to_cart_button">
@@ -30,10 +29,11 @@
         <%= f.hidden_field :product_id, value: @product.id %>
         <%= f.submit "Add to Cart"%>
       <% end %>
-    </div>
-
+    </div> <!-- add_to_cart -->
   <% end %>
-</div>
+
+</div> <!-- basic_product -->
+
 
   <div class = "product-options">
     <% if current_user == @product.user %>
@@ -42,48 +42,54 @@
     <% end %>
   </div>
 
+<div class = "product">
+  <% if current_user == @product.user%>
+    <%= link_to "delete", @product, method: :delete %>
+    <%= link_to "edit", edit_product_path %>
+  <% end %>
+</div>
 
 <div class = "product_reviews">
   <% if @product.reviews.empty? %>
-    There are no reviews for <%= @product.name.titleize %> yet.
+    <p>There are no reviews for <%= @product.name.titleize %> yet.</p>
   <% else %>
     <h4>Reviews for <%= @product.name %></h4>
     <div class = "product-rating">
       <% @product.reviews.each do |review| %>
         <h4><%= review.title %></h4>
-          <h5> Written <%= time_ago_in_words(review.created_at)%> ago</h5>
-          <p>Rating = <%= review.rating %></p>
+        <h5> Written <%= time_ago_in_words(review.created_at)%> ago</h5>
+        <p>Rating = <%= review.rating %></p>
         <p> <%= review.content %></p>
       <% end %>
+    </div>
   <% end %>
-  </div>
 </div>
 
-
 <div class = "review_form">
-<% unless @product.user == current_user %>
-  <h4>Add a review: </h4>
-  <%= error_message(@review) %>
-  <%= form_for @review do |f| %>
-    <%= f.hidden_field :product_id, value: @product.id %>
-    <!-- This is what it will create -->
-    <!-- <input type = "hidden" name = "review[product_id]" value = "1" > -->
-    <p>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </p>
-    <p>
-      <%= f.label :content %>
-      <%= f.text_area :content %>
-    </p>
-    <p>
-      <%= f.label :rating %>
-      <%= f.text_field :rating %>
-    </p>
-    <p><%= f.submit %></p>
-  <% end %>
+  <% unless @product.user == current_user %>
+    <h4>Add a review: </h4>
+    <%= error_message(@review) %>
+    <%= form_for @review do |f| %>
+      <%= f.hidden_field :product_id, value: @product.id %>
+      <p>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </p>
+      <p>
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+      </p>
+      <p><%= f.label :rating %></p>
+        1 <%= f.radio_button :rating, "1" %>&nbsp
+        2 <%= f.radio_button :rating, "2" %>&nbsp
+        3 <%= f.radio_button :rating, "3" %>&nbsp
+        4 <%= f.radio_button :rating, "4" %>&nbsp
+        5 <%= f.radio_button :rating, "5" %>&nbsp
+
+      <p><%= f.submit %></p>
+    <% end %>
 
   <% else %>
-    You cannot review your own product.
-<% end %>
+    <p>You cannot review your own product.</p>
+  <% end %>
 </div>

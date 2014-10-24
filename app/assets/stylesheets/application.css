@@ -29,13 +29,14 @@
 }
 
 body {
-  margin: 0;
+
 }
 
 #header-container{
   width: 95%;
   margin: 0 auto;
 }
+
 
 header {
     top: 0;

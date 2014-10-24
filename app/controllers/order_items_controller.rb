@@ -1,8 +1,6 @@
 class OrderItemsController < ApplicationController
 
   def update
-    # raise params.inspect
-    @order_item = OrderItem.new
     @errors_array = []
     params[:order_item].each do |k, v|
       order_item = OrderItem.find_by(id: k)
@@ -20,8 +18,7 @@ class OrderItemsController < ApplicationController
       end
     end
 
-    # adding something to cart should not update stock, only when you buy it
-
+    @order_item = OrderItem.new
     render "orders/cart"
 
   end

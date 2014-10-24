@@ -30,10 +30,11 @@ class ApplicationController < ActionController::Base
     price_change = order_item.product.price * quantity_diff
     order_item.subtotal += price_change
     if order_item.save
-      order_item.product.quantity -= quantity_diff
-      order_item.product.save
-      order_item.order.total_price += price_change
-      order_item.order.save
+      # order_item.product.quantity -= quantity_diff
+      # order_item.product.save
+      # order_item.order.total_price += price_change
+        order_total_price
+      # order_item.order.save
       # raise order_item.order.inspect
 
       return nil

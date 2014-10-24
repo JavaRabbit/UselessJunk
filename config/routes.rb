@@ -17,12 +17,15 @@ Rails.application.routes.draw do
 
   get "/products/new",            to: "products#new",         as: :new_product
   post "/products/new",           to: "products#create"
-  get "/products/:id/edit/categories/new", to: "categories#new", as: :edit_product_to_new_category
+  get "/products",                to: "products#index"
   get "/products/new/categories/new", to: "categories#new",     as: :new_product_to_new_category
+  get "/products/:id/edit/categories/new", to: "categories#new", as: :edit_product_to_new_category
   get "/products/:id",            to: "products#show",        as: :product
   get "/products/:id/edit",       to: "products#edit"
   put "/products/:id/edit",       to: "products#update",      as: :edit_product
   delete "/products/:id",         to: "products#destroy",     as: :delete_product
+  get "/products/:id/retire",     to: "products#retire",      as: :retire_product
+  post "/products/:id/retire/confirm", to: "products#confirm", as: :confirm_retire
 
   get "/order_items",             to: "order_items#index",    as: :order_items
 
@@ -43,7 +46,7 @@ Rails.application.routes.draw do
   get "categories/new",           to: "categories#new",       as: :new_category
   post "categories/new",          to: "categories#create"
   get "categories/:id",           to: "categories#show",      as: :category
-  get "categories/sort",          to: "categories#sort",      as: :category_sort
+  post "categories/sort",          to: "categories#sort",      as: :category_sort
   root "products#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

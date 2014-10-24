@@ -15,16 +15,38 @@
  */
 #logo{
   text-align:left;
+  width: 100%;
   /*text-size: 133px; */
 }
+
+.small-product-pic {
+    width: 200px;
+    height: 200px;
+    background-size:cover;
+    background-position:50% 50%;
+    margin: auto;
+    border-radius: 2%;
+}
+
+body {
+  margin: 0;
+}
+
+.container{
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+
 
 #user_header {
     background-color: #99FFCC;
     width: 100%;
-    padding: 0px;
-    position: fixed;
-    margin: 0px; padding: 0px ;
-    text-align: right;
+
+    /*position: fixed;*/
+    text-align: left;
+
 
     font-family: 'Poiret One', cursive;
     }
@@ -42,6 +64,11 @@
  height: 300px;
  border: 1px solid #990000;
  margin: 10px;
+ padding-top: 1em;
+}
+
+.square-box * {
+  text-align: center;
 }
 
 .field_with_errors {
@@ -51,6 +78,11 @@
 .error_messages {
   color: red;
 }
+
+.nav {
+  text-align: right;
+}
+
 
 /*.square-box{
   float: left;

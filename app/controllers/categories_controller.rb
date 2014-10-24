@@ -27,6 +27,7 @@ before_filter only: [:new, :update, :destroy]
 
   def show
     category = Category.find_by(id: params[:id])
+    @categories = [category]
     @products = []
     Product.all.each do |product|
       if product.categories.include? category
@@ -37,11 +38,22 @@ before_filter only: [:new, :update, :destroy]
   end
 
   def sort
-    products = []
-    params[:category_id].each do |cat_id|
-      products << Product.includes(:categories).where(categories:{id: cat_id})
+    @products = []
+    @categories = []
+    if params[:category_ids]
+      params[:category_ids].each do |cat_id|
+        @categories << Category.find(cat_id)
+        product_set = Product.includes(:categories).where(categories:{id: cat_id})
+        product_set.each do |product|
+          unless @products.include? product
+            @products << product
+          end
+        end
+      end
+      render "products/index"
+    else
+      redirect_to root_path
     end
-    raise products.inspect
   end
 
   private

@@ -73,6 +73,20 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
     @product = Product.find(params[:id])
   end
 
+  def retire
+    @product = Product.find(params[:id])
+  end
+
+  def confirm
+    @product = Product.find(params[:id])
+    @product.retired = true
+    if @product.save
+      redirect_to user_path(current_user.id)
+    else
+      render :retire
+    end
+  end
+
 private
 
   def product_params

@@ -28,9 +28,7 @@
 <% end %>
 
 <aside class="categories">
-
-  <!--links for each category, all pointing to the same method in categories_controller-->
-  <!--Sets a new @products, filled with only the categories that match the clicked one-->
+    <!--Sets a new @products, filled with only the categories that match the clicked one-->
   <%= form_tag category_sort_path do %>
     <% all_categories.each do |cat| %>
       <% if defined? @categories %>
@@ -38,7 +36,7 @@
       <% else%>
         <% checked = false %>
       <% end %>
-      <% unless (cat.products.empty?) || ( retired_products - cat.products ).empty? %>
+      <% unless (cat.products.empty?) || ( cat.products - retired_products).empty? %>
         <%= check_box_tag "category_ids[]", cat.id, checked %>
         <%= cat.label %>
         <br>

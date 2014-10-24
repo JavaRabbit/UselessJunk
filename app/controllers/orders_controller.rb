@@ -25,6 +25,7 @@ before_filter :authorize_user_has_order, only: [:show]
     current_order.state = "paid"
     current_order.date_ordered = DateTime.now
     if current_order.update(order_params)
+      update_product_quantity
       session[:order_id] = nil
       redirect_to order_confirm_path(current_order.id), notice: "Order Approved! Thank you!"
     else
@@ -59,6 +60,13 @@ before_filter :authorize_user_has_order, only: [:show]
 
   def order_params
     params.require(:order).permit(:buyer_name, :email, :address, :last_four, :expiration)
+  end
+
+  def update_product_quantity
+    current_order.order_items.each do |item|
+      item.product.quantity -= item.quantity_of_product
+      item.product.save
+    end
   end
 
 end

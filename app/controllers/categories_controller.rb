@@ -34,7 +34,6 @@ before_filter only: [:new, :update, :destroy]
         @products << product
       end
     end
-    raise @products.inspect
     render 'products/index'
   end
 
@@ -43,13 +42,11 @@ before_filter only: [:new, :update, :destroy]
     @categories = []
     if params[:category_ids]
       params[:category_ids].each do |cat_id|
+        @categories << Category.find(cat_id)
         product_set = Product.includes(:categories).where(categories:{id: cat_id})
         product_set.each do |product|
           unless @products.include? product
             @products << product
-            product.categories.each do |cat|
-              @categories << cat
-            end
           end
         end
       end

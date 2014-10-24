@@ -64,6 +64,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_order
 
+  def retired_products
+    Product.where(retired: true)
+  end
+  
+  helper_method :retired_products
+
 # if current user
 
 # to give access to specific page

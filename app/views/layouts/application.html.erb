@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Crapsy</title>
+    <title>Crapsy Store</title>
     <link type = "text/css" rel= "stylesheet" href = "/assets/stylesheets/resets.css" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
-      <nav id="main_nav_container">
-        <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "My Cart", cart_path %></li>
-          <% if current_user %>
-          <li><%= link_to "My Account", current_user %></li>
+    <div id="wrapper">
+      <div id="header">
+        <div class="box">
+          <ul>
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "My Cart", cart_path %></li>
+            <% if current_user %>
+              <li><%= link_to "My Account", current_user %></li>
             Logged in as <%= current_user.username %>.
-          <li><%= link_to "Log Out", logout_path %></li>
-          <% else %>
-            <li><%= link_to "Sign Up", signup_path %></li>
-            <li>or</li>
-            <li><%= link_to "Log In", login_path %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </header>
+              <li><%= link_to "Log Out", logout_path %></li>
+            <% else %>
+              <li><%= link_to "Sign Up", signup_path %></li>
+              <li>or</li>
+              <li><%= link_to "Log In", login_path %></li>
+              <% end %>
+          </ul>
+        </div>
+      </div>
 
-  
-    <div class = "page">
+    <div class = "content">
+      <div class = "box">
       <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
       <%= yield %>
     </div> <!-- page_container -->
-
-  <div id="footer">
-    <ul>
-      <li>some text here </li>
-    </ul>
   </div>
 
-  </body>
+    <div id="footer">
+      <div class = "box">
+        <ul>
+          <li>some text here </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

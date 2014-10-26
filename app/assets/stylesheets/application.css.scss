@@ -14,7 +14,10 @@
  *= require_self
  */
 
-body {
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
   background: #FCFCE3;
   font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -28,8 +31,7 @@ a {
 }
 
 /*navigation*/
-#main_nav_container {
-
+#header{
     background-color: #3FC2D7;
     color: #FFFFFF;
 
@@ -64,12 +66,11 @@ a {
    }
 }
 
-#page {
-  width: 90%;
+#content {
+  padding-bottom:400px;
   float: left;
   min-width: 3em;
   text-align: justify;
-  margin-bottom: 6%;
   border: 8px solid #990000;
 }
 
@@ -101,25 +102,18 @@ a {
 
 /*footer*/
 #footer {
-  text-align: center;
-  display: inline-block;
-  z-index: 999999;
-  margin: 0 auto;
-  width: 100%;
-  height: 7%;   /* Height of the footer */
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 18px;
+  width:100%;
+  height:100px;
+  position: absolute;
+  bottom:0;
+  left:0;
   background: #FCFCE3;
-  padding: 0;
-  padding-bottom: 1%;
-  margin-top: 5%;
   border: 1px solid #990000;
 }
 
 /*wrapper*/
 .wrap {
+  min-height:100%;
 	position: relative;
 	margin: 0 auto;
   width: 100%;
@@ -139,4 +133,9 @@ a {
 
 .error_messages {
   color: red;
+}
+
+.box {
+  width: 800px;
+  margin: 0 auto;
 }

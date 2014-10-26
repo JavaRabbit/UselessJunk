@@ -15,7 +15,7 @@
  */
 
 body {
-  background: #FFFFFF;
+  background: #FCFCF0;
   font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
@@ -23,11 +23,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
-
+a {
+  text-decoration: none;
+}
 
 #main_nav_container {
 
-    background-color: #FB8521;
+    background-color: #3FC2D7;
     color: #FFFFFF;
 
     a {

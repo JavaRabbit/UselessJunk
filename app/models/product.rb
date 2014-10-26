@@ -6,8 +6,9 @@ class Product < ActiveRecord::Base
   # relationships
 
   validates :name, :description, :price, :quantity, :user_id, presence: true
-  validates :quantity, numericality: {greater_than: 0}
+  validates :quantity, numericality: {greater_than: -1}
   validates :name, uniqueness: true
   validates :price, numericality: {only_integer: true, greater_than: 0}
+
 
 end

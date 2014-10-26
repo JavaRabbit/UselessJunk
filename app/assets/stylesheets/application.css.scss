@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  background: #FFFFFF;
+  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+
+
+#main_nav_container {
+
+    background-color: #FB8521;
+    color: #FFFFFF;
+
+    a {
+      color: #FCFCFC;
+      text-decoration: none;
+      display: inline-block;
+      padding: 18px;
+    }
+
+    li :hover {
+      color: #FFFFFF;
+      opacity: .8;
+    }
+
+    ul {
+       width: 100%;
+       padding: 0;
+       font-size: 90%;
+       font: "HelveticaNeue-Light";
+       text-align: right;
+       letter-spacing: 0.05em;
+    }
+
+     li {
+     display: inline-block;
+   }
+}
+
+#page {
+  margin-top: 8%;
+  /*clear: both;*/
+}
+
+.small-product-pic {
+    width: 200px;
+    height: 200px;
+    background-size:cover;
+    background-position:50% 50%;
+    margin: auto;
+    border-radius: 2%;
+}
+
+.square-box {
+ float: left;
+ width: 300px;
+ height: 300px;
+ border: 1px solid #990000;
+ margin: 10px;
+ padding-top: 1em;
+}
+
+.square-box * {
+  text-align: center;
+}
+
+.field_with_errors {
+  display: inline-block;
+}
+
+.error_messages {
+  color: red;
+}

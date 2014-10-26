@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Crapsy Store</title>
-    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <title>Crapsy</title>
     <link type = "text/css" rel= "stylesheet" href = "/assets/stylesheets/resets.css" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse"> <!-- header section -->
-      <div class="container">
-        <nav>
-          <ul class = "nav navbar-nav pull-right">
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "My Cart", cart_path %></li>
+    <header>
+      <nav id="main_nav_container">
+        <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "My Cart", cart_path %></li>
           <% if current_user %>
-            <li><%= link_to "My Account", current_user %></li>
-          Logged in as <%= current_user.username %>.
-            <li><%= link_to "Log Out", logout_path %></li>
+          <li><%= link_to "My Account", current_user %></li>
+            Logged in as <%= current_user.username %>.
+          <li><%= link_to "Log Out", logout_path %></li>
           <% else %>
-            <li><%= link_to "Sign Up", signup_path %> or</li>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li>or</li>
             <li><%= link_to "Log In", login_path %></li>
           <% end %>
-          </ul>
-        </nav>
-      </div>
+        </ul>
+      </nav>
     </header>
 
 
-  <div class="container">
+    <div id = "page">
       <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
       <%= yield %>
     </div> <!-- page_container -->
+
   </body>
 </html>

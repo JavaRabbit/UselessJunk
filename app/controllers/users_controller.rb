@@ -21,7 +21,8 @@ class UsersController < ApplicationController
     if @user == nil
       redirect_to root_path
     end
-    @products = @user.products
+    @retired_products = @user.products.where(retired: true)
+    @active_products = @user.products.where("retired is NULL or retired = false")
   end
 
   def edit

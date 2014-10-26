@@ -123,7 +123,7 @@ class UsersController < ApplicationController
 
 
   def user_is_current_user
-    unless current_user.id == params[:id].to_i
+    unless current_user == nil || current_user.id == params[:id].to_i
       flash[:notice] = "You may only edit/delete your own account."
       redirect_to root_path
     end

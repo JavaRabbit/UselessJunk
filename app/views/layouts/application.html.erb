@@ -27,22 +27,23 @@
         </div>
       </div>
 
-    <div class = "content">
-      <div class = "box">
+    <div id="content">
+      <div class="box">
       <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
-      <%= yield %>
-    </div> <!-- page_container -->
-  </div>
+        <%= yield %>
+      </div> <!-- page_container -->
+    </div>
 
     <div id="footer">
-      <div class = "box">
+      <div class="box">
         <ul>
           <li>some text here </li>
         </ul>
       </div>
     </div>
+
   </div>
 </body>
 </html>

@@ -48,17 +48,12 @@ a {
       padding: 18px;
     }
 
-    li :hover {
-      color: #FFFFFF;
-      opacity: .8;
-    }
-
     ul {
        display: block;
        list-style-type: none;
        padding: 0;
        margin-top: 0;
-       padding-bottom: 1%;
+       padding-bottom: 0%;
        margin-bottom: 5%;
        font: "Helvetica";
        text-align: right;
@@ -67,9 +62,18 @@ a {
 
      li {
        display: inline-block;
-       margin-left: 1%;
+       margin-left: 0px;
        padding: 0px;
    }
+}
+
+#logo{
+  display: inline-block;
+  float: left;
+  text-align: left;
+  padding: 6px 0 6px;
+  font-weight: bold;
+  font-size: 37px;
 }
 
 #content {
@@ -110,10 +114,6 @@ a {
   width:100%;
   height:100px;
   position: relative;
-  left:0;
-  padding: 0;
-  margin-top: 10%;
-  padding-top: 0%;
   margin-bottom: 0%;
   background: #FCFCE3;
   border: 1px solid #990000;
@@ -135,6 +135,7 @@ a {
 }
 
 .box {
+  display: block;
   width: 90%;
   margin: 0 auto;
 }

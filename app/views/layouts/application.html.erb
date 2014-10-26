@@ -27,12 +27,19 @@
     </header>
 
 
-    <div id = "page">
+    <div class = "page">
       <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
       <%= yield %>
     </div> <!-- page_container -->
+
+  <div id="footer">
+    <div id="wrap">
+    <ul>
+      <li>some text here </li>
+    </ul>
+  </div>
 
   </body>
 </html>

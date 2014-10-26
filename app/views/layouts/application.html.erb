@@ -26,16 +26,16 @@
       </nav>
     </header>
 
-
-    <div class = "page">
+  <div id="wrap">
+    <div class = "container">
       <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
       <%= yield %>
     </div> <!-- page_container -->
+  </div>
 
   <div id="footer">
-    <div id="wrap">
     <ul>
       <li>some text here </li>
     </ul>

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-before_filter :user_owns_product, only: [:edit, :update, :destroy]
+before_filter :user_owns_product, only: [:edit, :update, :destroy, :retire, :activate]
 
   def index
     @user = User.new
@@ -75,28 +75,30 @@ before_filter :user_owns_product, only: [:edit, :update, :destroy]
 
   def retire
     @product = Product.find(params[:id])
-  end
-
-  def confirm
-    @product = Product.find(params[:id])
     @product.retired = true
     if @product.save
-      redirect_to user_path(current_user.id)
-    else
-      render :retire
+      redirect_to user_path(current_user.id), notice: "#{@product.name} has been retired"
+    end
+  end
+
+  def activate
+    @product = Product.find(params[:id])
+    @product.retired = false
+    if @product.save
+      redirect_to user_path(current_user.id), notice: "#{@product.name} has been re-activated"
     end
   end
 
 private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id, :categories)
+    params.require(:product).permit(:name, :description, :price, :quantity, :imageurl, :user_id, :categories, :retired)
   end
 
   def user_owns_product
     product = Product.find_by(id: params[:id])
     unless current_user == product.user
-      flash[:notice] = "You may only edit/delete your own products."
+      flash[:notice] = "You are not authorized to change this product"
       redirect_to product_path(product.id)
     end
   end

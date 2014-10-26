@@ -21,7 +21,8 @@ class UsersController < ApplicationController
     if @user == nil
       redirect_to root_path
     end
-    @products = @user.products
+    @retired_products = @user.products.where(retired: true)
+    @active_products = @user.products.where("retired is NULL or retired = false")
   end
 
   def edit
@@ -122,7 +123,7 @@ class UsersController < ApplicationController
 
 
   def user_is_current_user
-    unless current_user.id == params[:id].to_i
+    unless current_user == nil || current_user.id == params[:id].to_i
       flash[:notice] = "You may only edit/delete your own account."
       redirect_to root_path
     end

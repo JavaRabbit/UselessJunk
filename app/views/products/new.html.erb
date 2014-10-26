@@ -10,13 +10,13 @@
 
  <%= form_for @product, method: :post, url: new_product_path do |f|%>
    <%= f.hidden_field :user_id, value: current_user.id %>
-
+   <%= f.hidden_field :retired, value: false %>
    <p>
      <%= f.label :name.capitalize %>
      <%= f.text_field :name %>
    </p>
    <p>
-     <%= f.label :price.capitalize %>
+     <%= f.label :price.capitalize %> (in cents)
      <%= f.text_field :price %>
    </p>
    <p>

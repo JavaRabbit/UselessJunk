@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # validate format of email, length of password, etc.
 
   validates :email, presence: true, uniqueness: true, format: {with: /@/}
-
+  validates :username, presence: true, uniqueness: true
 
   #has_many :products
   #has_many :orderitems, through: :products

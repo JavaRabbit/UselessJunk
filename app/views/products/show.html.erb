@@ -1,95 +1,98 @@
 <h2><%= @product.name.titleize %></h2>
 
-<h3>
-  Sold by: <%= link_to @product.user.username, user_path(@product.user) %>
-</h3>
+<% if @product.retired == true %>
+  <article>
+  This product is no longer available for purchase.
+  </article>
 
-<div class = "basic_product">
+<% else %>
 
-  <img src = "<%= @product.imageurl %>" alt = "Image of product">
-  <p><%= @product.description %></p>
-  <% unless @product.categories.empty? %>
-    Categories: <% @product.categories.each do |cat| %>
-                  <%= link_to cat.label, category_path(cat.id) %>
-                <% end %>
+  <h3>
+    Sold by: <%= link_to @product.user.username, user_path(@product.user) %>
+  </h3>
+
+  <div class = "basic_product">
+
+    <img src = "<%= @product.imageurl %>" alt = "Image of product">
+    <p><%= @product.description %></p>
+    <% unless @product.categories.empty? %>
+      Categories: <% @product.categories.each do |cat| %>
+                    <%= link_to cat.label, category_path(cat.id) %>
+                  <% end %>
+      <% end %>
+
+    <p>Price: <%= format_money(@product.price) %> </p>
+
+    <% if @product.quantity == nil || @product.quantity == 0 %>
+      <p>Not in stock :(</p>
+
+    <% elsif @product.quantity > 0 %>
+
+      <p><%= @product.quantity %> remaining! </p>
+
+        <div class = "add_to_cart_button">
+          <!-- Update this link eventually, to return you to the same page? -->
+          <%= form_for @order_item, url: new_order_path do |f| %>
+            <%= f.hidden_field :product_id, value: @product.id %>
+            <%= f.submit "Add to Cart"%>
+          <% end %>
+        </div> <!-- add_to_cart -->
+
     <% end %>
 
-  <p>Price: <%= format_money(@product.price) %> </p>
+  </div> <!-- basic_product -->
 
-  <% if @product.quantity == nil || @product.quantity == 0 %>
-    <p>Not in stock :(</p>
 
-  <% elsif @product.quantity > 0 %>
-
-    <p><%= @product.quantity %> remaining! </p>
-
-    <div class = "add_to_cart_button">
-      <!-- Update this link eventually, to return you to the same page? -->
-      <%= form_for @order_item, url: new_order_path do |f| %>
-        <%= f.hidden_field :product_id, value: @product.id %>
-        <%= f.submit "Add to Cart"%>
+    <div class = "product-options">
+      <% if current_user == @product.user %>
+        <%= link_to "delete", @product, method: :delete %>
+        <%= link_to "edit", edit_product_path %>
       <% end %>
-    </div> <!-- add_to_cart -->
-  <% end %>
+    </div>
 
-</div> <!-- basic_product -->
-
-
-  <div class = "product-options">
-    <% if current_user == @product.user %>
-      <%= link_to "delete", @product, method: :delete %>
-      <%= link_to "edit", edit_product_path %>
+  <div class = "product_reviews">
+    <% if @product.reviews.empty? %>
+      <p>There are no reviews for <%= @product.name.titleize %> yet.</p>
+    <% else %>
+      <h4>Reviews for <%= @product.name %></h4>
+      <div class = "product-rating">
+        <% @product.reviews.each do |review| %>
+          <h4><%= review.title %></h4>
+          <h5> Written <%= time_ago_in_words(review.created_at)%> ago</h5>
+          <p>Rating = <%= review.rating %></p>
+          <p> <%= review.content %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
-<div class = "product">
-  <% if current_user == @product.user%>
-    <%= link_to "delete", @product, method: :delete %>
-    <%= link_to "edit", edit_product_path %>
-  <% end %>
-</div>
+  <div class = "review_form">
+    <% unless @product.user == current_user %>
+      <h4>Add a review: </h4>
+      <%= error_message(@review) %>
+      <%= form_for @review do |f| %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <p>
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </p>
+        <p>
+          <%= f.label :content %>
+          <%= f.text_area :content %>
+        </p>
+        <p><%= f.label :rating %></p>
+          1 <%= f.radio_button :rating, "1" %>&nbsp
+          2 <%= f.radio_button :rating, "2" %>&nbsp
+          3 <%= f.radio_button :rating, "3" %>&nbsp
+          4 <%= f.radio_button :rating, "4" %>&nbsp
+          5 <%= f.radio_button :rating, "5" %>&nbsp
 
-<div class = "product_reviews">
-  <% if @product.reviews.empty? %>
-    <p>There are no reviews for <%= @product.name.titleize %> yet.</p>
-  <% else %>
-    <h4>Reviews for <%= @product.name %></h4>
-    <div class = "product-rating">
-      <% @product.reviews.each do |review| %>
-        <h4><%= review.title %></h4>
-        <h5> Written <%= time_ago_in_words(review.created_at)%> ago</h5>
-        <p>Rating = <%= review.rating %></p>
-        <p> <%= review.content %></p>
+        <p><%= f.submit %></p>
       <% end %>
-    </div>
-  <% end %>
-</div>
 
-<div class = "review_form">
-  <% unless @product.user == current_user %>
-    <h4>Add a review: </h4>
-    <%= error_message(@review) %>
-    <%= form_for @review do |f| %>
-      <%= f.hidden_field :product_id, value: @product.id %>
-      <p>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-      </p>
-      <p>
-        <%= f.label :content %>
-        <%= f.text_area :content %>
-      </p>
-      <p><%= f.label :rating %></p>
-        1 <%= f.radio_button :rating, "1" %>&nbsp
-        2 <%= f.radio_button :rating, "2" %>&nbsp
-        3 <%= f.radio_button :rating, "3" %>&nbsp
-        4 <%= f.radio_button :rating, "4" %>&nbsp
-        5 <%= f.radio_button :rating, "5" %>&nbsp
-
-      <p><%= f.submit %></p>
+    <% else %>
+      <p>You cannot review your own product.</p>
     <% end %>
-
-  <% else %>
-    <p>You cannot review your own product.</p>
-  <% end %>
-</div>
+  </div>
+  
+<% end %>

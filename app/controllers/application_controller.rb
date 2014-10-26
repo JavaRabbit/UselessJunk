@@ -71,6 +71,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :retired_products
 
+
   def order_total_price
     current_order.total_price = 0
     current_order.order_items.each do |item|

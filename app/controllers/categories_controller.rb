@@ -29,7 +29,7 @@ before_filter only: [:new, :update, :destroy]
     category = Category.find_by(id: params[:id])
     @categories = [category]
     @products = []
-    Product.all.each do |product|
+    Product.find_each do |product|
       if product.categories.include? category
         @products << product
       end

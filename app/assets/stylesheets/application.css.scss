@@ -41,6 +41,10 @@ h3 {
 
 }
 
+strong {
+  font-weight: 600;
+}
+
 
 a {
   text-decoration: none;
@@ -159,6 +163,11 @@ a:hover {
     background-color: rgba(48, 33, 168, 0.25)
 
   }
+}
+
+.retired-products {
+  clear: both;
+  padding-top: 2em;
 }
 
 .field_with_errors {

@@ -6,63 +6,59 @@
     <h3> <%= link_to "Add a Product", new_product_path %> </h3>
   </div>
 
-  <ul>
-    <li> Username: <%= current_user.username %> </li>
-    <li> Email: <%= current_user.email %> </li>
-  </ul>
+  <h3> My Details </h3>
+    <ul class = "account-details">
+      <li> <strong> Username: </strong> <%= current_user.username %> </li>
+      <li> <strong> Email: </strong> <%= current_user.email %> </li>
+    </ul>
+
     <h3> My Products </h3>
 
-  <% @active_products.each do |product| %>
-     <div class = "basic_product">
-       <p><img src= "<%= product.imageurl %>"></p>
-       <h4><%= link_to  product.name.titleize, product_path(product.id) %></h4>
-        <ul class = "horizontal">
-          <li><%= button_to "Edit this Product", edit_product_path(product.id), method: :get %></li>
-          <!-- <li><%= button_to "Delete", delete_product_path(product.id), method: :delete %></li> -->
-          <!--Delete no longer seems needed now that we have 'retire'-->
-          <li><%= button_to "Retire this Product", retire_product_path(product.id) %></li>
-        </ul>
-     </div>
+  <% else %>
+
+    <h2><%= @user.username.titleize %></h2>
+    <h3><%= @user.username.titleize %>'s  Products </h3>
+
   <% end %>
 
-  <h3>Retired Products</h3>
+  <div id="product_container">
+    <% @active_products.each do |product| %>
+       <div class = "square-box">
+         <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)"></div>
+            <h4> <%= link_to product.name, product_path(product.id) %> </h4>
 
-    <% @retired_products.each do |product| %>
-       <div class = "basic_product">
-         <p><img src= "<%= product.imageurl %>"></p>
-         <h4><%= link_to  product.name.titleize, product_path(product.id) %></h4>
-          <ul class = "horizontal">
-            <li><%= button_to "Edit this Product", edit_product_path(product.id), method: :get %></li>
-            <li><%= button_to "Delete", delete_product_path(product.id), method: :delete %></li>
-            <!-- <li> This Product has been retired. </li> -->
-            <li><%= button_to "Un-retire this Product", activate_product_path(product.id) %></li>
-          </ul>
-       </div>
+            <% if @user == current_user %>
+              <ul class = "horizontal">
+                <li><%= button_to "Edit this Product", edit_product_path(product.id), method: :get %></li>
+                <li><%= button_to "Retire this Product", retire_product_path(product.id) %></li>
+              </ul>
+            <% end %>
+
+            <section>
+              Rated: <%= average_rating(product) %> <br>
+              <%= format_money(product.price) %> <br>
+            </section>
+      </div> <!-- square box -->
     <% end %>
-
-<% else %>
-
-  <h2><%= @user.username.titleize %></h2>
-  <h3><%= @user.username.titleize %>'s  Products </h3>
-
-  <% @active_products.each do |product| %>
-     <div class = "basic_product">
-       <h4><%= link_to product.name.titleize, product_path(product.id) %></h4>
-       <img src = <%= product.imageurl %> >
-
-       <p><%= format_money(product.price) %></p>
-       <p><%= product.description %></p>
-       <% if product.quantity > 0 %>
-          <p>In stock!</p>
-       <% else %>
-          <p>Not in stock :(</p>
-       <% end %>
-    </div>
-  <% end %>
-
-<% end %>
-
-<hr>
-<% if current_user == @user %>
-  <%= link_to "Delete this account", confirm_path(@user.id), method: :get %>
+  </div> <!-- product_container -->
+<% if @user == current_user %>
+  <section class = "retired-products">
+    <h3>Retired Products</h3>
+    <% if @retired_products.empty? %>
+      You have no retired products.
+    <% else %>
+      <% @retired_products.each do |product| %>
+         <div class = "square-box">
+           <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)"></div>
+           <h4><%= link_to  product.name.titleize, product_path(product.id) %></h4>
+            <ul class = "horizontal">
+              <li><%= button_to "Edit", edit_product_path(product.id), method: :get %></li>
+              <li><%= button_to "Delete", delete_product_path(product.id), method: :delete %></li>
+              <!-- <li> This Product has been retired. </li> -->
+              <li><%= button_to "Un-retire", activate_product_path(product.id) %></li>
+            </ul>
+         </div>
+      <% end %>
+    <% end %>
+  </section>
 <% end %>

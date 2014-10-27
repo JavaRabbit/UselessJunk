@@ -31,12 +31,14 @@
      <%= f.label :description.capitalize %>
      <%= f.text_area :description %>
    </p>
+   <ul class= "horizontal" class = "select_category">
      <% all_categories.each do |cat| %>
-        <div class = "select_category">
+        <li>
           <%= check_box_tag "category_ids[]", cat.id %>
           <%= cat.label %>
-        </div>
+        </li>
      <% end %>
+  </ul>
 
    <button class = "in_a_form"> <%= link_to "Add a Category", new_product_to_new_category_path, method: :get %> </button>
    Warning: Creating a new category now will discard your current work on the new product

@@ -1,14 +1,16 @@
 <% if @user == current_user %>
   <h2> My Account </h2>
+  <div class= "account-options">
+    <h3> <%= link_to "Edit my account", edit_user_path(current_user.id) %> </h3>
+    <h3> <%= link_to "View My Orders", my_orders_path(current_user.id) %> </h3>
+    <h3> <%= link_to "Add a Product", new_product_path %> </h3>
+  </div>
+
   <ul>
     <li> Username: <%= current_user.username %> </li>
     <li> Email: <%= current_user.email %> </li>
   </ul>
-  <%= link_to "Edit my account", edit_user_path(current_user.id) %>
-
-  <h3> <%= link_to "View My Orders", my_orders_path(current_user.id) %> </h3>
-  <h3> <%= link_to "Add a Product", new_product_path %> </h3>
-  <h3> My Products </h3>
+    <h3> My Products </h3>
 
   <% @active_products.each do |product| %>
      <div class = "basic_product">

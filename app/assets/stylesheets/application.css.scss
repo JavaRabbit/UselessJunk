@@ -26,8 +26,29 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  margin: .5em;
+  font-size: 2em;
+}
+
+h3 {
+  margin: .25em;
+  font-size: 1.25em;
+
+}
+
+
 a {
   text-decoration: none;
+}
+
+a:hover {
+  font-style: oblique;
+  // text-decoration: underline;
 }
 
 #wrapper {
@@ -152,4 +173,13 @@ a {
   display: block;
   width: 90%;
   margin: 0 auto;
+}
+
+.horizontal li {
+  display: inline;
+}
+
+.account-options h3{
+  display: inline;
+  margin-right: 1em;
 }

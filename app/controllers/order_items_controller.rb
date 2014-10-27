@@ -21,8 +21,12 @@ class OrderItemsController < ApplicationController
       end
     end
 
-    @order_item = OrderItem.new
-    render "orders/cart"
+    if @errors_array.length == 0
+      redirect_to cart_path
+    else      
+      @order_item = OrderItem.new
+      render "orders/cart"
+    end
 
   end
 

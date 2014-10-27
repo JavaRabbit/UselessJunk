@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <title>Crapsy</title>
-    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <title>Crapsy Store</title>
     <link type = "text/css" rel= "stylesheet" href = "/assets/stylesheets/resets.css" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   </head>
   <body>
-
-
-    <header> <!-- header section -->
-      <div id="header-container">
-
-        <div id = "logo">
-          <h1>Crapsy</h1>
-        </div>
-        <div class = "nav">
-          <%= link_to "Home", root_path %>
-          <%= link_to "My Cart", cart_path %>
-          <% if current_user %>
-            <%= link_to "My Account", current_user %>
+    <div id="wrapper">
+      <div id="header">
+        <div class="box">
+          <ul>
+            <div id="logo">
+              Crapsy
+            </div>
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "My Cart", cart_path %></li>
+            <% if current_user %>
+              <li><%= link_to "My Account", current_user %></li>
             Logged in as <%= current_user.username %>.
-            <%= link_to "Log Out", logout_path %>
-          <% else %>
-            <%= link_to "Sign Up", signup_path %> or
-            <%= link_to "Log In", login_path %>
-          <% end %>
-        </div> <!-- nav-container -->
+              <li><%= link_to "Log Out", logout_path %></li>
+            <% else %>
+              <li><%= link_to "Sign Up", signup_path %></li>
+              <li>or</li>
+              <li><%= link_to "Log In", login_path %></li>
+              <% end %>
+          </ul>
+        </div>
       </div>
-    </header>
 
-
-    <div id = "page">
+    <div id="content">
+      <div class="box">
       <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
         <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
-      <%= yield %>
-    </div> <!-- page_container -->
+        <%= yield %>
+      </div> <!-- page_container -->
+    </div>
 
-  </body>
+    <div id="footer">
+      <hr>
+      <div class="box">
+        some text here
+      </div>
+    </div>
+
+  </div>
+</body>
 </html>

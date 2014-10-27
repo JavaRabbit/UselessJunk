@@ -1,11 +1,12 @@
-Page to make a new category!
-
+<h2> Create a new Catetory</h2
+<div class="form-style">
 
  <%= form_for @category, method: :post, url: new_category_path do |f|%>
    <p>
      <%= f.label :label.capitalize %>
      <%= f.text_field :label %>
    </p>
-   
+
    <p><%= f.submit %></p>
+ </div>
  <% end %>

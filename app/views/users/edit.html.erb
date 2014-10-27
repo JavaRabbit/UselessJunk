@@ -13,3 +13,5 @@
   </div class="field">
   <%= f.submit "Submit" %>
 <% end %>
+<br>
+<%= link_to "Delete this account", confirm_path(current_user.id), method: :get %>

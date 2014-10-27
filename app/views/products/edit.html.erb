@@ -24,13 +24,15 @@
     <%= f.label :description.capitalize %>
     <%= f.text_area :description %>
   </div class="field">
-  <% all_categories.each do |cat| %>
-     <div class = "select_category">
-       <% checked = @product.categories.include? cat %>
-       <%= check_box_tag "category_ids[]", cat.id, checked %>
-       <%= cat.label %>
-     </div>
-  <% end %>
+    <ul class="horizontal" class = "select_category">
+      <% all_categories.each do |cat| %>
+         <li>
+           <% checked = @product.categories.include? cat %>
+           <%= check_box_tag "category_ids[]", cat.id, checked %>
+           <%= cat.label %>
+         </li>
+      <% end %>
+    </ul>
   <button class = "in_a_form"> <%= link_to "Add a Category", edit_product_to_new_category_path, method: :get %> </button>
   Warning: Creating a new category now will discard your current work on the product
 

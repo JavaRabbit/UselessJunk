@@ -13,7 +13,7 @@
 
   <div class = "basic_product">
 
-    <img src = "<%= @product.imageurl %>" alt = "Image of product">
+    <div class = "large-product-pic" style="background-image:url(<%=@product.imageurl%>)" alt = "Image of product"></div>
     <p><%= @product.description %></p>
     <% unless @product.categories.empty? %>
       Categories: <% @product.categories.each do |cat| %>

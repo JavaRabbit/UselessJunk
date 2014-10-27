@@ -24,7 +24,9 @@
   <div id="product_container">
     <% @active_products.each do |product| %>
        <div class = "square-box">
-         <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)"></div>
+         <%= link_to product_path(product.id) do %>
+          <div class = "small-product-pic" style="background-image:url(<%=product.imageurl%>)"></div>
+         <% end %>
             <h4> <%= link_to product.name, product_path(product.id) %> </h4>
 
             <% if @user == current_user %>

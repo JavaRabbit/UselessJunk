@@ -10,7 +10,7 @@
 
           <section>
             <h4> <%= link_to product.name, product_path(product.id) %> </h4>
-            Rated: <%= average_rating(product) %> <br>
+            Average Rating: <%= average_rating(product) %> <br>
             <%= format_money(product.price) %> <br>
           </section>
         </div>

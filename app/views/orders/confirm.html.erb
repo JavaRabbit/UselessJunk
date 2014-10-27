@@ -3,7 +3,7 @@
 
 <h2>Your Order</h2>
 <%= format_order(@order) %>
-<p>Order Total Price: <%= format_money @order.total_price %>
+<strong>Order Total Price: <%= format_money @order.total_price %> </strong>
 
 <h3>Order Items</h3>
 <% @order.order_items.each do |item| %>

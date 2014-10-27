@@ -38,7 +38,11 @@ h2 {
 h3 {
   margin: .25em;
   font-size: 1.25em;
+}
 
+h4 {
+  font-size: 1.1em;
+  font-weight: 600;
 }
 
 strong {
@@ -176,6 +180,7 @@ a:hover {
 
 .error_messages {
   color: red;
+  padding: 1.5em;
 }
 
 .box {
@@ -191,4 +196,12 @@ a:hover {
 .account-options h3{
   display: inline;
   margin-right: 1em;
+}
+
+.product_reviews {
+  margin: 2em;
+}
+
+p {
+  padding: .2em;
 }

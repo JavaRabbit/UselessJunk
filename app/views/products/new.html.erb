@@ -1,12 +1,6 @@
 <h2> Create a Product </h2>
 
-  <ul class = "errors">
-    <% @product.errors.each do |column, message| %>
-      <li>
-        <strong><%= column.capitalize %></strong> <%= message %>
-      </li>
-    <% end %>
-  </ul>
+  <% error_message(@product) %>
 
  <%= form_for @product, method: :post, url: new_product_path do |f|%>
    <%= f.hidden_field :user_id, value: current_user.id %>
@@ -31,12 +25,14 @@
      <%= f.label :description.capitalize %>
      <%= f.text_area :description %>
    </p>
+   <ul class= "horizontal" class = "select_category">
      <% all_categories.each do |cat| %>
-        <div class = "select_category">
+        <li>
           <%= check_box_tag "category_ids[]", cat.id %>
           <%= cat.label %>
-        </div>
+        </li>
      <% end %>
+  </ul>
 
    <button class = "in_a_form"> <%= link_to "Add a Category", new_product_to_new_category_path, method: :get %> </button>
    Warning: Creating a new category now will discard your current work on the new product

@@ -22,8 +22,41 @@ html, body {
   font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  margin: .5em;
+  font-size: 2em;
+}
+
+h3 {
+  margin: .25em;
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+strong {
+  font-weight: 600;
+}
+
+
 a {
   text-decoration: none;
+}
+
+a:hover {
+  font-style: oblique;
+  // text-decoration: underline;
 }
 
 #wrapper {
@@ -87,6 +120,14 @@ a {
   border-radius: 6%;
 }
 
+.large-product-pic {
+  width: 430px;
+  height: 430px;
+  background-size:cover;
+  background-position:50% 50%;
+  border-radius: 1%;
+}
+
 .square-box {
   float: left;
   width: 300px;
@@ -136,16 +177,39 @@ a {
   }
 }
 
+.retired-products {
+  clear: both;
+  padding-top: 2em;
+}
+
 .field_with_errors {
   display: inline-block;
 }
 
 .error_messages {
   color: red;
+  padding: 1.5em;
 }
 
 .box {
   display: block;
   width: 90%;
   margin: 0 auto;
+}
+
+.horizontal li {
+  display: inline;
+}
+
+.account-options h3{
+  display: inline;
+  margin-right: 1em;
+}
+
+.product_reviews {
+  margin: 2em;
+}
+
+p {
+  padding: .2em;
 }

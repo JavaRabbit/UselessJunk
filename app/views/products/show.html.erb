@@ -13,7 +13,7 @@
 
   <div class = "basic_product">
 
-    <img src = "<%= @product.imageurl %>" alt = "Image of product">
+    <div class = "large-product-pic" style="background-image:url(<%=@product.imageurl%>)" alt = "Image of product"></div>
     <p><%= @product.description %></p>
     <% unless @product.categories.empty? %>
       Categories: <% @product.categories.each do |cat| %>
@@ -54,12 +54,12 @@
     <% if @product.reviews.empty? %>
       <p>There are no reviews for <%= @product.name.titleize %> yet.</p>
     <% else %>
-      <h4>Reviews for <%= @product.name %></h4>
+      <h3>Reviews for <%= @product.name %></h3>
       <div class = "product-rating">
         <% @product.reviews.each do |review| %>
           <h4><%= review.title %></h4>
           <h5> Written <%= time_ago_in_words(review.created_at)%> ago</h5>
-          <p>Rating = <%= review.rating %></p>
+          <p>Rating: <%= review.rating %></p>
           <p> <%= review.content %></p>
         <% end %>
       </div>
@@ -87,12 +87,12 @@
           4 <%= f.radio_button :rating, "4" %>&nbsp
           5 <%= f.radio_button :rating, "5" %>&nbsp
 
-        <p><%= f.submit %></p>
+        <p><%= f.submit "Submit review" %></p>
       <% end %>
 
     <% else %>
       <p>You cannot review your own product.</p>
     <% end %>
   </div>
-  
+
 <% end %>
